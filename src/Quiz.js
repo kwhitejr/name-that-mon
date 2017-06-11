@@ -10,9 +10,13 @@ class Quiz extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Who is this?</h2>
         </div>
-        <p className="App-intro">
-          To get started, <code>Press Here</code> and name those Mon.
-        </p>
+        <ul>
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+          <li>4</li>
+        </ul>
+        <button>Submit</button>
       </div>
     );
   }

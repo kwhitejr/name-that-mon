@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import logo from './logo.svg';
 import './App.css';
 
@@ -11,7 +12,7 @@ class App extends Component {
           <h2>Name That Mon!</h2>
         </div>
         <p className="App-intro">
-          To get started, <code href="">Press Here</code> and name those Mon.
+          To get started, <Link to="/quiz"><code href="">Press Here</code></Link> and name those Mon.
         </p>
       </div>
     );
