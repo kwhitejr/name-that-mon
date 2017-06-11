@@ -8,7 +8,7 @@ class Quiz extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={pokemon} className="" alt="logo" />
+          <img src={pokemon} className="mask" alt="logo" />
           <h2>Who is this?</h2>
         </div>
         <ul>
