@@ -6,8 +6,8 @@ import {
   Link
 } from 'react-router-dom'
 
-import App from './App';
-import Quiz from './Quiz';
+import App from './App/App.js';
+import Quiz from './Quiz/Quiz.js';
 
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
