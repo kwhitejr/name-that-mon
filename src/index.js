@@ -8,6 +8,7 @@ import {
 
 import App from './App/App.js';
 import Quiz from './Quiz/Quiz.js';
+import Result from './Result/Result.js';
 
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
@@ -18,6 +19,7 @@ const BasicExample = () => (
       <ul>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/quiz">Quiz</Link></li>
+        <li><Link to="/result">Result</Link></li>
         
       </ul>
 
@@ -25,6 +27,7 @@ const BasicExample = () => (
 
       <Route exact path="/" component={App}/>
       <Route path="/quiz" component={Quiz}/>
+      <Route path="/result" component={Result}/>
       
     </div>
   </Router>
