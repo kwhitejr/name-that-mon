@@ -1,19 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import {
   BrowserRouter as Router,
   Route,
   Link
 } from 'react-router-dom'
 
-import App from './App/App.js';
+import Home from './Home/Home.js';
 import Quiz from './Quiz/Quiz.js';
 import Result from './Result/Result.js';
 
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
-const BasicExample = () => (
+const App = () => (
   <Router>
     <div>
       <ul>
@@ -25,7 +26,7 @@ const BasicExample = () => (
 
       <hr/>
 
-      <Route exact path="/" component={App}/>
+      <Route exact path="/" component={Home}/>
       <Route path="/quiz" component={Quiz}/>
       <Route path="/result" component={Result}/>
       
@@ -33,5 +34,5 @@ const BasicExample = () => (
   </Router>
 )
 
-ReactDOM.render(<BasicExample />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
