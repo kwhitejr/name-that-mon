@@ -6,6 +6,7 @@ import {
   Route,
   Link
 } from 'react-router-dom'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import configureStore from './store';
 
@@ -19,6 +20,7 @@ import './index.css';
 const store = configureStore();
 
 const App = () => (
+  <MuiThemeProvider>
   <Provider store={store}>
     <Router>
       <div>
@@ -38,6 +40,7 @@ const App = () => (
       </div>
     </Router>
   </Provider>
+  </MuiThemeProvider>
 )
 
 ReactDOM.render(<App />, document.getElementById('root'));
