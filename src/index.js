@@ -1,3 +1,7 @@
+/*
+`index.js` is the entry point for the front-end. The <App /> component is injected into `public/index.html`.   
+*/
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -8,8 +12,10 @@ import {
 } from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
+// Import the redux store
 import configureStore from './store';
 
+// Import the Containers, i.e. different page views. Ultimately this should be refactored into a `router.js`
 import Home from './Home/Home.js';
 import Quiz from './Quiz/Quiz.js';
 import Result from './Result/Result.js';
@@ -19,6 +25,10 @@ import './index.css';
 
 const store = configureStore();
 
+/* <App /> is the top-level React component.
+*  <MuiThemeProvider> is a wrapper component for Material-UI
+*  <Router> is a wrapper component for React Router. It handles navigation through each pageview. The `path` attribute describes the URL and the `component` attribute describes the React component to be used. These top-level router components are also referred to as "Containers". 
+*/
 const App = () => (
   <MuiThemeProvider>
   <Provider store={store}>
@@ -43,5 +53,6 @@ const App = () => (
   </MuiThemeProvider>
 )
 
+// This code injects the React app into `public/index.html`
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
