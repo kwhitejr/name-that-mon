@@ -12,7 +12,7 @@ class AnswerSelection extends Component {
   render() {
 
     return (
-      <Grid fluid>
+      <Grid>
         <Row>
           <Col xs={6} >
             <RaisedButton label="Squirtle" primary={true} style={style} fullWidth={true} />
