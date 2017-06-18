@@ -7,7 +7,7 @@ import pokemon from '../assets/pokemon/1.png';
 
 const styles = {
   gridTile: {
-    "background-color": "gray",
+    backgroundColor: "gray",
   }
 }
 
