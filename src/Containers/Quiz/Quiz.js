@@ -8,17 +8,17 @@ import AnswerSelection from '../../Components/AnswerSelection';
 import './Quiz.css';
 
 const Quiz = () => (
-  <Grid>
-    <div className="App">
-      <Row center="xs">
-        <Col xs={6}>
-          <QuizMon />
-        </Col>
-      </Row>
-      <Row>            
+  <Grid fluid>
+    <Row>
+      <Col xsOffset={3} xs={12}>      
+        <QuizMon />
+      </Col> 
+    <Row>
+    </Row>
+      <Col xs={12}>          
         <AnswerSelection />
-      </Row>
-    </div>
+      </Col>
+    </Row>
   </Grid>
 )
 

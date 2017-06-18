@@ -5,20 +5,14 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import pokemon from '../assets/pokemon/1.png';
 
 const QuizMon = () => (
-  <Grid>
-    <Row>
-      <Col xs={12} >
-        <GridList>
-          <GridTile
-            key={pokemon}
-            title="Name That Mon"
-          >
-            <img src={pokemon} className="mask" alt="logo" />
-          </GridTile>
-        </GridList>
-      </Col>
-    </Row>
-  </Grid>
+  <GridList>
+    <GridTile
+      key={pokemon}
+      title="Name That Mon"
+    >
+      <img src={pokemon} className="mask" alt="Name that Mon" />
+    </GridTile>
+  </GridList>
 )
 
 export default QuizMon;

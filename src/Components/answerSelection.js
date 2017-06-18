@@ -4,7 +4,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 
 // For simple styles, no need for separate CSS file
 const style = {
-  margin: 12,
+  margin: 6,
 };
 
 class AnswerSelection extends Component {
@@ -14,18 +14,18 @@ class AnswerSelection extends Component {
     return (
       <Grid>
         <Row>
-          <Col xs={6} >
+          <Col xs={12} sm={6} >
             <RaisedButton label="Squirtle" primary={true} style={style} fullWidth={true} />
           </Col>
-          <Col xs={6} >
+          <Col xs={12} sm={6} >
             <RaisedButton label="Bulbasaur" primary={true} style={style} fullWidth={true} />
           </Col>
         </Row>
         <Row>
-          <Col xs={6} >
+          <Col xs={12} sm={6} >
             <RaisedButton label="Charizard" primary={true} style={style} fullWidth={true} />
           </Col>
-          <Col xs={6} >
+          <Col xs={12} sm={6} >
             <RaisedButton label="Pikachu" primary={true} style={style} fullWidth={true} />
           </Col>
         </Row>
