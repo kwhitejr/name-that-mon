@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Grid, Row, Col } from 'react-flexbox-grid';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
 
 // For simple styles, no need for separate CSS file
 const style = {
@@ -8,8 +10,12 @@ const style = {
 };
 
 class AnswerSelection extends Component {
+  // constructor(props) {
+  //   super(props)
+  // }
 
   render() {
+    const { toggleMask } = this.props
 
     return (
       <Grid fluid>
@@ -31,7 +37,12 @@ class AnswerSelection extends Component {
         </Row>
         <Row>
           <Col xs={12} >
-            <RaisedButton label="Submit" secondary={true} style={style} fullWidth={true} />
+            <RaisedButton
+              onTouchTap={toggleMask} 
+              label="Submit" 
+              secondary={true} 
+              style={style} 
+              fullWidth={true} />
           </Col>
         </Row>
       </Grid>

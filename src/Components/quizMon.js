@@ -25,7 +25,7 @@ const QuizMon = () => (
             titleBackground="linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
             style={styles.gridTile}
           >
-            <img src={pokemon} className="mask" alt="Name that Mon"/>
+            <img src={pokemon} id="target-mon" className="mask" alt="Name that Mon"/>
           </GridTile>
         </GridList>
       </Col>

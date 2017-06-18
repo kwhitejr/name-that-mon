@@ -10,7 +10,9 @@ import './Quiz.css';
 class Quiz extends Component {
 
   toggleMask () {
-    
+    console.log("Fire Toggle Mask!")
+    let pokemon = document.getElementById("target-mon");
+    pokemon.classList.toggle('mask');
   }
 
   render () {
@@ -23,7 +25,9 @@ class Quiz extends Component {
         <Row>
         </Row>
           <Col xs={12}>          
-            <AnswerSelection />
+            <AnswerSelection 
+              toggleMask={this.toggleMask}
+            />
           </Col>
         </Row>
       </Grid>
