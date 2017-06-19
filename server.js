@@ -7,10 +7,14 @@ var connection = mysql.createConnection({
   database: 'pokemon'
 })
 
+//Start on a changable array of numbers. Missing ability to splice index # of chosen pokemon
+//Need to find out how to refresh on new session, but not new page
 var pokeArray = [];
 for (var i = 1; i <= 151; i++) {
   pokeArray.push(i)
 }
+
+
 
 // function getRandomArbitrary(min, max) {
 //     return Math.random() * (151 - 1) + 1;
