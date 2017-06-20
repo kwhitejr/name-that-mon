@@ -1,3 +1,7 @@
 .mask {
   filter: contrast(0%) brightness(0%)
 }
+
+.selected-answer {
+  background-color: green;
+}

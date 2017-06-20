@@ -10,12 +10,9 @@ const style = {
 };
 
 class AnswerSelection extends Component {
-  // constructor(props) {
-  //   super(props)
-  // }
 
   render() {
-    const { toggleMask } = this.props
+    const { toggleMask, toggleSelected } = this.props
 
     return (
       <Grid fluid>
@@ -32,7 +29,12 @@ class AnswerSelection extends Component {
             <RaisedButton label="Charizard" primary={true} style={style} fullWidth={true} />
           </Col>
           <Col xs={12} sm={6} >
-            <RaisedButton label="Pikachu" primary={true} style={style} fullWidth={true} />
+            <RaisedButton
+              onTouchTap={toggleSelected} 
+              label="Pikachu" 
+              primary={true} 
+              style={style} 
+              fullWidth={true} />
           </Col>
         </Row>
         <Row>

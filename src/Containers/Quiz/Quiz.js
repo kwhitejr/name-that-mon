@@ -9,6 +9,13 @@ import './Quiz.css';
 
 class Quiz extends Component {
 
+  toggleSelected(e) {
+    console.log("Fire Toggle Selected!")
+    console.log(e.target)
+    let selected = e.target
+    selected.classList.toggle('selected-answer')
+  }
+
   toggleMask () {
     console.log("Fire Toggle Mask!")
     let pokemon = document.getElementById("target-mon");
@@ -27,6 +34,7 @@ class Quiz extends Component {
           <Col xs={12}>          
             <AnswerSelection 
               toggleMask={this.toggleMask}
+              toggleSelected={this.toggleSelected}
             />
           </Col>
         </Row>
