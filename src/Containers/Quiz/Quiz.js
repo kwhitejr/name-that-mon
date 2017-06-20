@@ -8,12 +8,18 @@ import AnswerSelection from '../../Components/AnswerSelection';
 import './Quiz.css';
 
 class Quiz extends Component {
+  
+  setAnswer (event, value) {
+    console.log(event)
+    console.log(value)
+    
+  }
 
-  toggleSelected(e) {
-    console.log("Fire Toggle Selected!")
-    console.log(e.target)
-    let selected = e.target
-    selected.classList.toggle('selected-answer')
+  submitAnswer (e) {
+    console.log("Fire Answer Submit!")
+    let answer = document.getElementById("answers");
+    console.log(answer)
+    // selected.classList.toggle('selected-answer')
   }
 
   toggleMask () {
@@ -34,7 +40,8 @@ class Quiz extends Component {
           <Col xs={12}>          
             <AnswerSelection 
               toggleMask={this.toggleMask}
-              toggleSelected={this.toggleSelected}
+              submitAnswer={this.submitAnswer}
+              setAnswer={this.setAnswer}
             />
           </Col>
         </Row>
