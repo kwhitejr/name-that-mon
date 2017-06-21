@@ -3,6 +3,10 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+
+// Mock Data
+import mockData from '../mockData'
+
 injectTapEventPlugin();
 
 // For simple styles, no need for separate CSS file
@@ -15,15 +19,31 @@ const styles = {
   },
 };
 
-// Mock Data
-const pokeData = [
-  { index: 1, name: "Bulbasaur", },
-  { index: 4, name: "Charizard", },
-  { index: 7, name: "Squirtle", },
-  { index: 25, name: "Pikachu", },
-]
+let pokeData
+
+const getPokeData = (mockData) => {
+  let shuffledPokeData = shuffle(mockData)
+  pokeData = shuffledPokeData.slice(0,4)
+  console.log(pokeData)
+}
+
+const shuffle = (array, rng) => {
+  var i = array.length, j, swap;
+    if (!rng) rng = Math;
+  while (--i) {
+    j = rng.random() * (i + 1) | 0;
+    swap = array[i];
+    array[i] = array[j];
+    array[j] = swap;
+  }
+  return array;
+}
 
 class AnswerSelection extends Component {
+
+  componentWillMount() {
+    getPokeData(mockData)
+  }
 
   render() {
     const { checkAnswer, setAnswer, selected, answer, correctAnswer } = this.props
