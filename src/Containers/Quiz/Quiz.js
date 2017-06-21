@@ -1,47 +1,47 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Grid, Row, Col } from 'react-flexbox-grid';
+
+import { setAnswer, reset } from '../../actions/quizActions';
 
 import QuizMon from '../../Components/QuizMon';
 import AnswerSelection from '../../Components/AnswerSelection';
 
 import './Quiz.css';
 
+const toggleMask = () => {
+  let pokemon = document.getElementById("target-mon");
+  pokemon.classList.toggle('mask');
+}
+
 class Quiz extends Component {
-  
-  setAnswer (event, value) {
-    console.log(event)
-    console.log(value)
-    
-  }
 
-  submitAnswer (e) {
-    console.log("Fire Answer Submit!")
-    let answer = document.getElementById("answers");
-    console.log(answer)
-    // selected.classList.toggle('selected-answer')
-  }
-
-  toggleMask () {
-    console.log("Fire Toggle Mask!")
-    let pokemon = document.getElementById("target-mon");
-    pokemon.classList.toggle('mask');
+  checkAnswer (selected, answer, correctAnswer) {
+    if (selected && correctAnswer == answer) {
+      toggleMask()
+    } else {
+      console.log("Nope!")
+    }
   }
 
   render () {
+
     return (<div>
       <Grid fluid>
         <Row>
           <Col xsOffset={3} xs={12}>      
-            <QuizMon />
+            <QuizMon
+              {...this.props} 
+            />
           </Col> 
         <Row>
         </Row>
           <Col xs={12}>          
             <AnswerSelection 
+              {...this.props}
               toggleMask={this.toggleMask}
-              submitAnswer={this.submitAnswer}
-              setAnswer={this.setAnswer}
+              checkAnswer={this.checkAnswer}
             />
           </Col>
         </Row>
@@ -50,5 +50,18 @@ class Quiz extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  answer:  state.quizReducer.answer,
+  correctAnswer:  state.quizReducer.correctAnswer,
+  selected:  state.quizReducer.selected,
+});
 
-export default Quiz;
+const mapDispatchToProps = (dispatch) => ({
+  setAnswer:  (event, value) => dispatch(setAnswer(event, value)),
+  reset:      () => dispatch( reset() ),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Quiz);

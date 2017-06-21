@@ -1,13 +1,15 @@
 export const  SET_ANSWER = 'SET_ANSWER',
               RESET = 'RESET';
 
-export function setAnswer({ answer }) {
+export function setAnswer(event, value) {
+  console.log(event)
+  console.log(value)
   return (dispatch) => {
-    dispatch({ type: SET_ANSWER, payload: answer })
+    dispatch({ type: SET_ANSWER, payload: value })
   };
 }
 
-export function setAnswer() {
+export function reset() {
   return (dispatch) => {
     dispatch({ type: RESET })
   };

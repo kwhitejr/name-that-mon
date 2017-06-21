@@ -26,11 +26,11 @@ const pokeData = [
 class AnswerSelection extends Component {
 
   render() {
-    const { toggleMask, submitAnswer, setAnswer } = this.props
+    const { checkAnswer, setAnswer, selected, answer, correctAnswer } = this.props
 
     return (
       <div>
-        <RadioButtonGroup id="answers" name="answers" onChange={setAnswer.bind(this)}>
+        <RadioButtonGroup name="answers" onChange={setAnswer} >
           {pokeData.map( (datum, i) => (
             <RadioButton
               key={i}
@@ -44,7 +44,7 @@ class AnswerSelection extends Component {
           label="Submit"
           primary={true}
           style={styles.raisedButton}
-          onTouchTap={submitAnswer}
+          onTouchTap={checkAnswer.bind(this, selected, answer, correctAnswer)}
         />
       </div>
     );

@@ -1,7 +1,7 @@
 const SET_ANSWER = 'SET_ANSWER';
 const RESET = 'RESET';
 
-const INITIAL_STATE = { error: '', message: '', selected: false, answer: null };
+const INITIAL_STATE = { error: '', message: '', selected: false, answer: null, correctAnswer: 1 };
 
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
