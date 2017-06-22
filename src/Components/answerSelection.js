@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 import { Grid, Row, Col } from 'react-flexbox-grid';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 
 // Mock Data
 import mockData from '../mockData'
-
-injectTapEventPlugin();
 
 // For simple styles, no need for separate CSS file
 const styles = {
@@ -20,12 +17,6 @@ const styles = {
 };
 
 let pokeData
-
-const getPokeData = (mockData) => {
-  let shuffledPokeData = shuffle(mockData)
-  pokeData = shuffledPokeData.slice(0,4)
-  console.log(pokeData)
-}
 
 const shuffle = (array, rng) => {
   var i = array.length, j, swap;
@@ -42,16 +33,51 @@ const shuffle = (array, rng) => {
 class AnswerSelection extends Component {
 
   componentWillMount() {
-    getPokeData(mockData)
+    // const { getQuizData } = this.props
+    // getQuizData()
+  }
+
+  // componentDidMount() {
+  //   const { shuffledData } = this.props
+  //   this.getAnswerSelections(shuffledData)
+  // }
+
+  getAnswerSelections(shuffledData) {
+    const currentMon = shuffledData[shuffledData.length-1]
+    const remainingMon = shuffledData.slice(0,shuffledData.length-1)
+    const pickThree = shuffle(remainingMon).slice(0,3)
+    const answerSelections = currentMon.concat(remainingMon)
+    const shuffledAnswerSelections = shuffle(answerSelections)
+
+    return shuffledAnswerSelections
+  }
+
+  checkAnswer(selected, answer, shuffledData) {
+    const { toggleMask } = this.props
+    const currentMon = shuffledData[shuffledData.length-1].index
+
+    if (selected && currentMon == answer) {
+      toggleMask()
+    } else {
+      console.log("Nope!")
+    }
   }
 
   render() {
-    const { checkAnswer, setAnswer, selected, answer, correctAnswer } = this.props
+    const { setAnswer, selected, answer, shuffledData } = this.props
+  
+    let answerSelections 
+    if (shuffledData) {
+      answerSelections = this.getAnswerSelections(shuffledData)
+    } else {
+      answerSelections = [{index:0, name:"There"},{index:0, name:"There"},{index:0, name:"There"},{index:0, name:"There"}]
+    }
+    // console.log(answerSelections)
 
     return (
       <div>
         <RadioButtonGroup name="answers" onChange={setAnswer} >
-          {pokeData.map( (datum, i) => (
+          {answerSelections.map( (datum, i) => (
             <RadioButton
               key={i}
               value={datum.index}
@@ -64,7 +90,13 @@ class AnswerSelection extends Component {
           label="Submit"
           primary={true}
           style={styles.raisedButton}
-          onTouchTap={checkAnswer.bind(this, selected, answer, correctAnswer)}
+          onTouchTap={this.checkAnswer.bind(this, selected, answer, shuffledData)}
+        />
+        <RaisedButton 
+          label="Next"
+          secondary={true}
+          style={styles.raisedButton}
+          onTouchTap={this.getAnswerSelections.bind(this, shuffledData)}
         />
       </div>
     );

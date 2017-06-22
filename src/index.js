@@ -11,6 +11,7 @@ import {
   Link
 } from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 // Import the redux store
 import configureStore from './store';
@@ -22,6 +23,8 @@ import Result from './Containers/Result/Result.js';
 
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
+
+injectTapEventPlugin();
 
 const store = configureStore();
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
-import { setAnswer, reset } from '../../actions/quizActions';
+import { setAnswer, reset, getQuizData, getNextMon } from '../../actions/quizActions';
 
 import QuizMon from '../../Components/QuizMon';
 import AnswerSelection from '../../Components/AnswerSelection';
@@ -17,15 +17,15 @@ const toggleMask = () => {
 
 class Quiz extends Component {
 
-  checkAnswer (selected, answer, correctAnswer) {
-    if (selected && correctAnswer == answer) {
+  checkAnswer(selected, answer, correctAnswer) {
+    if (selected && correctAnswer === answer) {
       toggleMask()
     } else {
       console.log("Nope!")
     }
   }
 
-  render () {
+  render() {
 
     return (<div>
       <Grid fluid>
@@ -51,14 +51,17 @@ class Quiz extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  answer:  state.quizReducer.answer,
-  correctAnswer:  state.quizReducer.correctAnswer,
   selected:  state.quizReducer.selected,
+  answer:  state.quizReducer.answer,
+  correctAnswers:  state.quizReducer.correctAnswers,
+  shuffledData:  state.quizReducer.shuffledData,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setAnswer:  (event, value) => dispatch(setAnswer(event, value)),
-  reset:      () => dispatch( reset() ),
+  setAnswer:    (event, value) => dispatch(setAnswer(event, value)),
+  getQuizData:  () => dispatch(getQuizData()),
+  reset:        () => dispatch(reset()),
+  getNextMon:   () => dispatch(getNextMon()),
 });
 
 export default connect(
