@@ -27,24 +27,6 @@ class AnswerSelection extends Component {
     }
   }
 
-  // componentWillMount() {
-  // }
-
-  // componentDidMount() {
-  // }
-
-  // shuffle(array, rng) {
-  //   let i = array.length, j, swap;
-  //     if (!rng) rng = Math;
-  //   while (--i) {
-  //     j = rng.random() * (i + 1) | 0;
-  //     swap = array[i];
-  //     array[i] = array[j];
-  //     array[j] = swap;
-  //   }
-  //   return array;
-  // }
-
   getAnswerChoices(shuffledData) {
     let answerChoices = [];
 
@@ -66,10 +48,11 @@ class AnswerSelection extends Component {
   }
 
   checkAnswer() {
-    const { toggleMask, answerIsSelected, userAnswer, shuffledData } = this.props
-    const currentMon = shuffledData[shuffledData.length-1].index
+    const { toggleMask, answerIsSelected, userAnswer, shuffledData, currentMon } = this.props
 
-    if (answerIsSelected && currentMon == userAnswer) {
+    console.log(toggleMask)
+
+    if (answerIsSelected && currentMon.index == userAnswer) {
       toggleMask()
     } else {
       console.log("Nope!")
@@ -96,7 +79,7 @@ class AnswerSelection extends Component {
           label="Submit"
           primary={true}
           style={styles.raisedButton}
-          onTouchTap={this.checkAnswer}
+          onTouchTap={this.checkAnswer.bind(this)}
         />
         <RaisedButton 
           label="Next"

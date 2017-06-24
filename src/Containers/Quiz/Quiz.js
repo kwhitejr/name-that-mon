@@ -29,13 +29,13 @@ class Quiz extends Component {
   componentDidMount() {
   }
 
-  checkAnswer(selected, answer, correctAnswer) {
-    if (selected && correctAnswer === answer) {
-      toggleMask()
-    } else {
-      console.log("Nope!")
-    }
-  }
+  // checkAnswer(selected, answer, correctAnswer) {
+  //   if (selected && correctAnswer === answer) {
+  //     toggleMask()
+  //   } else {
+  //     console.log("Nope!")
+  //   }
+  // }
 
   render() {
 
@@ -54,8 +54,7 @@ class Quiz extends Component {
             <AnswerSelection 
               {...this.props}
               currentMon={this.state.currentMon}
-              toggleMask={this.toggleMask}
-              checkAnswer={this.checkAnswer}
+              toggleMask={toggleMask}
             />
           </Col>
         </Row>

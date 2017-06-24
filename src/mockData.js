@@ -14,7 +14,7 @@ const mockData = [
   { index: 13, name: "Weedle", },
   { index: 14, name: "Kakuna", },
   { index: 15, name: "Beedrill", },
-  { index: 25, name: "Pikachu", },
+  // { index: 25, name: "Pikachu", },
 ]
 
 export default mockData
