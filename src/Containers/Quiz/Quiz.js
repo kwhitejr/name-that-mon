@@ -17,6 +17,18 @@ const toggleMask = () => {
 
 class Quiz extends Component {
 
+  constructor(props) {
+    super(props);
+
+    const { shuffledData } = this.props
+    this.state = {
+      currentMon: shuffledData[shuffledData.length-1]
+    }
+  }
+
+  componentDidMount() {
+  }
+
   checkAnswer(selected, answer, correctAnswer) {
     if (selected && correctAnswer === answer) {
       toggleMask()
@@ -32,7 +44,8 @@ class Quiz extends Component {
         <Row>
           <Col xsOffset={3} xs={12}>      
             <QuizMon
-              {...this.props} 
+              {...this.props}
+              currentMon={this.state.currentMon} 
             />
           </Col> 
         <Row>
@@ -40,6 +53,7 @@ class Quiz extends Component {
           <Col xs={12}>          
             <AnswerSelection 
               {...this.props}
+              currentMon={this.state.currentMon}
               toggleMask={this.toggleMask}
               checkAnswer={this.checkAnswer}
             />

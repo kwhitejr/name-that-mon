@@ -17,9 +17,6 @@ const styles = {
 
 class Home extends Component {
   render() {
-    const { getQuizData } = this.props
-    console.log(getQuizData)
-
     return (
       <div className="App">
         <div className="App-header">

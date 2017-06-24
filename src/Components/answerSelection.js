@@ -23,33 +23,33 @@ class AnswerSelection extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      answerChoices: this.shuffle(this.getAnswerChoices(this.props.shuffledData))
+      answerChoices: shuffle(this.getAnswerChoices(this.props.shuffledData))
     }
   }
 
-  componentWillMount() {
-  }
+  // componentWillMount() {
+  // }
 
-  componentDidMount() {
-  }
+  // componentDidMount() {
+  // }
 
-  shuffle(array, rng) {
-    let i = array.length, j, swap;
-      if (!rng) rng = Math;
-    while (--i) {
-      j = rng.random() * (i + 1) | 0;
-      swap = array[i];
-      array[i] = array[j];
-      array[j] = swap;
-    }
-    return array;
-  }
+  // shuffle(array, rng) {
+  //   let i = array.length, j, swap;
+  //     if (!rng) rng = Math;
+  //   while (--i) {
+  //     j = rng.random() * (i + 1) | 0;
+  //     swap = array[i];
+  //     array[i] = array[j];
+  //     array[j] = swap;
+  //   }
+  //   return array;
+  // }
 
   getAnswerChoices(shuffledData) {
     let answerChoices = [];
 
     // insert correct answer
-    const currentMon = shuffledData[shuffledData.length-1];
+    const { currentMon } = this.props;
     answerChoices.push(currentMon);
 
     // add three bogus answers
@@ -59,10 +59,8 @@ class AnswerSelection extends Component {
       answerChoices.push(obj);
     });
 
-    console.log(answerChoices)
     var dup_array = answerChoices.slice();
-    this.shuffle(dup_array);
-    console.log(dup_array);
+    shuffle(dup_array);
 
     return answerChoices;
   }
