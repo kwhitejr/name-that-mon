@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { routerMiddleware } from 'react-router-redux';
-import { BrowserHistory } from 'react-history';
+import createHistory from 'history/createBrowserHistory'
 
 /* "Reducer" is redux-speak for the set of functions that alter the application state. 
 *  State-altering functions should be grouped by purpose, thus the application may have multiple reducers.
@@ -11,7 +11,8 @@ import { BrowserHistory } from 'react-history';
 import rootReducer from './reducers';
 
 // There are multiple ways to do history in React, i.e. how to handle when a user selects Back in the browser rather than an in-app button.
-const router = routerMiddleware(BrowserHistory);
+export const history = createHistory()
+const router = routerMiddleware(history);
 
 // `thunk` is middleware that permits asynchronous actions within redux.
 const middleware = [thunk, router];
@@ -24,7 +25,7 @@ const enhancers = compose(
 );
 
 // The `store` is where Redux manages state 
-export default function configureStore(initialState = {}) {
+export function configureStore(initialState = {}) {
   const store = createStore(rootReducer, initialState, enhancers); 
 
   if (module.hot) {
