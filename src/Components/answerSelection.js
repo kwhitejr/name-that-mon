@@ -59,6 +59,11 @@ class AnswerSelection extends Component {
       answerChoices.push(obj);
     });
 
+    console.log(answerChoices)
+    var dup_array = answerChoices.slice();
+    this.shuffle(dup_array);
+    console.log(dup_array);
+
     return answerChoices;
   }
 
@@ -76,7 +81,6 @@ class AnswerSelection extends Component {
   render() {
     const { setAnswer, answerIsSelected, userAnswer, shuffledData } = this.props
     const { answerChoices } = this.state
-    console.log(answerChoices)
 
     return (
       <div>
