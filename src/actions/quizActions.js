@@ -17,6 +17,7 @@ const shuffle = (array, rng) => {
 export const  SET_ANSWER = 'SET_ANSWER',
               RESET = 'RESET',
               GET_QUIZ_DATA = 'GET_QUIZ_DATA',
+              LOAD_ANSWER_CHOICES = 'LOAD_ANSWER_CHOICES',
               GET_NEXT_MON = 'GET_NEXT_MON';
 
 export function reset() {

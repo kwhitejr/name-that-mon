@@ -51,9 +51,8 @@ class Quiz extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  selected:  state.quizReducer.selected,
-  answer:  state.quizReducer.answer,
-  correctAnswers:  state.quizReducer.correctAnswers,
+  answerIsSelected:  state.quizReducer.answerIsSelected,
+  userAnswer:  state.quizReducer.userAnswer,
   shuffledData:  state.quizReducer.shuffledData,
 });
 

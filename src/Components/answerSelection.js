@@ -3,6 +3,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
+import { shuffle } from '../common'
+
 // Mock Data
 import mockData from '../mockData'
 
@@ -16,47 +18,55 @@ const styles = {
   },
 };
 
-let pokeData
-
-const shuffle = (array, rng) => {
-  var i = array.length, j, swap;
-    if (!rng) rng = Math;
-  while (--i) {
-    j = rng.random() * (i + 1) | 0;
-    swap = array[i];
-    array[i] = array[j];
-    array[j] = swap;
-  }
-  return array;
-}
-
 class AnswerSelection extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      answerChoices: this.shuffle(this.getAnswerChoices(this.props.shuffledData))
+    }
+  }
+
   componentWillMount() {
-    // const { getQuizData } = this.props
-    // getQuizData()
   }
 
-  // componentDidMount() {
-  //   const { shuffledData } = this.props
-  //   this.getAnswerSelections(shuffledData)
-  // }
-
-  getAnswerSelections(shuffledData) {
-    const currentMon = shuffledData[shuffledData.length-1]
-    const remainingMon = shuffledData.slice(0,shuffledData.length-1)
-    const pickThree = shuffle(remainingMon).slice(0,3)
-    const answerSelections = currentMon.concat(remainingMon)
-    const shuffledAnswerSelections = shuffle(answerSelections)
-
-    return shuffledAnswerSelections
+  componentDidMount() {
   }
 
-  checkAnswer(selected, answer, shuffledData) {
-    const { toggleMask } = this.props
+  shuffle(array, rng) {
+    let i = array.length, j, swap;
+      if (!rng) rng = Math;
+    while (--i) {
+      j = rng.random() * (i + 1) | 0;
+      swap = array[i];
+      array[i] = array[j];
+      array[j] = swap;
+    }
+    return array;
+  }
+
+  getAnswerChoices(shuffledData) {
+    let answerChoices = [];
+
+    // insert correct answer
+    const currentMon = shuffledData[shuffledData.length-1];
+    answerChoices.push(currentMon);
+
+    // add three bogus answers
+    const remainingMon = shuffledData.slice(0,shuffledData.length-1);
+    const pickThree = remainingMon.slice(0,3);
+    pickThree.forEach( (obj) => {
+      answerChoices.push(obj);
+    });
+
+    return answerChoices;
+  }
+
+  checkAnswer() {
+    const { toggleMask, answerIsSelected, userAnswer, shuffledData } = this.props
     const currentMon = shuffledData[shuffledData.length-1].index
 
-    if (selected && currentMon == answer) {
+    if (answerIsSelected && currentMon == userAnswer) {
       toggleMask()
     } else {
       console.log("Nope!")
@@ -64,20 +74,14 @@ class AnswerSelection extends Component {
   }
 
   render() {
-    const { setAnswer, selected, answer, shuffledData } = this.props
-  
-    let answerSelections 
-    if (shuffledData) {
-      answerSelections = this.getAnswerSelections(shuffledData)
-    } else {
-      answerSelections = [{index:0, name:"There"},{index:0, name:"There"},{index:0, name:"There"},{index:0, name:"There"}]
-    }
-    // console.log(answerSelections)
+    const { setAnswer, answerIsSelected, userAnswer, shuffledData } = this.props
+    const { answerChoices } = this.state
+    console.log(answerChoices)
 
     return (
       <div>
         <RadioButtonGroup name="answers" onChange={setAnswer} >
-          {answerSelections.map( (datum, i) => (
+          {answerChoices.map( (datum, i) => (
             <RadioButton
               key={i}
               value={datum.index}
@@ -90,13 +94,13 @@ class AnswerSelection extends Component {
           label="Submit"
           primary={true}
           style={styles.raisedButton}
-          onTouchTap={this.checkAnswer.bind(this, selected, answer, shuffledData)}
+          onTouchTap={this.checkAnswer}
         />
         <RaisedButton 
           label="Next"
           secondary={true}
           style={styles.raisedButton}
-          onTouchTap={this.getAnswerSelections.bind(this, shuffledData)}
+          onTouchTap={this.getAnswerChoices.bind(this, shuffledData)}
         />
       </div>
     );
