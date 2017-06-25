@@ -5,9 +5,6 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import { shuffle } from '../common'
 
-// Mock Data
-import mockData from '../mockData'
-
 const styles = {
   raisedButton: {
     margin: 6,
@@ -47,9 +44,9 @@ class AnswerSelection extends Component {
   }
 
   checkAnswer() {
-    const { toggleMask, isAnswerSelected, userAnswer, shuffledData, currentMon, submitAnswer } = this.props
+    const { toggleMask, isAnswerSelected, userAnswer, currentMon, submitAnswer } = this.props
 
-    if (isAnswerSelected && currentMon.index == userAnswer) {
+    if (isAnswerSelected && currentMon.index === userAnswer) {
       toggleMask()
       submitAnswer()
     } else {
@@ -58,7 +55,7 @@ class AnswerSelection extends Component {
   }
 
   render() {
-    const { setAnswer, isAnswerSelected, isAnswerSubmitted, userAnswer, shuffledData, loadNextMon } = this.props
+    const { setAnswer, isAnswerSelected, isAnswerSubmitted, loadNextMon } = this.props
     const { answerChoices } = this.state
 
     return (

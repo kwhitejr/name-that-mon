@@ -6,7 +6,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Route } from 'react-router-dom'
-import { ConnectedRouter, push } from 'react-router-redux'
+import { ConnectedRouter } from 'react-router-redux'
 // import createHistory from 'history/createBrowserHistory'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';

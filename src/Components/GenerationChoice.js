@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
-import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
 // For simple styles, no need for separate CSS file

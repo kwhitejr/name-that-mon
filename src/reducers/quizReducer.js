@@ -1,5 +1,3 @@
-import { shuffle } from '../common'
-
 const SET_ANSWER = 'SET_ANSWER',
       RESET = 'RESET',
       GET_QUIZ_DATA = 'GET_QUIZ_DATA',

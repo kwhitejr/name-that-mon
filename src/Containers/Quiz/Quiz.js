@@ -17,15 +17,6 @@ const toggleMask = () => {
 
 class Quiz extends Component {
 
-  // constructor(props) {
-  //   super(props);
-
-  //   const { shuffledData } = this.props
-  //   this.state = {
-  //     currentMon: shuffledData[shuffledData.length-1]
-  //   }
-  // }
-
   render() {
     const { shuffledData } = this.props
     const currentMon = shuffledData[shuffledData.length-1]
