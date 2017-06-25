@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
-import { setAnswer, reset, getQuizData, getNextMon } from '../../actions/quizActions';
+import { setAnswer, reset, getQuizData, loadNextMon, submitAnswer } from '../../actions/quizActions';
 
-import QuizMon from '../../Components/QuizMon';
-import AnswerSelection from '../../Components/AnswerSelection';
+import QuizMon from '../../Components/quizMon';
+import AnswerSelection from '../../Components/answerSelection';
 
 import './Quiz.css';
 
@@ -17,27 +17,18 @@ const toggleMask = () => {
 
 class Quiz extends Component {
 
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    const { shuffledData } = this.props
-    this.state = {
-      currentMon: shuffledData[shuffledData.length-1]
-    }
-  }
-
-  componentDidMount() {
-  }
-
-  // checkAnswer(selected, answer, correctAnswer) {
-  //   if (selected && correctAnswer === answer) {
-  //     toggleMask()
-  //   } else {
-  //     console.log("Nope!")
+  //   const { shuffledData } = this.props
+  //   this.state = {
+  //     currentMon: shuffledData[shuffledData.length-1]
   //   }
   // }
 
   render() {
+    const { shuffledData } = this.props
+    const currentMon = shuffledData[shuffledData.length-1]
 
     return (<div>
       <Grid fluid>
@@ -45,7 +36,7 @@ class Quiz extends Component {
           <Col xsOffset={3} xs={12}>      
             <QuizMon
               {...this.props}
-              currentMon={this.state.currentMon} 
+              currentMon={currentMon} 
             />
           </Col> 
         <Row>
@@ -53,7 +44,7 @@ class Quiz extends Component {
           <Col xs={12}>          
             <AnswerSelection 
               {...this.props}
-              currentMon={this.state.currentMon}
+              currentMon={currentMon}
               toggleMask={toggleMask}
             />
           </Col>
@@ -64,7 +55,8 @@ class Quiz extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  answerIsSelected:  state.quizReducer.answerIsSelected,
+  isAnswerSelected:  state.quizReducer.isAnswerSelected,
+  isAnswerSubmitted:  state.quizReducer.isAnswerSubmitted,
   userAnswer:  state.quizReducer.userAnswer,
   shuffledData:  state.quizReducer.shuffledData,
 });
@@ -73,7 +65,8 @@ const mapDispatchToProps = (dispatch) => ({
   setAnswer:    (event, value) => dispatch(setAnswer(event, value)),
   getQuizData:  () => dispatch(getQuizData()),
   reset:        () => dispatch(reset()),
-  getNextMon:   () => dispatch(getNextMon()),
+  submitAnswer: () => dispatch(submitAnswer()),
+  loadNextMon:  () => dispatch(loadNextMon()),
 });
 
 export default connect(

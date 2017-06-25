@@ -8,7 +8,6 @@ import { shuffle } from '../common'
 // Mock Data
 import mockData from '../mockData'
 
-// For simple styles, no need for separate CSS file
 const styles = {
   raisedButton: {
     margin: 6,
@@ -48,19 +47,18 @@ class AnswerSelection extends Component {
   }
 
   checkAnswer() {
-    const { toggleMask, answerIsSelected, userAnswer, shuffledData, currentMon } = this.props
+    const { toggleMask, isAnswerSelected, userAnswer, shuffledData, currentMon, submitAnswer } = this.props
 
-    console.log(toggleMask)
-
-    if (answerIsSelected && currentMon.index == userAnswer) {
+    if (isAnswerSelected && currentMon.index == userAnswer) {
       toggleMask()
+      submitAnswer()
     } else {
       console.log("Nope!")
     }
   }
 
   render() {
-    const { setAnswer, answerIsSelected, userAnswer, shuffledData } = this.props
+    const { setAnswer, isAnswerSelected, isAnswerSubmitted, userAnswer, shuffledData, loadNextMon } = this.props
     const { answerChoices } = this.state
 
     return (
@@ -77,15 +75,17 @@ class AnswerSelection extends Component {
         </RadioButtonGroup>
         <RaisedButton 
           label="Submit"
-          primary={true}
+          primary={isAnswerSelected}
+          disabled={!isAnswerSelected}
           style={styles.raisedButton}
           onTouchTap={this.checkAnswer.bind(this)}
         />
         <RaisedButton 
           label="Next"
-          secondary={true}
+          secondary={isAnswerSubmitted}
+          disabled={!isAnswerSubmitted}
           style={styles.raisedButton}
-          onTouchTap={this.getAnswerChoices.bind(this, shuffledData)}
+          onTouchTap={loadNextMon}
         />
       </div>
     );

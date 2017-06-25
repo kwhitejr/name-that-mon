@@ -3,23 +3,35 @@ import { shuffle } from '../common'
 const SET_ANSWER = 'SET_ANSWER',
       RESET = 'RESET',
       GET_QUIZ_DATA = 'GET_QUIZ_DATA',
+      SUBMIT_ANSWER = 'SUBMIT_ANSWER',
       LOAD_ANSWER_CHOICES = 'LOAD_ANSWER_CHOICES',
-      GET_NEXT_MON = 'GET_NEXT_MON';
+      LOAD_NEXT_MON = 'LOAD_NEXT_MON';
 
-const INITIAL_STATE = { error: '', message: '', answerIsSelected: false, userAnswer: null, answerChoices: null, shuffledData: null, correctAnswerStack: null };
+const INITIAL_STATE = { 
+  error: '', 
+  message: '', 
+  isAnswerSelected: false, 
+  isAnswerSubmitted: false, 
+  userAnswer: null, 
+  answerChoices: null, 
+  shuffledData: null, 
+  correctAnswerStack: [],
+};
 
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     case SET_ANSWER:
-      return { ...state, answerIsSelected: true, userAnswer: action.payload };
+      return { ...state, isAnswerSelected: true, userAnswer: action.payload };
     case RESET:
       return { INITIAL_STATE };
     case GET_QUIZ_DATA:
       return { ...state, shuffledData: action.payload };
+    case SUBMIT_ANSWER:
+      return { ...state, isAnswerSubmitted: true };
     case LOAD_ANSWER_CHOICES:
       return { ...state, answerChoices: action.payload };
-    case GET_NEXT_MON:
-      return getNextMon(state);
+    case LOAD_NEXT_MON:
+      return loadNextMon(state);
   }
 
   return state;
@@ -27,19 +39,20 @@ export default function (state = INITIAL_STATE, action) {
 
 // const loadAnswerChoices 
 
-const getNextMon = (state) => {
-  const shuffledData = state.quizReducer.shuffledData
+const loadNextMon = (state) => {
+  const shuffledData = state.shuffledData
   const lastDatum = shuffledData.pop()
+  let correctAnswerStack = state.correctAnswerStack
 
-  const nextMon = shuffledData[shuffledData.length-1]
-
-  let correctAnswers = state.quizReducer.correctAnswers
-  correctAnswers.push(lastDatum)
+  correctAnswerStack.push(lastDatum)
 
   const newObj = {
-    correctAnswers: correctAnswers,
     shuffledData: shuffledData,
-    answer: nextMon.index
+    correctAnswerStack: correctAnswerStack,
+    isAnswerSubmitted: false,
+    isAnswerSelected: false,
+    userAnswer: null, 
+    answerChoices: null,
   };
   return Object.assign({}, state, newObj);
 }

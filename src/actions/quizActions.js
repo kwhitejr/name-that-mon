@@ -1,24 +1,13 @@
 import { push } from 'react-router-redux'
-
+import { shuffle } from '../common'
 import mockData from '../mockData'
 
-const shuffle = (array, rng) => {
-  var i = array.length, j, swap;
-    if (!rng) rng = Math;
-  while (--i) {
-    j = rng.random() * (i + 1) | 0;
-    swap = array[i];
-    array[i] = array[j];
-    array[j] = swap;
-  }
-  return array;
-}
 
 export const  SET_ANSWER = 'SET_ANSWER',
               RESET = 'RESET',
               GET_QUIZ_DATA = 'GET_QUIZ_DATA',
-              LOAD_ANSWER_CHOICES = 'LOAD_ANSWER_CHOICES',
-              GET_NEXT_MON = 'GET_NEXT_MON';
+              LOAD_NEXT_MON = 'LOAD_NEXT_MON',
+              SUBMIT_ANSWER = 'SUBMIT_ANSWER';
 
 export function reset() {
   return (dispatch) => {
@@ -35,15 +24,20 @@ export function getQuizData() {
 }
 
 export function setAnswer(event, value) {
-  // console.log(event)
-  // console.log(value)
   return (dispatch) => {
     dispatch({ type: SET_ANSWER, payload: value })
   }
 }
 
-export function getNextMon() {
+export function loadNextMon() {
   return (dispatch) => {
-    dispatch({ type: GET_NEXT_MON })
+    dispatch({ type: LOAD_NEXT_MON })
+    dispatch(push('/quiz'))
+  }
+}
+
+export function submitAnswer() {
+  return (dispatch) => {
+    dispatch({ type: SUBMIT_ANSWER })
   }
 }
