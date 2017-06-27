@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
-import { setAnswer, reset, getQuizData, loadNextMon, submitAnswer } from '../../actions/quizActions';
+import { setAnswer, reset, getQuizData, submitAnswer, setNextQuestion } from '../../actions/quizActions';
 
 import QuizMon from '../../Components/quizMon';
 import AnswerSelection from '../../Components/answerSelection';
@@ -50,6 +50,7 @@ const mapStateToProps = (state) => ({
   isAnswerSubmitted:  state.quizReducer.isAnswerSubmitted,
   userAnswer:  state.quizReducer.userAnswer,
   shuffledData:  state.quizReducer.shuffledData,
+  answerChoices:  state.quizReducer.answerChoices,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -57,7 +58,7 @@ const mapDispatchToProps = (dispatch) => ({
   getQuizData:  () => dispatch(getQuizData()),
   reset:        () => dispatch(reset()),
   submitAnswer: () => dispatch(submitAnswer()),
-  loadNextMon:  () => dispatch(loadNextMon()),
+  setNextQuestion:  () => dispatch(setNextQuestion()),
 });
 
 export default connect(

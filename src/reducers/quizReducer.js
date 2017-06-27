@@ -1,9 +1,11 @@
+import { shuffle } from '../common'
+
 const SET_ANSWER = 'SET_ANSWER',
       RESET = 'RESET',
       GET_QUIZ_DATA = 'GET_QUIZ_DATA',
       SUBMIT_ANSWER = 'SUBMIT_ANSWER',
-      LOAD_ANSWER_CHOICES = 'LOAD_ANSWER_CHOICES',
-      LOAD_NEXT_MON = 'LOAD_NEXT_MON';
+      SET_ANSWER_CHOICES = 'SET_ANSWER_CHOICES',
+      STACK_CORRECT_ANSWER = 'STACK_CORRECT_ANSWER';
 
 const INITIAL_STATE = { 
   error: '', 
@@ -11,7 +13,7 @@ const INITIAL_STATE = {
   isAnswerSelected: false, 
   isAnswerSubmitted: false, 
   userAnswer: null, 
-  answerChoices: null, 
+  answerChoices: [], 
   shuffledData: null, 
   correctAnswerStack: [],
 };
@@ -26,18 +28,38 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, shuffledData: action.payload };
     case SUBMIT_ANSWER:
       return { ...state, isAnswerSubmitted: true };
-    case LOAD_ANSWER_CHOICES:
-      return { ...state, answerChoices: action.payload };
-    case LOAD_NEXT_MON:
-      return loadNextMon(state);
+    case SET_ANSWER_CHOICES:
+      return setAnswerChoices(state);
+    case STACK_CORRECT_ANSWER:
+      return stackCorrectAnswer(state);
   }
 
   return state;
 }
 
-// const loadAnswerChoices 
+const setAnswerChoices = (state) => {
+  const shuffledData = state.shuffledData
+  const currentMon = shuffledData[shuffledData.length-1]
+  let answerChoices = []
+  answerChoices.push(currentMon)
 
-const loadNextMon = (state) => {
+  // add three bogus answers
+  const remainingMon = shuffle(shuffledData.slice(0,shuffledData.length-1))
+  const pickThree = remainingMon.slice(0,3);
+  pickThree.forEach( (obj) => {
+    answerChoices.push(obj);
+  });
+
+  const shuffledAnswerChoices = shuffle(answerChoices)
+
+  const newObj = {
+    shuffledData: shuffledData,
+    answerChoices: shuffledAnswerChoices,
+  };
+  return Object.assign({}, state, newObj);
+}
+
+const stackCorrectAnswer = (state) => {
   const shuffledData = state.shuffledData
   const lastDatum = shuffledData.pop()
   let correctAnswerStack = state.correctAnswerStack
@@ -50,7 +72,7 @@ const loadNextMon = (state) => {
     isAnswerSubmitted: false,
     isAnswerSelected: false,
     userAnswer: null, 
-    answerChoices: null,
+    answerChoices: [],
   };
   return Object.assign({}, state, newObj);
 }

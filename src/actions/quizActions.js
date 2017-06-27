@@ -4,9 +4,11 @@ import mockData from '../mockData'
 
 
 export const  SET_ANSWER = 'SET_ANSWER',
+              SET_ANSWER_CHOICES = 'SET_ANSWER_CHOICES',
+              SET_NEXT_QUESTION = 'SET_NEXT_QUESTION',
               RESET = 'RESET',
               GET_QUIZ_DATA = 'GET_QUIZ_DATA',
-              LOAD_NEXT_MON = 'LOAD_NEXT_MON',
+              STACK_CORRECT_ANSWER = 'STACK_CORRECT_ANSWER',
               SUBMIT_ANSWER = 'SUBMIT_ANSWER';
 
 export function reset() {
@@ -19,6 +21,7 @@ export function getQuizData() {
   const shuffledData = shuffle(mockData)
   return (dispatch) => {
     dispatch({ type: GET_QUIZ_DATA, payload: shuffledData });
+    dispatch({ type: SET_ANSWER_CHOICES })
     dispatch(push('/quiz'));
   }
 }
@@ -29,15 +32,27 @@ export function setAnswer(event, value) {
   }
 }
 
-export function loadNextMon() {
+export function setNextQuestion() {
   return (dispatch) => {
-    dispatch({ type: LOAD_NEXT_MON })
-    dispatch(push('/quiz'))
+    dispatch({ type: STACK_CORRECT_ANSWER })
+    dispatch({ type: SET_ANSWER_CHOICES })
+  }
+}
+
+export function stackCorrectAnswer() {
+  return (dispatch) => {
+    dispatch({ type: STACK_CORRECT_ANSWER })
   }
 }
 
 export function submitAnswer() {
   return (dispatch) => {
     dispatch({ type: SUBMIT_ANSWER })
+  }
+}
+
+export function setAnswerChoices() {
+  return (dispatch) => {
+    dispatch({ type: SET_ANSWER_CHOICES })
   }
 }
