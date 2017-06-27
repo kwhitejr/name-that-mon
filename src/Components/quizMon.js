@@ -3,6 +3,8 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import { GridList, GridTile } from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import HelpOutline from 'material-ui/svg-icons/action/help-outline';
+import FlatButton from 'material-ui/FlatButton';
+import Dialog from 'material-ui/Dialog';
 
 const styles = {
   gridTile: {
@@ -11,12 +13,31 @@ const styles = {
 }
 
 class QuizMon extends Component {
+  state = {
+    open: false,
+  };
+
+  handleOpen = () => {
+    this.setState({open: true});
+  };
+
+  handleClose = () => {
+    this.setState({open: false});
+  };
 
   render() {
     const { currentMon, correctAnswerStack } = this.props
 
     // image src requires dynamic import
     const imgUrl = require(`../assets/pokemon/${currentMon.index}.png`)
+
+    const actions = [
+      <FlatButton
+        label="Back"
+        primary={true}
+        onTouchTap={this.handleClose}
+      />,
+    ];
 
     return (
     <Grid>
@@ -25,7 +46,7 @@ class QuizMon extends Component {
           <GridList>
             <GridTile
               key={imgUrl}
-              actionIcon={<IconButton><HelpOutline color="white" /></IconButton>}
+              actionIcon={<IconButton onTouchTap={this.handleOpen}><HelpOutline color="white" /></IconButton>}
               actionPosition="right"
               title="Name That Mon!"
               titlePosition="top"
@@ -36,6 +57,14 @@ class QuizMon extends Component {
             </GridTile>
           </GridList>
           <p>Answer Streak: {correctAnswerStack.length}</p>
+          <Dialog
+            title="Clue!"
+            actions={actions}
+            modal={true}
+            open={this.state.open}
+          >
+            {currentMon.clue}
+          </Dialog>
         </Col>
       </Row>
     </Grid>
