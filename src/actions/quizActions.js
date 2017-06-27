@@ -14,6 +14,7 @@ export const  SET_ANSWER = 'SET_ANSWER',
 export function reset() {
   return (dispatch) => {
     dispatch({ type: RESET })
+    dispatch(push('/'))
   };
 }
 
@@ -27,9 +28,7 @@ export function getQuizData() {
 }
 
 export function setAnswer(event, value) {
-  return (dispatch) => {
-    dispatch({ type: SET_ANSWER, payload: value })
-  }
+  return { type: SET_ANSWER, payload: value }
 }
 
 export function setNextQuestion() {
@@ -40,19 +39,13 @@ export function setNextQuestion() {
 }
 
 export function stackCorrectAnswer() {
-  return (dispatch) => {
-    dispatch({ type: STACK_CORRECT_ANSWER })
-  }
+  return { type: STACK_CORRECT_ANSWER }
 }
 
 export function submitAnswer() {
-  return (dispatch) => {
-    dispatch({ type: SUBMIT_ANSWER })
-  }
+  return { type: SUBMIT_ANSWER }
 }
 
 export function setAnswerChoices() {
-  return (dispatch) => {
-    dispatch({ type: SET_ANSWER_CHOICES })
-  }
+  return { type: SET_ANSWER_CHOICES }
 }

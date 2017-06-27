@@ -51,6 +51,7 @@ const mapStateToProps = (state) => ({
   userAnswer:  state.quizReducer.userAnswer,
   shuffledData:  state.quizReducer.shuffledData,
   answerChoices:  state.quizReducer.answerChoices,
+  correctAnswerStack:  state.quizReducer.correctAnswerStack,
 });
 
 const mapDispatchToProps = (dispatch) => ({

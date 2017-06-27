@@ -44,13 +44,20 @@ class AnswerSelection extends Component {
   // }
 
   checkAnswer() {
-    const { toggleMask, isAnswerSelected, userAnswer, currentMon, submitAnswer } = this.props
+    const { 
+      isAnswerSelected, 
+      userAnswer, 
+      currentMon, 
+      submitAnswer, 
+      toggleMask, 
+      reset 
+    } = this.props
 
     if (isAnswerSelected && currentMon.index === userAnswer) {
       toggleMask()
       submitAnswer()
     } else {
-      console.log("Nope!")
+      reset()
     }
   }
 

@@ -23,7 +23,7 @@ export default function (state = INITIAL_STATE, action) {
     case SET_ANSWER:
       return { ...state, isAnswerSelected: true, userAnswer: action.payload };
     case RESET:
-      return { INITIAL_STATE };
+      return { ...INITIAL_STATE };
     case GET_QUIZ_DATA:
       return { ...state, shuffledData: action.payload };
     case SUBMIT_ANSWER:
