@@ -23,7 +23,16 @@ export default function (state = INITIAL_STATE, action) {
     case SET_ANSWER:
       return { ...state, isAnswerSelected: true, userAnswer: action.payload };
     case RESET:
-      return { ...INITIAL_STATE };
+      return { 
+        error: '', 
+        message: '', 
+        isAnswerSelected: false, 
+        isAnswerSubmitted: false, 
+        userAnswer: null, 
+        answerChoices: [], 
+        shuffledData: null, 
+        correctAnswerStack: [],
+      };
     case GET_QUIZ_DATA:
       return { ...state, shuffledData: action.payload };
     case SUBMIT_ANSWER:
@@ -41,17 +50,24 @@ const setAnswerChoices = (state) => {
   const shuffledData = state.shuffledData
   const currentMon = shuffledData[shuffledData.length-1]
   let answerChoices = []
+  let pickThree = null
   answerChoices.push(currentMon)
 
-  // add three bogus answers
+  // add bogus answers
   const remainingMon = shuffle(shuffledData.slice(0,shuffledData.length-1))
-  const pickThree = remainingMon.slice(0,3);
+  if (remainingMon.length > 3) {
+    pickThree = remainingMon.slice(0,3);
+  } else {
+    pickThree = remainingMon
+  }
   pickThree.forEach( (obj) => {
     answerChoices.push(obj);
   });
 
+  // shuffle the order
   const shuffledAnswerChoices = shuffle(answerChoices)
 
+  // update `state`
   const newObj = {
     shuffledData: shuffledData,
     answerChoices: shuffledAnswerChoices,
@@ -64,6 +80,7 @@ const stackCorrectAnswer = (state) => {
   const lastDatum = shuffledData.pop()
   let correctAnswerStack = state.correctAnswerStack
 
+  // add correct answer to `correctAnswerStack`
   correctAnswerStack.push(lastDatum)
 
   const newObj = {

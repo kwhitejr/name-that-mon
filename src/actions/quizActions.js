@@ -1,7 +1,6 @@
 import { push } from 'react-router-redux'
 import { shuffle } from '../common'
-import mockData from '../mockData'
-
+import mockData from '../mockData' // remove once server is set up
 
 export const  SET_ANSWER = 'SET_ANSWER',
               SET_ANSWER_CHOICES = 'SET_ANSWER_CHOICES',
@@ -14,7 +13,7 @@ export const  SET_ANSWER = 'SET_ANSWER',
 export function reset() {
   return (dispatch) => {
     dispatch({ type: RESET })
-    dispatch(push('/'))
+    dispatch(push('/'));
   };
 }
 
