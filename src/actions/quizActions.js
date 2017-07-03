@@ -1,6 +1,6 @@
 import { push } from 'react-router-redux'
 import { shuffle } from '../common'
-import mockData from '../mockData' // remove once server is set up
+import mockData from '../mockData' // TODO: remove once server is set up
 
 export const  SET_ANSWER = 'SET_ANSWER',
               SET_ANSWER_CHOICES = 'SET_ANSWER_CHOICES',
@@ -11,13 +11,11 @@ export const  SET_ANSWER = 'SET_ANSWER',
               SUBMIT_ANSWER = 'SUBMIT_ANSWER';
 
 export function reset() {
-  return (dispatch) => {
-    dispatch({ type: RESET })
-    dispatch(push('/'));
-  };
+  return { type: RESET }
 }
 
-export function getQuizData() {  
+export function getQuizData() {
+  // TODO: replace mockData with API call to db  
   const shuffledData = shuffle(mockData)
   return (dispatch) => {
     dispatch({ type: GET_QUIZ_DATA, payload: shuffledData });
@@ -47,4 +45,10 @@ export function submitAnswer() {
 
 export function setAnswerChoices() {
   return { type: SET_ANSWER_CHOICES }
+}
+
+export function goToResults() {
+  return (dispatch) => {
+    dispatch(push('/result'))
+  }
 }

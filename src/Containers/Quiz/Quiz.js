@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
-import { setAnswer, reset, getQuizData, submitAnswer, setNextQuestion } from '../../actions/quizActions';
+import { 
+  setAnswer, 
+  reset, 
+  getQuizData, 
+  submitAnswer, 
+  setNextQuestion,
+  goToResults,
+} from '../../actions/quizActions';
 
 import QuizMon from '../../Components/quizMon';
 import AnswerSelection from '../../Components/answerSelection';
@@ -59,6 +66,7 @@ const mapDispatchToProps = (dispatch) => ({
   reset:        () => dispatch(reset()),
   submitAnswer: () => dispatch(submitAnswer()),
   setNextQuestion:  () => dispatch(setNextQuestion()),
+  goToResults:  () => dispatch(goToResults()),
 });
 
 export default connect(

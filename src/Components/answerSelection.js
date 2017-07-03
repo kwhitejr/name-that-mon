@@ -23,19 +23,25 @@ class AnswerSelection extends Component {
       // actions 
       submitAnswer, 
       toggleMask, 
-      reset 
+      goToResults, 
     } = this.props
 
     if (isAnswerSelected && currentMon.index === userAnswer) {
       toggleMask()
       submitAnswer()
     } else {
-      reset()
+      goToResults()
     }
   }
 
   render() {
-    const { setAnswer, isAnswerSelected, isAnswerSubmitted, setNextQuestion, answerChoices } = this.props
+    const { 
+      setAnswer, 
+      isAnswerSelected, 
+      isAnswerSubmitted, 
+      setNextQuestion, 
+      answerChoices, 
+    } = this.props
 
     return (
       <div>
