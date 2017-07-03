@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux'
 
-import { resetThenHome, resetThenRestart } from '../../actions/resultActions';
+import { 
+  resetThenHome, 
+  resetThenRestart 
+} from '../../actions/resultActions';
 
 import ResultsTable from '../../Components/ResultsTable'
 import ResultsActions from '../../Components/ResultsActions'
@@ -14,6 +18,12 @@ import mark from '../../assets/pokemon/0.png';
 
 class Result extends Component {
 
+  componentWillMount() {
+    const { resetThenHome } = this.props
+    if (this.props.shuffledData === null) {
+      resetThenHome()
+    }
+  }
 
   render() {
     const { correctAnswerStack, shuffledData } = this.props

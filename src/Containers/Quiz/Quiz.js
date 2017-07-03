@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux'
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import { 
@@ -9,7 +10,11 @@ import {
   submitAnswer, 
   setNextQuestion,
   goToResults,
-} from '../../actions/quizActions';
+} from '../../actions/quizActions'
+
+import {
+  resetThenHome,
+} from '../../actions/resultActions'
 
 import QuizMon from '../../Components/quizMon';
 import AnswerSelection from '../../Components/answerSelection';
@@ -22,6 +27,13 @@ const toggleMask = () => {
 }
 
 class Quiz extends Component {
+
+  componentWillMount() {
+    const { resetThenHome } = this.props
+    if (this.props.shuffledData === null) {
+      resetThenHome()
+    }
+  }
 
   render() {
     const { shuffledData } = this.props
@@ -67,6 +79,7 @@ const mapDispatchToProps = (dispatch) => ({
   submitAnswer: () => dispatch(submitAnswer()),
   setNextQuestion:  () => dispatch(setNextQuestion()),
   goToResults:  () => dispatch(goToResults()),
+  resetThenHome: () => dispatch(resetThenHome()),
 });
 
 export default connect(
