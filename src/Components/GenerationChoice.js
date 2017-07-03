@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 

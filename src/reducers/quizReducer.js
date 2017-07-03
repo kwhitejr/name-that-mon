@@ -19,6 +19,7 @@ const INITIAL_STATE = {
 };
 
 export default function (state = INITIAL_STATE, action) {
+  // eslint-disable-next-line
   switch (action.type) {
     case SET_ANSWER:
       return { ...state, isAnswerSelected: true, userAnswer: action.payload };

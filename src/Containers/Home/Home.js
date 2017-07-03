@@ -1,19 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom'
-
-import RaisedButton from 'material-ui/RaisedButton';
-
 import { getQuizData } from '../../actions/quizActions';
 import GenerationChoice from '../../Components/GenerationChoice';
 import logo from '../../logo.svg';
 import './Home.css';
-
-const styles = {
-  raisedButton: {
-    margin: 6,
-  },
-}
 
 class Home extends Component {
   render() {

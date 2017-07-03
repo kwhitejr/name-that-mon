@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import { setAnswer, reset, getQuizData, submitAnswer, setNextQuestion } from '../../actions/quizActions';

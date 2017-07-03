@@ -3,8 +3,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
-import { shuffle } from '../common'
-
 const styles = {
   raisedButton: {
     margin: 6,
@@ -16,38 +14,13 @@ const styles = {
 
 class AnswerSelection extends Component {
 
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     answerChoices: shuffle(this.getAnswerChoices(this.props.shuffledData))
-  //   }
-  // }
-
-  // getAnswerChoices(shuffledData) {
-  //   let answerChoices = [];
-
-  //   // insert correct answer
-  //   const { currentMon } = this.props;
-  //   answerChoices.push(currentMon);
-
-  //   // add three bogus answers
-  //   const remainingMon = shuffledData.slice(0,shuffledData.length-1);
-  //   const pickThree = remainingMon.slice(0,3);
-  //   pickThree.forEach( (obj) => {
-  //     answerChoices.push(obj);
-  //   });
-
-  //   var dup_array = answerChoices.slice();
-  //   shuffle(dup_array);
-
-  //   return answerChoices;
-  // }
-
   checkAnswer() {
-    const { 
+    const {
+      // redux state 
       isAnswerSelected, 
       userAnswer, 
-      currentMon, 
+      currentMon,
+      // actions 
       submitAnswer, 
       toggleMask, 
       reset 
