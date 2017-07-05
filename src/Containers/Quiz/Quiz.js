@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux'
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import { 
@@ -39,27 +38,26 @@ class Quiz extends Component {
     const { shuffledData } = this.props
     const currentMon = shuffledData[shuffledData.length-1]
 
-    return (<div>
+    return (
       <Grid fluid>
-        <Row>
-          <Col xsOffset={3} xs={12}>      
+        <Row center="xs">
+          <Col xs={12} sm={6} smOffset={1}>      
             <QuizMon
               {...this.props}
               currentMon={currentMon} 
             />
-          </Col> 
-        <Row>
-        </Row>
-          <Col xs={12}>          
-            <AnswerSelection 
-              {...this.props}
-              currentMon={currentMon}
-              toggleMask={toggleMask}
-            />
+          <AnswerSelection 
+            {...this.props}
+            currentMon={currentMon}
+            toggleMask={toggleMask}
+          />
+          </Col>
+          <Col sm={4}>
+            <p>This is the stat bar</p>
           </Col>
         </Row>
       </Grid>
-    </div>)
+    )
   }
 }
 

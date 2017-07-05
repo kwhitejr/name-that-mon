@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux'
+import { Grid, Row, Col } from 'react-flexbox-grid';
+
 
 import { 
   resetThenHome, 
@@ -32,18 +33,27 @@ class Result extends Component {
     const endedOn = shuffledData.length > 0 ? shuffledData[shuffledData.length-1].name : lastCorrectAnswer
 
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={mark} className="App-logo" alt="logo" />
-          <h2>Mon, you are done!</h2>
-          <ResultsTable
-            lastCorrectAnswer={lastCorrectAnswer} 
-            endedOn={endedOn} 
-            {...this.props} 
-          />
-          <ResultsActions {...this.props} />
-        </div>
-      </div>
+      <Grid fluid>
+        <Row center="xs">
+          <Col xs={12} sm={6} smOffset={3}>
+            <div className="App">
+              <div className="App-header">
+                <img src={mark} className="App-logo" alt="logo" />
+                <h2>Mon, you are done!</h2>
+                <ResultsTable
+                  lastCorrectAnswer={lastCorrectAnswer} 
+                  endedOn={endedOn} 
+                  {...this.props} 
+                />
+                <ResultsActions {...this.props} />
+              </div>
+            </div>
+          </Col>
+          <Col sm={4}>
+            <p>This is the stat bar</p>
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 }

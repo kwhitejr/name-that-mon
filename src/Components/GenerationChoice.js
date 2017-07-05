@@ -13,30 +13,26 @@ const styles = {
 };
 
 const GenerationChoice = ({ getQuizData }) => (
-  <Grid>
-    <Row>
-      <Col xs={12}>
-        <RaisedButton 
-          label="Generation 1"
-          primary={true}
-          style={styles.raisedButton}
-          onTouchTap={getQuizData}
-        />
-        <RaisedButton 
-          label="Generation 2"
-          disabled={true}
-          style={styles.raisedButton}
-          onTouchTap={getQuizData}
-        />
-        <RaisedButton 
-          label="Generation 3"
-          disabled={true}
-          style={styles.raisedButton}
-          onTouchTap={getQuizData}
-        />
-      </Col>
-    </Row>
-  </Grid>
+  <div>
+    <RaisedButton 
+      label="Generation 1"
+      primary={true}
+      style={styles.raisedButton}
+      onTouchTap={getQuizData}
+    />
+    <RaisedButton 
+      label="Generation 2"
+      disabled={true}
+      style={styles.raisedButton}
+      onTouchTap={getQuizData}
+    />
+    <RaisedButton 
+      label="Generation 3"
+      disabled={true}
+      style={styles.raisedButton}
+      onTouchTap={getQuizData}
+    />
+  </div>
 )
 
 export default GenerationChoice;
