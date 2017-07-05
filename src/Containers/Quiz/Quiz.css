@@ -2,6 +2,10 @@
   filter: contrast(0%) brightness(0%)
 }
 
-.selected-answer {
-  background-color: green;
+.answers {
+  background: lightgreen;
+}
+
+.progress-bar {
+  background: lightblue;
 }

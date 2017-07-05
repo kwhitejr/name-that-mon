@@ -41,8 +41,8 @@ class QuizMon extends Component {
     ];
 
     return (
-      <div>
-        <GridList cols={1} height="auto">
+      <div className="top">
+        <GridList>
           <GridTile
             key={imgUrl}
             actionIcon={<IconButton onTouchTap={this.handleOpen}><HelpOutline color="white" /></IconButton>}

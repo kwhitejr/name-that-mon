@@ -44,7 +44,7 @@ class AnswerSelection extends Component {
     } = this.props
 
     return (
-      <div>
+      <div className="answers">
         <RadioButtonGroup name="answers" onChange={setAnswer} >
           {answerChoices.map( (datum, i) => (
             <RadioButton
