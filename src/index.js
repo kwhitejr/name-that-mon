@@ -15,6 +15,9 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 // Import the redux store
 import { history, configureStore } from './store';
 
+// Import Header
+import Header from './Header/Header'
+
 // Import the Containers, i.e. different page views. Ultimately this should be refactored into a `router.js`
 import Home from './Containers/Home/Home.js';
 import Quiz from './Containers/Quiz/Quiz.js';
@@ -34,15 +37,16 @@ const store = configureStore();
 */
 const App = () => (
   <MuiThemeProvider>
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <div>
-        <Route exact path="/" component={Home}/>
-        <Route path="/quiz" component={Quiz}/>
-        <Route path="/result" component={Result}/>
-      </div>
-    </ConnectedRouter>
-  </Provider>
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <div>
+          <Header />
+          <Route exact path="/" component={Home}/>
+          <Route path="/quiz" component={Quiz}/>
+          <Route path="/result" component={Result}/>
+        </div>
+      </ConnectedRouter>
+    </Provider>
   </MuiThemeProvider>
 )
 
