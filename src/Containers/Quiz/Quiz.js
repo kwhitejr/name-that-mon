@@ -17,6 +17,7 @@ import {
 
 import QuizMon from '../../Components/quizMon';
 import AnswerSelection from '../../Components/answerSelection';
+import QuizProgress from '../../Components/QuizProgress';
 
 import './Quiz.css';
 
@@ -35,8 +36,9 @@ class Quiz extends Component {
   }
 
   render() {
-    const { shuffledData } = this.props
+    const { shuffledData, correctAnswerStack } = this.props
     const currentMon = shuffledData[shuffledData.length-1]
+    const quizLength = shuffledData.length + correctAnswerStack.length
 
     return (
       <Grid fluid>
@@ -46,11 +48,15 @@ class Quiz extends Component {
               {...this.props}
               currentMon={currentMon} 
             />
-          <AnswerSelection 
-            {...this.props}
-            currentMon={currentMon}
-            toggleMask={toggleMask}
-          />
+            <QuizProgress 
+              {...this.props}
+              quizLength={quizLength}
+            />
+            <AnswerSelection 
+              {...this.props}
+              currentMon={currentMon}
+              toggleMask={toggleMask}
+            />
           </Col>
           <Col sm={4}>
             <p>This is the stat bar</p>

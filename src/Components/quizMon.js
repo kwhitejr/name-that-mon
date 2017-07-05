@@ -8,6 +8,8 @@ import Dialog from 'material-ui/Dialog';
 const styles = {
   gridTile: {
     backgroundColor: "gray",
+    // height: 200,
+    width: 200,
   }
 }
 
@@ -40,7 +42,7 @@ class QuizMon extends Component {
 
     return (
       <div>
-        <GridList>
+        <GridList cols={1} height="auto">
           <GridTile
             key={imgUrl}
             actionIcon={<IconButton onTouchTap={this.handleOpen}><HelpOutline color="white" /></IconButton>}
@@ -50,10 +52,14 @@ class QuizMon extends Component {
             titleBackground="linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
             style={styles.gridTile}
           >
-            <img src={imgUrl} id="target-mon" className="mask" alt="Name that Mon"/>
+            <img 
+              src={imgUrl} 
+              id="target-mon" 
+              className="mask" 
+              alt="Name that Mon" 
+            />
           </GridTile>
         </GridList>
-        <p>Answer Streak: {correctAnswerStack.length}</p>
         <Dialog
           title="Clue!"
           actions={actions}
