@@ -1,4 +1,8 @@
-CREATE DATABASE name_that_mon
+-- CREATE DATABASE name_that_mon;
+
+\c name_that_mon
+
+DROP TABLE IF EXISTS pokemon;
 
 CREATE TABLE pokemon(
    id int primary key not null,
@@ -16,4 +20,4 @@ CREATE TABLE pokemon(
    legendary boolean
 );
 
-copy pokemon from './pokemon-data.csv' DELIMITERS ',' CSV HEADER;
+copy pokemon from '/Users/kevin/git/name-that-mon/server/pokemon-data.csv' DELIMITERS ',' CSV HEADER;
