@@ -1,6 +1,10 @@
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
+const bodyParser = require('body-parser');
+
+const db = require('./models');
+const Pokemon = db.Pokemon;
 
 const app = express();
 
@@ -9,6 +13,14 @@ app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:htt
 
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
+app.use(bodyParser.urlencoded({extended: false}));
+
+app.get('/pokemon/:id', function (req, res) {
+  Pokemon.find({where: {id: req.params.id}})
+    .then(function (result) {
+      res.send(result);
+    });
+});
 
 // Always return the main index.html, so react-router render the route in the client
 app.get('*', (req, res) => {

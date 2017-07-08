@@ -2,7 +2,10 @@
 
 module.exports = function (sequelize, DataTypes) {
   var Pokemon = sequelize.define('Pokemon', {
-    id:               DataTypes.INTEGER,
+    id:               {
+      type: DataTypes.INTEGER,
+      primaryKey: true
+    },
     name:             DataTypes.STRING,
     type1:            DataTypes.STRING,
     type2:            DataTypes.STRING,
@@ -15,6 +18,10 @@ module.exports = function (sequelize, DataTypes) {
     speed:            DataTypes.INTEGER,
     generation:       DataTypes.INTEGER,
     legendary:        DataTypes.BOOLEAN
+  }, {
+    timestamps: false,
+    freezeTableName: true,
+    tableName: 'pokemon'
   });
 
   return Pokemon;
