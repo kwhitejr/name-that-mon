@@ -1,6 +1,5 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
-import { Grid, Row, Col } from 'react-flexbox-grid';
 
 // For simple styles, no need for separate CSS file
 const styles = {
