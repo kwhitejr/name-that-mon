@@ -15,8 +15,15 @@ app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:htt
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.get('/pokemon/:id', function (req, res) {
+app.get('/api/pokemon/:id', function (req, res) {
   Pokemon.find({where: {id: req.params.id}})
+    .then(function (result) {
+      res.send(result);
+    });
+});
+
+app.get('/api/generation/:id', function (req, res) {
+  Pokemon.findAll({where: {generation: req.params.id}})
     .then(function (result) {
       res.send(result);
     });
