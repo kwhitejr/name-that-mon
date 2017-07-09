@@ -67,10 +67,6 @@ export function useClue() {
   return { type: USE_CLUE }
 }
 
-// export function incrementClueCount() {
-//   return { type: INCREMENT_CLUE_COUNT }
-// }
-
 export function endCurrentQuiz() {
   return (dispatch) => {
     dispatch({ type: END_TIMER })

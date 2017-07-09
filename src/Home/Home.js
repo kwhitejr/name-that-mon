@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-flexbox-grid';
-import GenerationChoice from './HomeGenerationChoice';
+import HomeQuizChoice from './HomeQuizChoice';
 
 import questionMark from '../assets/pokemon/0.png';
 import './Home.css';
@@ -9,6 +9,7 @@ import './Home.css';
 import { getQuizData } from '../Quiz/QuizActions';
 
 class Home extends Component {
+
   render() {
     return (
       <Grid fluid>
@@ -19,7 +20,7 @@ class Home extends Component {
                 <img src={questionMark} className="App-logo" alt="logo" />
                 <h2>Read to Start?</h2>
               </div>
-              <GenerationChoice {...this.props} />
+              <HomeQuizChoice {...this.props} />
             </div>
           </Col>
           <Col sm={4} md={3} lg={2}>
