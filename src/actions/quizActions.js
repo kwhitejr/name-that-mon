@@ -13,7 +13,9 @@ export const  SET_ANSWER = 'SET_ANSWER',
               STACK_CORRECT_ANSWER = 'STACK_CORRECT_ANSWER',
               SUBMIT_ANSWER = 'SUBMIT_ANSWER',
               START_TIMER = 'START_TIMER',
-              END_TIMER = 'END_TIMER';
+              END_TIMER = 'END_TIMER',
+              USE_CLUE = 'USE_CLUE',
+              INCREMENT_CLUE_COUNT = 'INCREMENT_CLUE_COUNT';
 
 export function reset() {
   return { type: RESET }
@@ -45,6 +47,7 @@ export function setAnswer(event, value) {
 
 export function setNextQuestion() {
   return (dispatch) => {
+    dispatch({ type: INCREMENT_CLUE_COUNT })
     dispatch({ type: STACK_CORRECT_ANSWER })
     dispatch({ type: SET_ANSWER_CHOICES })
   }
@@ -62,10 +65,18 @@ export function setAnswerChoices() {
   return { type: SET_ANSWER_CHOICES }
 }
 
+export function useClue() {
+  return { type: USE_CLUE }
+}
+
+// export function incrementClueCount() {
+//   return { type: INCREMENT_CLUE_COUNT }
+// }
+
 export function endCurrentQuiz() {
   return (dispatch) => {
     dispatch({ type: END_TIMER })
-
+    dispatch({ type: INCREMENT_CLUE_COUNT })
     dispatch(push('/result'))
   }
 }

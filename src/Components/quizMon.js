@@ -15,15 +15,17 @@ const styles = {
 
 class QuizMon extends Component {
   state = {
-    open: false,
+    dialogOpen: false,
+    // isClueUsed: false,
   };
 
   handleOpen = () => {
-    this.setState({open: true});
+    this.setState({dialogOpen: true});
+    this.props.useClue()
   };
 
   handleClose = () => {
-    this.setState({open: false});
+    this.setState({dialogOpen: false});
   };
 
   render() {
@@ -64,9 +66,9 @@ class QuizMon extends Component {
           title="Clue!"
           actions={actions}
           modal={true}
-          open={this.state.open}
+          open={this.state.dialogOpen}
         >
-          {currentMon.clue}
+          {`This pokemon's type: ${currentMon.type1.toUpperCase()}.`}
         </Dialog>
       </div>
     )

@@ -9,6 +9,7 @@ import {
   submitAnswer, 
   setNextQuestion,
   endCurrentQuiz,
+  useClue,
 } from '../../actions/quizActions'
 
 import {
@@ -70,6 +71,7 @@ class Quiz extends Component {
 const mapStateToProps = (state) => ({
   isAnswerSelected:  state.quizReducer.isAnswerSelected,
   isAnswerSubmitted:  state.quizReducer.isAnswerSubmitted,
+  isClueUsed:  state.quizReducer.isClueUsed,
   userAnswer:  state.quizReducer.userAnswer,
   shuffledQuizStack:  state.quizReducer.shuffledQuizStack,
   answerChoices:  state.quizReducer.answerChoices,
@@ -84,6 +86,7 @@ const mapDispatchToProps = (dispatch) => ({
   setNextQuestion:  () => dispatch(setNextQuestion()),
   endCurrentQuiz:   () => dispatch(endCurrentQuiz()),
   resetThenHome:    () => dispatch(resetThenHome()),
+  useClue:          () => dispatch(useClue()),
 });
 
 export default connect(

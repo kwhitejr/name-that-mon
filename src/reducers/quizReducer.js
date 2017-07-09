@@ -8,19 +8,23 @@ const SET_ANSWER = 'SET_ANSWER',
       SET_ANSWER_CHOICES = 'SET_ANSWER_CHOICES',
       STACK_CORRECT_ANSWER = 'STACK_CORRECT_ANSWER',
       START_TIMER = 'START_TIMER',
-      END_TIMER = 'END_TIMER';
+      END_TIMER = 'END_TIMER',
+      USE_CLUE = 'USE_CLUE',
+      INCREMENT_CLUE_COUNT = 'INCREMENT_CLUE_COUNT';
 
 const INITIAL_STATE = { 
   error: '', 
   message: '', 
   isAnswerSelected: false, 
   isAnswerSubmitted: false, 
+  isClueUsed: false, 
   userAnswer: null, 
   answerChoices: [], 
   shuffledQuizStack: [], 
   correctAnswerStack: [],
   startTime: null,
   endTime: null,
+  clueCount: 0,
 };
 
 export default function (state = INITIAL_STATE, action) {
@@ -34,12 +38,14 @@ export default function (state = INITIAL_STATE, action) {
         message: '', 
         isAnswerSelected: false, 
         isAnswerSubmitted: false, 
+        isClueUsed: false, 
         userAnswer: null, 
         answerChoices: [], 
         shuffledQuizStack: [], 
         correctAnswerStack: [],
         startTime: null,
         endTime: null,
+        clueCount: 0,
       };
     case GET_QUIZ_DATA:
       return { ...state, shuffledQuizStack: action.payload };
@@ -53,11 +59,17 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, startTime: moment().unix() };
     case END_TIMER:
       return { ...state, endTime: moment().unix() };
+    case USE_CLUE:
+      return { ...state, isClueUsed: true };
+    case INCREMENT_CLUE_COUNT:
+      if (state.isClueUsed)
+        return { ...state, isClueUsed: false, clueCount: state.clueCount + 1 };
   }
 
   return state;
 }
 
+// For each new question, get correct pokemon and three bogus pokemon, shuffle, and set.
 const setAnswerChoices = (state) => {
   const shuffledQuizStack = state.shuffledQuizStack
   const currentMon = shuffledQuizStack[shuffledQuizStack.length-1]
@@ -87,6 +99,7 @@ const setAnswerChoices = (state) => {
   return Object.assign({}, state, newObj);
 }
 
+// When correct answer is submitted, add it to the correctAnswerStack
 const stackCorrectAnswer = (state) => {
   const shuffledQuizStack = state.shuffledQuizStack
   const lastDatum = shuffledQuizStack.pop()
@@ -100,6 +113,7 @@ const stackCorrectAnswer = (state) => {
     correctAnswerStack: correctAnswerStack,
     isAnswerSubmitted: false,
     isAnswerSelected: false,
+    isClueUsed: false,
     userAnswer: null, 
     answerChoices: [],
   };

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import GenerationChoice from '../../Components/GenerationChoice';
 
-import logo from '../../logo.svg';
+import questionMark from '../../assets/pokemon/0.png';
 import './Home.css';
 
 import { getQuizData } from '../../actions/quizActions';
@@ -16,7 +16,7 @@ class Home extends Component {
           <Col xs={12} sm={6} smOffset={1} md={4} mdOffset={1} lg={3} lgOffset={2}>
             <div className="App">
               <div className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
+                <img src={questionMark} className="App-logo" alt="logo" />
                 <h2>Name That Mon!</h2>
               </div>
               <GenerationChoice {...this.props} />

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
+import FlatButton from 'material-ui/FlatButton';
+import Dialog from 'material-ui/Dialog';
 
 const styles = {
   raisedButton: {
@@ -12,24 +14,35 @@ const styles = {
 };
 
 class AnswerSelection extends Component {
+  state = {
+    dialogOpen: false,
+  };
+
+  handleOpen = () => {
+    this.setState({dialogOpen: true});
+  };
+
+  handleClose = () => {
+    this.setState({dialogOpen: false});
+  };
 
   checkAnswer() {
     const {
       // redux state 
-      isAnswerSelected, 
+      isAnswerSelected,
       userAnswer, 
       currentMon,
       // actions 
       submitAnswer, 
       toggleMask, 
-      endCurrentQuiz, 
+      // endCurrentQuiz, 
     } = this.props
 
     if (isAnswerSelected && currentMon.id === userAnswer) {
       toggleMask()
       submitAnswer()
     } else {
-      endCurrentQuiz()
+      this.handleOpen()
     }
   }
 
@@ -39,8 +52,17 @@ class AnswerSelection extends Component {
       isAnswerSelected, 
       isAnswerSubmitted, 
       setNextQuestion, 
-      answerChoices, 
+      answerChoices,
+      endCurrentQuiz, 
     } = this.props
+
+    const actions = [
+      <FlatButton
+        label="Continue"
+        primary={true}
+        onTouchTap={endCurrentQuiz}
+      />,
+    ];
 
     return (
       <div className="answers">
@@ -68,6 +90,14 @@ class AnswerSelection extends Component {
           style={styles.raisedButton}
           onTouchTap={setNextQuestion}
         />
+        <Dialog
+          title="Oh Noes!"
+          actions={actions}
+          modal={true}
+          open={this.state.dialogOpen}
+        >
+          Game Over, Mon.
+        </Dialog>
       </div>
     );
   }
