@@ -30,15 +30,15 @@ class Quiz extends Component {
 
   componentWillMount() {
     const { resetThenHome } = this.props
-    if (this.props.shuffledData === null) {
+    if (this.props.shuffledQuizStack === null) {
       resetThenHome()
     }
   }
 
   render() {
-    const { shuffledData, correctAnswerStack } = this.props
-    const currentMon = shuffledData[shuffledData.length-1]
-    const quizLength = shuffledData.length + correctAnswerStack.length
+    const { shuffledQuizStack, correctAnswerStack } = this.props
+    const currentMon = shuffledQuizStack ? shuffledQuizStack[shuffledQuizStack.length-1] : null
+    const quizLength = shuffledQuizStack ? shuffledQuizStack.length + correctAnswerStack.length : null
 
     return (
       <Grid fluid>
@@ -71,7 +71,7 @@ const mapStateToProps = (state) => ({
   isAnswerSelected:  state.quizReducer.isAnswerSelected,
   isAnswerSubmitted:  state.quizReducer.isAnswerSubmitted,
   userAnswer:  state.quizReducer.userAnswer,
-  shuffledData:  state.quizReducer.shuffledData,
+  shuffledQuizStack:  state.quizReducer.shuffledQuizStack,
   answerChoices:  state.quizReducer.answerChoices,
   correctAnswerStack:  state.quizReducer.correctAnswerStack,
 });

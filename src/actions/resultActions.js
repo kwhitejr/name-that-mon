@@ -1,7 +1,7 @@
 import { push } from 'react-router-redux'
 import { shuffle } from '../common'
 
-import mockData from '../mockData' // TODO: remove once server is set up
+const API_URL = 'http://localhost:3000/api';
 
 export const  RESET = 'RESET',
               GET_QUIZ_DATA = 'GET_QUIZ_DATA',
@@ -15,13 +15,15 @@ export function resetThenHome() {
 }
 
 export function resetThenRestart() {
-  // TODO: replace mockData with API call to db  
-  const shuffledData = shuffle(mockData)
-
+  // need to refactor the reload of pokemon
+  const generation = 1
   return (dispatch) => {
     dispatch({ type: RESET })
-    dispatch({ type: GET_QUIZ_DATA, payload: shuffledData });
-    dispatch({ type: SET_ANSWER_CHOICES })
-    dispatch(push('/quiz'));
-  };
+    return fetch(`${API_URL}/pokemon/generation/${generation}`)
+      .then(res => res.json())
+      .then(json => shuffle(json))
+      .then(shuffledQuizStack => dispatch({ type: GET_QUIZ_DATA, payload: shuffledQuizStack }))
+      .then(() => dispatch({ type: SET_ANSWER_CHOICES }))
+      .then(() => dispatch(push('/quiz')));
+  }
 }

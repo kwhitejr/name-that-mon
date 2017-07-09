@@ -21,16 +21,16 @@ class Result extends Component {
 
   componentWillMount() {
     const { resetThenHome } = this.props
-    if (this.props.shuffledData === null) {
+    if (this.props.shuffledQuizStack === null) {
       resetThenHome()
     }
   }
 
   render() {
-    const { correctAnswerStack, shuffledData } = this.props
+    const { correctAnswerStack, shuffledQuizStack } = this.props
 
     const lastCorrectAnswer = correctAnswerStack.length > 0 ? correctAnswerStack[correctAnswerStack.length-1].name : 'None'
-    const endedOn = shuffledData.length > 0 ? shuffledData[shuffledData.length-1].name : lastCorrectAnswer
+    const endedOn = shuffledQuizStack.length > 0 ? shuffledQuizStack[shuffledQuizStack.length-1].name : lastCorrectAnswer
 
     return (
       <Grid fluid>
@@ -60,7 +60,7 @@ class Result extends Component {
 
 const mapStateToProps = (state) => ({
   correctAnswerStack:  state.quizReducer.correctAnswerStack,
-  shuffledData:  state.quizReducer.shuffledData,
+  shuffledQuizStack:  state.quizReducer.shuffledQuizStack,
 });
 
 const mapDispatchToProps = (dispatch) => ({

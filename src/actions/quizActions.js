@@ -11,7 +11,8 @@ export const  SET_ANSWER = 'SET_ANSWER',
               RESET = 'RESET',
               GET_QUIZ_DATA = 'GET_QUIZ_DATA',
               STACK_CORRECT_ANSWER = 'STACK_CORRECT_ANSWER',
-              SUBMIT_ANSWER = 'SUBMIT_ANSWER';
+              SUBMIT_ANSWER = 'SUBMIT_ANSWER'
+              START_TIMER = 'START_TIMER';
 
 export function reset() {
   return { type: RESET }
@@ -19,17 +20,18 @@ export function reset() {
 
 export function getQuizData(generation) {
   // TODO: replace mockData with API call to db  
-  // const shuffledData = shuffle(mockData)
+  // const shuffledQuizStack = shuffle(mockData)
   generation = 1
   // console.log(event)
-  console.log(generation)
-  console.log(API_URL)
+  // console.log(generation)
+  // console.log(API_URL)
   return (dispatch) => {
     return fetch(`${API_URL}/pokemon/generation/${generation}`)
       .then(res => res.json())
       .then(json => shuffle(json))
-      .then(shuffledData => dispatch({ type: GET_QUIZ_DATA, payload: shuffledData }))
+      .then(shuffledQuizStack => dispatch({ type: GET_QUIZ_DATA, payload: shuffledQuizStack }))
       .then(() => dispatch({ type: SET_ANSWER_CHOICES }))
+      .then(() => dispatch({ type: START_TIMER }))
       .then(() => dispatch(push('/quiz')));
   }
 }

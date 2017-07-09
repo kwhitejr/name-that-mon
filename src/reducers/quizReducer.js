@@ -5,7 +5,9 @@ const SET_ANSWER = 'SET_ANSWER',
       GET_QUIZ_DATA = 'GET_QUIZ_DATA',
       SUBMIT_ANSWER = 'SUBMIT_ANSWER',
       SET_ANSWER_CHOICES = 'SET_ANSWER_CHOICES',
-      STACK_CORRECT_ANSWER = 'STACK_CORRECT_ANSWER';
+      STACK_CORRECT_ANSWER = 'STACK_CORRECT_ANSWER',
+      START_TIMER = 'START_TIMER',
+      END_TIMER = 'END_TIMER';
 
 const INITIAL_STATE = { 
   error: '', 
@@ -14,7 +16,7 @@ const INITIAL_STATE = {
   isAnswerSubmitted: false, 
   userAnswer: null, 
   answerChoices: [], 
-  shuffledData: null, 
+  shuffledQuizStack: [], 
   correctAnswerStack: [],
 };
 
@@ -31,11 +33,11 @@ export default function (state = INITIAL_STATE, action) {
         isAnswerSubmitted: false, 
         userAnswer: null, 
         answerChoices: [], 
-        shuffledData: null, 
+        shuffledQuizStack: [], 
         correctAnswerStack: [],
       };
     case GET_QUIZ_DATA:
-      return { ...state, shuffledData: action.payload };
+      return { ...state, shuffledQuizStack: action.payload };
     case SUBMIT_ANSWER:
       return { ...state, isAnswerSubmitted: true };
     case SET_ANSWER_CHOICES:
@@ -48,14 +50,14 @@ export default function (state = INITIAL_STATE, action) {
 }
 
 const setAnswerChoices = (state) => {
-  const shuffledData = state.shuffledData
-  const currentMon = shuffledData[shuffledData.length-1]
+  const shuffledQuizStack = state.shuffledQuizStack
+  const currentMon = shuffledQuizStack[shuffledQuizStack.length-1]
   let answerChoices = []
   let pickThree = null
   answerChoices.push(currentMon)
 
   // add bogus answers
-  const remainingMon = shuffle(shuffledData.slice(0,shuffledData.length-1))
+  const remainingMon = shuffle(shuffledQuizStack.slice(0,shuffledQuizStack.length-1))
   if (remainingMon.length > 3) {
     pickThree = remainingMon.slice(0,3);
   } else {
@@ -70,22 +72,22 @@ const setAnswerChoices = (state) => {
 
   // update `state`
   const newObj = {
-    shuffledData: shuffledData,
+    shuffledQuizStack: shuffledQuizStack,
     answerChoices: shuffledAnswerChoices,
   };
   return Object.assign({}, state, newObj);
 }
 
 const stackCorrectAnswer = (state) => {
-  const shuffledData = state.shuffledData
-  const lastDatum = shuffledData.pop()
+  const shuffledQuizStack = state.shuffledQuizStack
+  const lastDatum = shuffledQuizStack.pop()
   let correctAnswerStack = state.correctAnswerStack
 
   // add correct answer to `correctAnswerStack`
   correctAnswerStack.push(lastDatum)
 
   const newObj = {
-    shuffledData: shuffledData,
+    shuffledQuizStack: shuffledQuizStack,
     correctAnswerStack: correctAnswerStack,
     isAnswerSubmitted: false,
     isAnswerSelected: false,
