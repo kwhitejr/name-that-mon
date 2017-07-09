@@ -19,6 +19,7 @@ class Home extends Component {
               <div className="App-header">
                 <img src={questionMark} className="App-logo" alt="logo" />
                 <h2>Read to Start?</h2>
+                <p>Pick a Quiz.</p>
               </div>
               <HomeQuizChoice {...this.props} />
             </div>
