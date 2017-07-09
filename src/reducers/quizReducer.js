@@ -1,3 +1,4 @@
+import moment from 'moment'
 import { shuffle } from '../common'
 
 const SET_ANSWER = 'SET_ANSWER',
@@ -18,6 +19,8 @@ const INITIAL_STATE = {
   answerChoices: [], 
   shuffledQuizStack: [], 
   correctAnswerStack: [],
+  startTime: null,
+  endTime: null,
 };
 
 export default function (state = INITIAL_STATE, action) {
@@ -35,6 +38,8 @@ export default function (state = INITIAL_STATE, action) {
         answerChoices: [], 
         shuffledQuizStack: [], 
         correctAnswerStack: [],
+        startTime: null,
+        endTime: null,
       };
     case GET_QUIZ_DATA:
       return { ...state, shuffledQuizStack: action.payload };
@@ -44,6 +49,10 @@ export default function (state = INITIAL_STATE, action) {
       return setAnswerChoices(state);
     case STACK_CORRECT_ANSWER:
       return stackCorrectAnswer(state);
+    case START_TIMER:
+      return { ...state, startTime: moment().unix() };
+    case END_TIMER:
+      return { ...state, endTime: moment().unix() };
   }
 
   return state;

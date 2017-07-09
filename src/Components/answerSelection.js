@@ -22,14 +22,14 @@ class AnswerSelection extends Component {
       // actions 
       submitAnswer, 
       toggleMask, 
-      goToResults, 
+      endCurrentQuiz, 
     } = this.props
 
     if (isAnswerSelected && currentMon.id === userAnswer) {
       toggleMask()
       submitAnswer()
     } else {
-      goToResults()
+      endCurrentQuiz()
     }
   }
 

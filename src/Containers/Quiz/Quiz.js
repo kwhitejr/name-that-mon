@@ -8,7 +8,7 @@ import {
   getQuizData, 
   submitAnswer, 
   setNextQuestion,
-  goToResults,
+  endCurrentQuiz,
 } from '../../actions/quizActions'
 
 import {
@@ -77,13 +77,13 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setAnswer:    (event, value) => dispatch(setAnswer(event, value)),
-  getQuizData:  (generation) => dispatch(getQuizData(generation)),
-  reset:        () => dispatch(reset()),
-  submitAnswer: () => dispatch(submitAnswer()),
+  setAnswer:        (event, value) => dispatch(setAnswer(event, value)),
+  getQuizData:      (generation) => dispatch(getQuizData(generation)),
+  reset:            () => dispatch(reset()),
+  submitAnswer:     () => dispatch(submitAnswer()),
   setNextQuestion:  () => dispatch(setNextQuestion()),
-  goToResults:  () => dispatch(goToResults()),
-  resetThenHome: () => dispatch(resetThenHome()),
+  endCurrentQuiz:   () => dispatch(endCurrentQuiz()),
+  resetThenHome:    () => dispatch(resetThenHome()),
 });
 
 export default connect(

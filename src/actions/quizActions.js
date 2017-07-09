@@ -11,8 +11,9 @@ export const  SET_ANSWER = 'SET_ANSWER',
               RESET = 'RESET',
               GET_QUIZ_DATA = 'GET_QUIZ_DATA',
               STACK_CORRECT_ANSWER = 'STACK_CORRECT_ANSWER',
-              SUBMIT_ANSWER = 'SUBMIT_ANSWER'
-              START_TIMER = 'START_TIMER';
+              SUBMIT_ANSWER = 'SUBMIT_ANSWER',
+              START_TIMER = 'START_TIMER',
+              END_TIMER = 'END_TIMER';
 
 export function reset() {
   return { type: RESET }
@@ -61,8 +62,10 @@ export function setAnswerChoices() {
   return { type: SET_ANSWER_CHOICES }
 }
 
-export function goToResults() {
+export function endCurrentQuiz() {
   return (dispatch) => {
+    dispatch({ type: END_TIMER })
+
     dispatch(push('/result'))
   }
 }
