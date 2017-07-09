@@ -6,15 +6,15 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import { 
   resetThenHome, 
   resetThenRestart 
-} from '../../actions/resultActions';
+} from './ResultActions';
 
-import ResultsTable from '../../Components/ResultsTable'
-import ResultsActions from '../../Components/ResultsActions'
+import ResultTable from './ResultTable'
+import ResultNext from './ResultNext'
 
 import './Result.css';
 
 // assets
-import mark from '../../assets/pokemon/0.png';
+import mark from '../assets/pokemon/0.png';
 
 
 class Result extends Component {
@@ -40,12 +40,12 @@ class Result extends Component {
               <div className="App-header">
                 <img src={mark} className="App-logo" alt="logo" />
                 <h2>Mon, you are done!</h2>
-                <ResultsTable
+                <ResultTable
                   lastCorrectAnswer={lastCorrectAnswer} 
                   endedOn={endedOn} 
                   {...this.props} 
                 />
-                <ResultsActions {...this.props} />
+                <ResultNext {...this.props} />
               </div>
             </div>
           </Col>

@@ -10,15 +10,15 @@ import {
   setNextQuestion,
   endCurrentQuiz,
   useClue,
-} from '../../actions/quizActions'
+} from './QuizActions'
 
 import {
   resetThenHome,
-} from '../../actions/resultActions'
+} from '../Result/ResultActions'
 
-import QuizMon from '../../Components/quizMon';
-import AnswerSelection from '../../Components/answerSelection';
-import QuizProgress from '../../Components/QuizProgress';
+import QuizTop from './QuizTop';
+import QuizAnswers from './QuizAnswers';
+import QuizProgress from './QuizProgress';
 
 import './Quiz.css';
 
@@ -45,7 +45,7 @@ class Quiz extends Component {
       <Grid fluid>
         <Row center="xs">
           <Col xs={12} sm={6} smOffset={1} md={4} mdOffset={1} lg={3} lgOffset={2}>      
-            <QuizMon
+            <QuizTop
               {...this.props}
               currentMon={currentMon} 
             />
@@ -53,7 +53,7 @@ class Quiz extends Component {
               {...this.props}
               quizLength={quizLength}
             />
-            <AnswerSelection 
+            <QuizAnswers 
               {...this.props}
               currentMon={currentMon}
               toggleMask={toggleMask}

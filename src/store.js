@@ -8,7 +8,7 @@ import createHistory from 'history/createBrowserHistory'
 *  Our app is relatively straightforward, so we will likely only need one or two.
 *  For example, we should have a Quiz reducer.
 */
-import rootReducer from './reducers';
+import rootReducer from './rootReducer';
 
 // There are multiple ways to do history in React, i.e. how to handle when a user selects Back in the browser rather than an in-app button.
 export const history = createHistory()
@@ -29,8 +29,8 @@ export function configureStore(initialState = {}) {
   const store = createStore(rootReducer, initialState, enhancers); 
 
   if (module.hot) {
-    module.hot.accept('./reducers', () =>
-      store.replaceReducer(require('./reducers')) 
+    module.hot.accept('./rootReducer', () =>
+      store.replaceReducer(require('./rootReducer')) 
     );
   }
 

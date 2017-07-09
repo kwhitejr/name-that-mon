@@ -40,8 +40,6 @@ export function getQuizData(generation) {
 }
 
 export function setAnswer(event, value) {
-  console.log(event)
-  console.log(value)
   return { type: SET_ANSWER, payload: value }
 }
 

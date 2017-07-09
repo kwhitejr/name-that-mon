@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-flexbox-grid';
-import GenerationChoice from '../../Components/GenerationChoice';
+import GenerationChoice from './HomeGenerationChoice';
 
-import questionMark from '../../assets/pokemon/0.png';
+import questionMark from '../assets/pokemon/0.png';
 import './Home.css';
 
-import { getQuizData } from '../../actions/quizActions';
+import { getQuizData } from '../Quiz/QuizActions';
 
 class Home extends Component {
   render() {

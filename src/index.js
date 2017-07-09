@@ -19,9 +19,9 @@ import { history, configureStore } from './store';
 import Header from './Header/Header'
 
 // Import the Containers, i.e. different page views. Ultimately this should be refactored into a `router.js`
-import Home from './Containers/Home/Home.js';
-import Quiz from './Containers/Quiz/Quiz.js';
-import Result from './Containers/Result/Result.js';
+import Home from './Home/Home.js';
+import Quiz from './Quiz/Quiz.js';
+import Result from './Result/Result.js';
 
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
