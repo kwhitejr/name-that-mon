@@ -23,35 +23,63 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 // Get Pokemon by ID number
 app.get('/api/pokemon/id/:id', (req, res) => {
+  if (!req.params.id) {
+    return res.status(422).send({ error: 'You must enter an id.' });
+  }
+
   Pokemon.find({where: { id: req.params.id }})
     .then( (result) => {
       res.send(result);
+    })
+    .catch( (err) => {
+      res.send(err);
     });
 });
 
 // Get Pokemon by name
 app.get('/api/pokemon/name/:name', (req, res) => {
+  if (!req.params.name) {
+    return res.status(422).send({ error: 'You must enter a name.' });
+  }
+
   const name = capitalizeFirstLetter(req.params.name);
   Pokemon.find({where: { name: name }})
     .then( (result) => {
       res.send(result);
+    })
+    .catch( (err) => {
+      res.send(err);
     });
 });
 
 // Get Pokemon by generation
 app.get('/api/pokemon/generation/:generation', (req, res) => {
+  if (!req.params.generation) {
+    return res.status(422).send({ error: 'You must enter a generation.' });
+  }
+
   Pokemon.findAll({where: { generation: req.params.generation }})
     .then( (result) => {
       res.send(result);
+    })
+    .catch( (err) => {
+      res.send(err);
     });
 });
 
 // Get Pokemon by type
 app.get('/api/pokemon/type/:type', (req, res) => {
+  if (!req.params.type) {
+    return res.status(422).send({ error: 'You must enter a type.' });
+  }
+
   const type = capitalizeFirstLetter(req.params.type);
   Pokemon.findAll({where: { type1: type }})
     .then( (result) => {
       res.send(result);
+    })
+    .catch( (err) => {
+      res.send(err);
     });
 });
 
@@ -60,6 +88,9 @@ app.get('/api/pokemon/legendary', (req, res) => {
   Pokemon.findAll({where: { legendary: true }})
     .then( (result) => {
       res.send(result);
+    })
+    .catch( (err) => {
+      res.send(err);
     });
 });
 
