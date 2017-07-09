@@ -78,7 +78,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   setAnswer:    (event, value) => dispatch(setAnswer(event, value)),
-  getQuizData:  () => dispatch(getQuizData()),
+  getQuizData:  (generation) => dispatch(getQuizData(generation)),
   reset:        () => dispatch(reset()),
   submitAnswer: () => dispatch(submitAnswer()),
   setNextQuestion:  () => dispatch(setNextQuestion()),

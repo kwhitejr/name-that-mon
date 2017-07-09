@@ -25,7 +25,7 @@ class AnswerSelection extends Component {
       goToResults, 
     } = this.props
 
-    if (isAnswerSelected && currentMon.index === userAnswer) {
+    if (isAnswerSelected && currentMon.id === userAnswer) {
       toggleMask()
       submitAnswer()
     } else {
@@ -48,7 +48,7 @@ class AnswerSelection extends Component {
           {answerChoices.map( (datum, i) => (
             <RadioButton
               key={i}
-              value={datum.index}
+              value={datum.id}
               label={datum.name}
               style={styles.radioButton}
             />

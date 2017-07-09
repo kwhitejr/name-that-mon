@@ -18,6 +18,7 @@ const GenerationChoice = ({ getQuizData }) => (
       primary={true}
       style={styles.raisedButton}
       onTouchTap={getQuizData}
+      // onClick={(event) => getQuizData(event)}
     />
     <RaisedButton 
       label="Generation 2"

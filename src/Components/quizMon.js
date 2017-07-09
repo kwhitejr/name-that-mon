@@ -27,10 +27,10 @@ class QuizMon extends Component {
   };
 
   render() {
-    const { currentMon, correctAnswerStack } = this.props
+    const { currentMon } = this.props
 
     // image src requires dynamic import
-    const imgUrl = require(`../assets/pokemon/${currentMon.index}.png`)
+    const imgUrl = require(`../assets/pokemon/${currentMon.id}.png`)
 
     const actions = [
       <FlatButton
