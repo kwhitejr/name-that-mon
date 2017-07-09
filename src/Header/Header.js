@@ -3,7 +3,7 @@ import AppBar from 'material-ui/AppBar';
 
 const Header = () => (
   <AppBar
-    title="Title"
+    title="Name That Mon!"
     iconClassNameRight="muidocs-icon-navigation-expand-more"
   />
 );

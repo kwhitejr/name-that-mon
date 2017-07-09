@@ -17,7 +17,7 @@ class Home extends Component {
             <div className="App">
               <div className="App-header">
                 <img src={questionMark} className="App-logo" alt="logo" />
-                <h2>Name That Mon!</h2>
+                <h2>Read to Start?</h2>
               </div>
               <GenerationChoice {...this.props} />
             </div>
