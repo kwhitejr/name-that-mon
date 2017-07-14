@@ -62,16 +62,13 @@ class HomeQuizChoice extends Component {
 
 export default HomeQuizChoice;
 
-// { getLegendaryData }
-
-const HomeQuizTypes = ({ handleQuizGeneration, handleQuizType, getLegendaryData }) => (
+const HomeQuizTypes = ({ handleQuizGeneration, handleQuizType, beginLegendaryQuiz }) => (
   <div>
     <RaisedButton 
       label="Generations"
       primary={true}
       style={styles.raisedButton.generation}
       onTouchTap={handleQuizGeneration}
-      // onClick={(event) => getQuizData(event)}
     />
     <RaisedButton 
       label="Types"
@@ -83,23 +80,29 @@ const HomeQuizTypes = ({ handleQuizGeneration, handleQuizType, getLegendaryData 
       label="Legendaries"
       primary={true}
       style={styles.raisedButton.generation}
-      onTouchTap={getLegendaryData}
+      onTouchTap={beginLegendaryQuiz}
     />
   </div>
 )
 
 const pokemonGenerations = [1,2,3,4,5,6,7]
 
-const GenerationChoice = ({ getQuizData }) => (
+const GenerationChoice = ({ beginGenerationQuiz }) => (
   <div>
-    {pokemonGenerations.map( (generation, i) => (
+    {pokemonGenerations.map( (generationNumber, i) => (
       <RaisedButton
         key={i}
         primary={true}
-        label={`Generation ${generation}`}
-        style={styles.radioButton.generation}
+        label={`Generation ${generationNumber}`}
+        style={styles.raisedButton.generation}
+        onTouchTap={beginGenerationQuiz.bind(generationNumber)}
       />
     ))}
+    <RaisedButton
+      secondary={true}
+      label="Back"
+      style={styles.raisedButton.generation}
+    />
   </div>
 )
 
@@ -124,15 +127,21 @@ const pokemonTypes = [
   "Water",
 ]
 
-const TypeChoice = ({ getTypeData }) => (
+const TypeChoice = ({ beginPokemonTypeQuiz }) => (
   <div>
-    {pokemonTypes.map( (type, i) => (
+    {pokemonTypes.map( (pokemonType, i) => (
       <RaisedButton
         key={i}
         primary={true}
-        label={type}
-        style={styles.radioButton.type}
+        label={pokemonType}
+        style={styles.raisedButton.type}
+        onTouchTap={beginPokemonTypeQuiz.bind(pokemonType)}
       />
     ))}
+    <RaisedButton
+      secondary={true}
+      label="Back"
+      style={styles.raisedButton.type}
+    />
   </div>
 )

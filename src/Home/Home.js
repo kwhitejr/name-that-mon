@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-flexbox-grid';
+
 import HomeQuizChoice from './HomeQuizChoice';
+import HomeQuizList from './HomeQuizList';
 
 import questionMark from '../assets/pokemon/0.png';
 import './Home.css';
 
-import { getQuizData } from '../Quiz/QuizActions';
+import { 
+  beginGenerationQuiz, 
+  beginPokemonTypeQuiz, 
+  beginLegendaryQuiz
+} from '../Quiz/QuizActions';
 
 class Home extends Component {
 
@@ -21,7 +27,7 @@ class Home extends Component {
                 <h2>Read to Start?</h2>
                 <p>Pick a Quiz.</p>
               </div>
-              <HomeQuizChoice {...this.props} />
+              <HomeQuizList {...this.props} />
             </div>
           </Col>
           <Col sm={4} md={3} lg={2}>
@@ -38,7 +44,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getQuizData:  () => dispatch(getQuizData()),
+  beginGenerationQuiz:  (generationNumber) => dispatch(beginGenerationQuiz(generationNumber)),
+  beginPokemonTypeQuiz:  (pokemonType) => dispatch(beginPokemonTypeQuiz(pokemonType)),
+  beginLegendaryQuiz:  () => dispatch(beginLegendaryQuiz()),
 });
 
 export default connect(

@@ -5,7 +5,6 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import { 
   setAnswer, 
   reset, 
-  getQuizData, 
   submitAnswer, 
   setNextQuestion,
   endCurrentQuiz,
@@ -80,7 +79,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   setAnswer:        (event, value) => dispatch(setAnswer(event, value)),
-  getQuizData:      (generation) => dispatch(getQuizData(generation)),
   reset:            () => dispatch(reset()),
   submitAnswer:     () => dispatch(submitAnswer()),
   setNextQuestion:  () => dispatch(setNextQuestion()),
