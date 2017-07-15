@@ -6,9 +6,6 @@ const SET_ANSWER = 'SET_ANSWER',
       GET_QUIZ_DATA = 'GET_QUIZ_DATA',
       SUBMIT_ANSWER = 'SUBMIT_ANSWER',
       SET_ANSWER_CHOICES = 'SET_ANSWER_CHOICES',
-      SET_GENERATION_NUMBER = 'SET_GENERATION_NUMBER',
-      SET_POKEMON_TYPE = 'SET_POKEMON_TYPE',
-      SET_LEGENDARY = 'SET_LEGENDARY',
       STACK_CORRECT_ANSWER = 'STACK_CORRECT_ANSWER',
       START_TIMER = 'START_TIMER',
       END_TIMER = 'END_TIMER',
@@ -28,10 +25,6 @@ const INITIAL_STATE = {
   startTime: null,
   endTime: null,
   clueCount: 0,
-  quizType: null,
-  quizGeneration: null,
-  quizPokemonType: null,
-  quizLegendary: null,
 };
 
 export default function (state = INITIAL_STATE, action) {
@@ -53,10 +46,6 @@ export default function (state = INITIAL_STATE, action) {
         startTime: null,
         endTime: null,
         clueCount: 0,
-        quizType: null,
-        quizGeneration: null,
-        quizPokemonType: null,
-        quizLegendary: null,
       };
     case GET_QUIZ_DATA:
       return { ...state, shuffledQuizStack: action.payload };
@@ -64,12 +53,6 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, isAnswerSubmitted: true };
     case SET_ANSWER_CHOICES:
       return setAnswerChoices(state);
-    case SET_GENERATION_NUMBER:
-      return { ...state, quizType: 'generation', quizGeneration: action.payload };
-    case SET_POKEMON_TYPE:
-      return { ...state, quizType: 'type', quizPokemonType: action.payload };
-    case SET_LEGENDARY:
-      return { ...state, quizType: 'legendary', quizLegendary: action.payload };
     case STACK_CORRECT_ANSWER:
       return stackCorrectAnswer(state);
     case START_TIMER:

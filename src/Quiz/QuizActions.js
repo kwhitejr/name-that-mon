@@ -12,6 +12,7 @@ export const  SET_ANSWER = 'SET_ANSWER',
               SET_POKEMON_TYPE = 'SET_POKEMON_TYPE',
               SET_LEGENDARY = 'SET_LEGENDARY',
               RESET = 'RESET',
+              RESET_META_DATA = 'RESET_META_DATA',
               GET_QUIZ_DATA = 'GET_QUIZ_DATA',
               STACK_CORRECT_ANSWER = 'STACK_CORRECT_ANSWER',
               SUBMIT_ANSWER = 'SUBMIT_ANSWER',
@@ -21,7 +22,10 @@ export const  SET_ANSWER = 'SET_ANSWER',
               INCREMENT_CLUE_COUNT = 'INCREMENT_CLUE_COUNT';
 
 export function reset() {
-  return { type: RESET }
+  return (dispatch) => {
+    dispatch({ type: RESET })
+    dispatch({ type: RESET_META_DATA })
+   } 
 }
 
 export function beginGenerationQuiz(generationNumber) {
