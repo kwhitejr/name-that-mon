@@ -1,4 +1,4 @@
--- CREATE DATABASE name_that_mon;
+CREATE DATABASE name_that_mon;
 
 \c name_that_mon
 
@@ -21,3 +21,4 @@ CREATE TABLE pokemon(
 );
 
 copy pokemon from '/Users/kevin/git/name-that-mon/server/pokemon-data.csv' DELIMITERS ',' CSV HEADER;
+-- copy pokemon from '/Users/kwhi32/Projects/name-that-mon/server/pokemon-data.csv' DELIMITERS ',' CSV HEADER;
