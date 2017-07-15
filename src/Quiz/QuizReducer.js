@@ -103,13 +103,13 @@ const setAnswerChoices = (state) => {
 const stackCorrectAnswer = (state) => {
   let shuffledQuizStack = state.shuffledQuizStack
   let correctAnswerStack = state.correctAnswerStack
-  const lastDatum = shuffledQuizStack.pop()
+  const lastDatum = shuffledQuizStack[shuffledQuizStack.length-1]
 
   // add correct answer to `correctAnswerStack`
   correctAnswerStack.push(lastDatum)
 
   const newObj = {
-    shuffledQuizStack: shuffledQuizStack,
+    shuffledQuizStack: shuffledQuizStack.slice(0,-1),
     correctAnswerStack: correctAnswerStack,
     isAnswerSubmitted: false,
     isAnswerSelected: false,
