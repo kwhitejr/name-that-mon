@@ -26,7 +26,7 @@ const ResultsTable = ({ correctAnswerStack, lastCorrectAnswer, endedOn }) => (
       </TableRow>
       <TableRow>
         <TableRowColumn>Avg Time Per Answer</TableRowColumn>
-        <TableRowColumn>{null}</TableRowColumn>
+        <TableRowColumn>{1}</TableRowColumn>
       </TableRow>
     </TableBody>
   </Table>
