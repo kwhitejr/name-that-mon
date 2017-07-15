@@ -25,7 +25,6 @@ export function reset() {
 }
 
 export function beginGenerationQuiz(generationNumber) {
-  console.log(generationNumber)
   return (dispatch) => {
     return fetch(`${API_URL}/pokemon/generation/${generationNumber}`)
       .then(res => res.json())
@@ -39,7 +38,6 @@ export function beginGenerationQuiz(generationNumber) {
 }
 
 export function beginPokemonTypeQuiz(pokemonType) {
-  console.log(pokemonType)
   return (dispatch) => {
     return fetch(`${API_URL}/pokemon/type/${pokemonType}`)
       .then(res => res.json())
@@ -53,7 +51,6 @@ export function beginPokemonTypeQuiz(pokemonType) {
 }
 
 export function beginLegendaryQuiz() {
-
   return (dispatch) => {
     return fetch(`${API_URL}/pokemon/legendary`)
       .then(res => res.json())
