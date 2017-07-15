@@ -10,11 +10,12 @@ import {
 
 import ResultTable from './ResultTable'
 import ResultNext from './ResultNext'
+import ResultTop from './ResultTop'
 
 import './Result.css';
 
 // assets
-import mark from '../assets/pokemon/0.png';
+import mark from '../assets/pokemon/6.png';
 
 
 class Result extends Component {
@@ -29,24 +30,26 @@ class Result extends Component {
   render() {
     const { correctAnswerStack, shuffledQuizStack } = this.props
 
-    const lastCorrectAnswer = correctAnswerStack.length > 0 ? correctAnswerStack[correctAnswerStack.length-1].name : 'None'
-    const endedOn = shuffledQuizStack.length > 0 ? shuffledQuizStack[shuffledQuizStack.length-1].name : lastCorrectAnswer
+    const lastCorrectAnswer = correctAnswerStack.length > 0 ? correctAnswerStack[correctAnswerStack.length-1] : 'None'
+    const endedOn = shuffledQuizStack.length > 0 ? shuffledQuizStack[shuffledQuizStack.length-1] : lastCorrectAnswer
+
+    const imgUrl = require(`../assets/pokemon/${endedOn.id}.png`)
 
     return (
       <Grid fluid>
         <Row center="xs">
           <Col xs={12} sm={6} smOffset={1} md={4} mdOffset={1} lg={3} lgOffset={2}>
             <div className="App">
-              <div className="App-header">
-                <img src={mark} className="App-logo" alt="logo" />
-                <h2>Mon, you are done!</h2>
-                <ResultTable
-                  lastCorrectAnswer={lastCorrectAnswer} 
-                  endedOn={endedOn} 
-                  {...this.props} 
-                />
-                <ResultNext {...this.props} />
-              </div>
+              <ResultTop 
+                {...this.props}
+                endedOn={endedOn}
+              />
+              <ResultTable
+                lastCorrectAnswer={lastCorrectAnswer} 
+                endedOn={endedOn} 
+                {...this.props} 
+              />
+              <ResultNext {...this.props} />
             </div>
           </Col>
           <Col sm={4} md={3} lg={2}>

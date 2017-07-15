@@ -18,11 +18,11 @@ const ResultsTable = ({ correctAnswerStack, lastCorrectAnswer, endedOn }) => (
       </TableRow>
       <TableRow>
         <TableRowColumn>Ended On</TableRowColumn>
-        <TableRowColumn>{endedOn}</TableRowColumn>
+        <TableRowColumn>{endedOn.name}</TableRowColumn>
       </TableRow>
       <TableRow>
         <TableRowColumn>Last Correct Answer</TableRowColumn>
-        <TableRowColumn>{lastCorrectAnswer}</TableRowColumn>
+        <TableRowColumn>{lastCorrectAnswer.name}</TableRowColumn>
       </TableRow>
     </TableBody>
   </Table>
