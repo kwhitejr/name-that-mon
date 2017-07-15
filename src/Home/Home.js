@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
-import HomeQuizChoice from './HomeQuizChoice';
 import HomeQuizList from './HomeQuizList';
 
 import questionMark from '../assets/pokemon/0.png';

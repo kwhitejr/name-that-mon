@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {List, ListItem, makeSelectable} from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
-import Subheader from 'material-ui/Subheader';
 
 const styles = {
   listItem: {
@@ -11,27 +10,111 @@ const styles = {
 }
 
 const pokemonTypes = [
-  "Normal",
-  "Bug",
-  "Dark",
-  "Dragon",
-  "Electric",
-  "Fairy",
-  "Fighting",
-  "Fire",
-  "Flying",
-  "Ghost",
-  "Grass",
-  "Ground",
-  "Ice",
-  "Poison",
-  "Psychic",
-  "Rock",
-  "Steel",
-  "Water",
+  { 
+    name: "Normal", 
+    sprite: null,
+  },
+  {
+    name: "Bug",
+    sprite: null,
+  },
+  {
+    name: "Dark",
+    sprite: null,
+  },
+  {
+    name: "Dragon",
+    sprite: null,
+  },
+  {
+    name: "Electric",
+    sprite: null,
+  },
+  {
+    name: "Fairy",
+    sprite: null,
+  },
+  {
+    name: "Fighting",
+    sprite: null,
+  },
+  {
+    name: "Fire",
+    sprite: null,
+  },
+  {
+    name: "Flying",
+    sprite: null,
+  },
+  {
+    name: "Ghost",
+    sprite: null,
+  },
+  {
+    name: "Grass",
+    sprite: null,
+  },
+  {
+    name: "Ground",
+    sprite: null,
+  },
+  {
+    name: "Ice",
+    sprite: null,
+  },
+  {
+    name: "Poison",
+    sprite: null,
+  },
+  {
+    name: "Psychic",
+    sprite: null,
+  },
+  {
+    name: "Rock",
+    sprite: null,
+  },
+  {
+    name: "Steel",
+    sprite: null,
+  },
+  {
+    name: "Water",
+    sprite: null,
+  },
 ]
 
-const pokemonGenerations = [1,2,3,4,5,6,7]
+const pokemonGenerations = [
+  {
+    number: 1,
+    sprite: null
+  },
+  {
+    number: 2,
+    sprite: null
+  },
+  {
+    number: 3,
+    sprite: null
+  },
+  {
+    number: 4,
+    sprite: null
+  },
+  {
+    number: 5,
+    sprite: null
+  },
+  {
+    number: 6,
+    sprite: null
+  },
+  {
+    number: 7,
+    sprite: null
+  },
+
+]
 
 let SelectableList = makeSelectable(List);
 
@@ -50,8 +133,8 @@ function wrapState(ComposedComponent) {
 
     handleRequestChange = (event, value) => {
       // console.log(value)
-      const quizType = value.type
-      const quizValue = value.value
+      // const quizType = value.type
+      // const quizValue = value.value
       // if (quizType === 'generation') { beginGenerationQuiz(quizValue); }
     }
 
@@ -70,7 +153,7 @@ function wrapState(ComposedComponent) {
 
 SelectableList = wrapState(SelectableList);
 
-const HomeQuizList = ({ beginGenerationQuiz }) => (
+const HomeQuizList = ({ beginGenerationQuiz, beginPokemonTypeQuiz, beginLegendaryQuiz }) => (
   <SelectableList defaultValue={null} >
     <ListItem
       value="generation"
@@ -78,17 +161,17 @@ const HomeQuizList = ({ beginGenerationQuiz }) => (
       disabled={true}
       style={styles.listItem}
       leftAvatar={<Avatar src="" />}
-      nestedItems={pokemonGenerations.map( (generationNumber, i) => (
+      nestedItems={pokemonGenerations.map( (generation, i) => (
         <ListItem
           key={i}
           style={styles.listItem}
           value={{ 
             type: 'generation', 
-            value: generationNumber 
+            value: generation.number 
           }}
-          primaryText={`Generation ${generationNumber}`}
-          leftAvatar={<Avatar src="" />}
-          onTouchTap={beginGenerationQuiz.bind(this, generationNumber)}
+          primaryText={`Generation ${generation.number}`}
+          leftAvatar={<Avatar src={generation.sprite} />}
+          onTouchTap={beginGenerationQuiz.bind(this, generation.number)}
         />
       ))}
     />
@@ -102,10 +185,10 @@ const HomeQuizList = ({ beginGenerationQuiz }) => (
         <ListItem
           key={i}
           style={styles.listItem}
-          value={type}
-          primaryText={type}
-          leftAvatar={<Avatar src="" />}
-          // onTouchTap={beginGenerationQuiz.bind(generationNumber)}
+          value={type.name}
+          primaryText={type.name}
+          leftAvatar={<Avatar src={type.sprite} />}
+          onTouchTap={beginPokemonTypeQuiz.bind(this, type.name)}
         />
       ))}
     />
@@ -114,6 +197,7 @@ const HomeQuizList = ({ beginGenerationQuiz }) => (
       primaryText="Legendaries"
       style={styles.listItem}
       leftAvatar={<Avatar src="" />}
+      onTouchTap={beginLegendaryQuiz}
     />
   </SelectableList>
 );
