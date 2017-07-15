@@ -15,6 +15,11 @@ import {
   resetThenHome,
 } from '../Result/ResultActions'
 
+import { 
+  getCurrentMon,
+  getQuizLength
+} from './QuizSelectors'
+
 import QuizTop from './QuizTop';
 import QuizAnswers from './QuizAnswers';
 import QuizProgress from './QuizProgress';
@@ -28,16 +33,15 @@ const toggleMask = () => {
 
 class Quiz extends Component {
 
-  componentWillMount() {
-    const { resetThenHome } = this.props
-    if (this.props.shuffledQuizStack === null) {
-      resetThenHome()
-    }
-  }
+  // componentWillMount() {
+  //   const { resetThenHome } = this.props
+  //   if (!this.props.shuffledQuizStack || !this.props.currentMon) {
+  //     resetThenHome()
+  //   }
+  // }
 
   render() {
     const { shuffledQuizStack, correctAnswerStack } = this.props
-    const currentMon = shuffledQuizStack ? shuffledQuizStack[shuffledQuizStack.length-1] : null
     const quizLength = shuffledQuizStack ? shuffledQuizStack.length + correctAnswerStack.length : null
 
     return (
@@ -46,15 +50,12 @@ class Quiz extends Component {
           <Col xs={12} sm={6} smOffset={1} md={4} mdOffset={1} lg={3} lgOffset={2}>      
             <QuizTop
               {...this.props}
-              currentMon={currentMon} 
             />
             <QuizProgress 
               {...this.props}
-              quizLength={quizLength}
             />
             <QuizAnswers 
               {...this.props}
-              currentMon={currentMon}
               toggleMask={toggleMask}
             />
           </Col>
@@ -68,13 +69,15 @@ class Quiz extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  isAnswerSelected:  state.quizReducer.isAnswerSelected,
-  isAnswerSubmitted:  state.quizReducer.isAnswerSubmitted,
-  isClueUsed:  state.quizReducer.isClueUsed,
-  userAnswer:  state.quizReducer.userAnswer,
-  shuffledQuizStack:  state.quizReducer.shuffledQuizStack,
-  answerChoices:  state.quizReducer.answerChoices,
-  correctAnswerStack:  state.quizReducer.correctAnswerStack,
+  isAnswerSelected:  state.quizInstance.isAnswerSelected,
+  isAnswerSubmitted:  state.quizInstance.isAnswerSubmitted,
+  isClueUsed:  state.quizInstance.isClueUsed,
+  userAnswer:  state.quizInstance.userAnswer,
+  shuffledQuizStack:  state.quizInstance.shuffledQuizStack,
+  answerChoices:  state.quizInstance.answerChoices,
+  correctAnswerStack:  state.quizInstance.correctAnswerStack,
+  currentMon: getCurrentMon(state),
+  quizLength: getQuizLength(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

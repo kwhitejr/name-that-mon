@@ -30,7 +30,8 @@ class QuizMon extends Component {
 
   render() {
     const { currentMon } = this.props
-
+    console.log(currentMon)
+    
     // image src requires dynamic import
     const imgUrl = require(`../assets/pokemon/${currentMon.id}.png`)
 
@@ -46,7 +47,7 @@ class QuizMon extends Component {
       <div className="top">
         <GridList>
           <GridTile
-            key={imgUrl}
+            key={currentMon.id}
             actionIcon={<IconButton onTouchTap={this.handleOpen}><HelpOutline color="white" /></IconButton>}
             actionPosition="right"
             title="Name That Mon!"

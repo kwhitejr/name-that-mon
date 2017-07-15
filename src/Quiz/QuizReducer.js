@@ -101,9 +101,9 @@ const setAnswerChoices = (state) => {
 
 // When correct answer is submitted, add it to the correctAnswerStack
 const stackCorrectAnswer = (state) => {
-  const shuffledQuizStack = state.shuffledQuizStack
-  const lastDatum = shuffledQuizStack.pop()
+  let shuffledQuizStack = state.shuffledQuizStack
   let correctAnswerStack = state.correctAnswerStack
+  const lastDatum = shuffledQuizStack.pop()
 
   // add correct answer to `correctAnswerStack`
   correctAnswerStack.push(lastDatum)
