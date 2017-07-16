@@ -32,7 +32,7 @@ class QuizMon extends Component {
     const { currentMon } = this.props
 
     // image src requires dynamic import
-    const imgUrl = require(`../assets/pokemon/${currentMon.id}.png`)
+    let imgUrl = require(`../assets/pokemon/${currentMon.id}.png`)
 
     const actions = [
       <FlatButton
@@ -46,7 +46,7 @@ class QuizMon extends Component {
       <div className="top">
         <GridList>
           <GridTile
-            key={imgUrl}
+            key={currentMon.id}
             actionIcon={<IconButton onTouchTap={this.handleOpen}><HelpOutline color="white" /></IconButton>}
             actionPosition="right"
             title="Name That Mon!"

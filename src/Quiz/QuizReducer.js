@@ -56,9 +56,9 @@ export default function (state = INITIAL_STATE, action) {
     case STACK_CORRECT_ANSWER:
       return stackCorrectAnswer(state);
     case START_TIMER:
-      return { ...state, startTime: moment().unix() };
+      return { ...state, startTime: moment().valueOf() };
     case END_TIMER:
-      return { ...state, endTime: moment().unix() };
+      return { ...state, endTime: moment().valueOf() };
     case USE_CLUE:
       return { ...state, isClueUsed: true };
     case INCREMENT_CLUE_COUNT:
@@ -93,7 +93,6 @@ const setAnswerChoices = (state) => {
 
   // update `state`
   const newObj = {
-    shuffledQuizStack: shuffledQuizStack,
     answerChoices: shuffledAnswerChoices,
   };
   return Object.assign({}, state, newObj);
@@ -101,15 +100,15 @@ const setAnswerChoices = (state) => {
 
 // When correct answer is submitted, add it to the correctAnswerStack
 const stackCorrectAnswer = (state) => {
-  const shuffledQuizStack = state.shuffledQuizStack
-  const lastDatum = shuffledQuizStack.pop()
+  let shuffledQuizStack = state.shuffledQuizStack
   let correctAnswerStack = state.correctAnswerStack
+  const lastDatum = shuffledQuizStack[shuffledQuizStack.length-1]
 
   // add correct answer to `correctAnswerStack`
   correctAnswerStack.push(lastDatum)
 
   const newObj = {
-    shuffledQuizStack: shuffledQuizStack,
+    shuffledQuizStack: shuffledQuizStack.slice(0,-1),
     correctAnswerStack: correctAnswerStack,
     isAnswerSubmitted: false,
     isAnswerSelected: false,

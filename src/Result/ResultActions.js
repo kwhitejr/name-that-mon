@@ -1,15 +1,20 @@
 import { push } from 'react-router-redux'
 import { shuffle } from '../common'
 
+import { 
+  RESET, 
+  RESET_META_DATA, 
+} from '../Quiz/QuizActions'
+
 const API_URL = 'http://localhost:3000/api';
 
-export const  RESET = 'RESET',
-              GET_QUIZ_DATA = 'GET_QUIZ_DATA',
+export const  GET_QUIZ_DATA = 'GET_QUIZ_DATA',
               SET_ANSWER_CHOICES = 'SET_ANSWER_CHOICES';
 
 export function resetThenHome() {
   return (dispatch) => {
     dispatch({ type: RESET })
+    dispatch({ type: RESET_META_DATA })
     dispatch(push('/'))
   };
 }
