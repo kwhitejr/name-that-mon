@@ -9,7 +9,7 @@ const styles = {
   }
 }
 
-const ResultTop = ({endedOn}) => (
+const ResultTop = ({ endedOn }) => (
   <div className="top">
     <GridList>
       <GridTile

@@ -8,7 +8,8 @@ import {
 } from './ResultActions';
 
 import { 
-  getLastCorrectAnswer
+  getLastCorrectAnswer,
+  getQuizTotalTime,
 } from './ResultSelectors'
 
 import { 
@@ -25,12 +26,13 @@ class Result extends Component {
 
   componentWillMount() {
     const { resetThenHome } = this.props
-    if (this.props.shuffledQuizStack === null) {
+    if (!this.props.shuffledQuizStack || !this.props.endedOn) {
       resetThenHome()
     }
   }
 
   render() {
+    console.log(this.props.quizTotalTime)
     // const { correctAnswerStack, shuffledQuizStack } = this.props
 
     // const lastCorrectAnswer = correctAnswerStack.length > 0 ? correctAnswerStack[correctAnswerStack.length-1] : 'None'
@@ -68,6 +70,7 @@ const mapStateToProps = (state) => ({
   shuffledQuizStack:  state.quizInstance.shuffledQuizStack,
   lastCorrectAnswer: getLastCorrectAnswer(state),
   endedOn: getCurrentMon(state),
+  quizTotalTime: getQuizTotalTime(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

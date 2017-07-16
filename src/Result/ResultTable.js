@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 import {
   Table,
@@ -9,7 +9,7 @@ import {
   TableRowColumn,
 } from 'material-ui/Table'
 
-const ResultsTable = ({ correctAnswerStack, lastCorrectAnswer, endedOn }) => (
+const ResultsTable = ({ correctAnswerStack, lastCorrectAnswer, endedOn, quizTotalTime }) => (
   <Table selectable={false} >
     <TableBody displayRowCheckbox={false} >
       <TableRow>
@@ -21,12 +21,12 @@ const ResultsTable = ({ correctAnswerStack, lastCorrectAnswer, endedOn }) => (
         <TableRowColumn>{correctAnswerStack.length}</TableRowColumn>
       </TableRow>
       <TableRow>
-        <TableRowColumn>Total Time</TableRowColumn>
-        <TableRowColumn>{null}</TableRowColumn>
+        <TableRowColumn>Total Quiz Time</TableRowColumn>
+        <TableRowColumn>{quizTotalTime}</TableRowColumn>
       </TableRow>
       <TableRow>
-        <TableRowColumn>Avg Time Per Answer</TableRowColumn>
-        <TableRowColumn>{1}</TableRowColumn>
+        <TableRowColumn>Avg Answer Time</TableRowColumn>
+        <TableRowColumn>{}</TableRowColumn>
       </TableRow>
     </TableBody>
   </Table>

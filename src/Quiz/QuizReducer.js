@@ -56,9 +56,9 @@ export default function (state = INITIAL_STATE, action) {
     case STACK_CORRECT_ANSWER:
       return stackCorrectAnswer(state);
     case START_TIMER:
-      return { ...state, startTime: moment().unix() };
+      return { ...state, startTime: moment().valueOf() };
     case END_TIMER:
-      return { ...state, endTime: moment().unix() };
+      return { ...state, endTime: moment().valueOf() };
     case USE_CLUE:
       return { ...state, isClueUsed: true };
     case INCREMENT_CLUE_COUNT:
