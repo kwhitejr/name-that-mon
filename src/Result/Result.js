@@ -32,14 +32,6 @@ class Result extends Component {
   }
 
   render() {
-    console.log(this.props.quizTotalTime)
-    // const { correctAnswerStack, shuffledQuizStack } = this.props
-
-    // const lastCorrectAnswer = correctAnswerStack.length > 0 ? correctAnswerStack[correctAnswerStack.length-1] : 'None'
-    // const endedOn = shuffledQuizStack.length > 0 ? shuffledQuizStack[shuffledQuizStack.length-1] : lastCorrectAnswer
-
-    // const imgUrl = require(`../assets/pokemon/${endedOn.id}.png`)
-
     return (
       <Grid fluid>
         <Row center="xs">
