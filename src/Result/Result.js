@@ -2,21 +2,24 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
-
 import { 
   resetThenHome, 
-  resetThenRestart 
+  resetThenRestart, 
 } from './ResultActions';
+
+import { 
+  getLastCorrectAnswer
+} from './ResultSelectors'
+
+import { 
+  getCurrentMon,
+} from '../Quiz/QuizSelectors'
 
 import ResultTable from './ResultTable'
 import ResultNext from './ResultNext'
 import ResultTop from './ResultTop'
 
 import './Result.css';
-
-// assets
-import mark from '../assets/pokemon/6.png';
-
 
 class Result extends Component {
 
@@ -28,12 +31,12 @@ class Result extends Component {
   }
 
   render() {
-    const { correctAnswerStack, shuffledQuizStack } = this.props
+    // const { correctAnswerStack, shuffledQuizStack } = this.props
 
-    const lastCorrectAnswer = correctAnswerStack.length > 0 ? correctAnswerStack[correctAnswerStack.length-1] : 'None'
-    const endedOn = shuffledQuizStack.length > 0 ? shuffledQuizStack[shuffledQuizStack.length-1] : lastCorrectAnswer
+    // const lastCorrectAnswer = correctAnswerStack.length > 0 ? correctAnswerStack[correctAnswerStack.length-1] : 'None'
+    // const endedOn = shuffledQuizStack.length > 0 ? shuffledQuizStack[shuffledQuizStack.length-1] : lastCorrectAnswer
 
-    const imgUrl = require(`../assets/pokemon/${endedOn.id}.png`)
+    // const imgUrl = require(`../assets/pokemon/${endedOn.id}.png`)
 
     return (
       <Grid fluid>
@@ -42,14 +45,13 @@ class Result extends Component {
             <div className="App">
               <ResultTop 
                 {...this.props}
-                endedOn={endedOn}
               />
               <ResultTable
-                lastCorrectAnswer={lastCorrectAnswer} 
-                endedOn={endedOn} 
                 {...this.props} 
               />
-              <ResultNext {...this.props} />
+              <ResultNext 
+                {...this.props} 
+              />
             </div>
           </Col>
           <Col sm={4} md={3} lg={2}>
@@ -62,8 +64,10 @@ class Result extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  correctAnswerStack:  state.quizReducer.correctAnswerStack,
-  shuffledQuizStack:  state.quizReducer.shuffledQuizStack,
+  correctAnswerStack:  state.quizInstance.correctAnswerStack,
+  shuffledQuizStack:  state.quizInstance.shuffledQuizStack,
+  lastCorrectAnswer: getLastCorrectAnswer(state),
+  endedOn: getCurrentMon(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

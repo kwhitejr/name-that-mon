@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { GridList, GridTile } from 'material-ui/GridList';
 
 const styles = {

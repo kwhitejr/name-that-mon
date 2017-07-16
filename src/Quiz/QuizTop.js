@@ -30,7 +30,6 @@ class QuizMon extends Component {
 
   render() {
     const { currentMon } = this.props
-    console.log(currentMon)
 
     // image src requires dynamic import
     let imgUrl = require(`../assets/pokemon/${currentMon.id}.png`)

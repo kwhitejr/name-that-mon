@@ -93,7 +93,6 @@ const setAnswerChoices = (state) => {
 
   // update `state`
   const newObj = {
-    shuffledQuizStack: shuffledQuizStack,
     answerChoices: shuffledAnswerChoices,
   };
   return Object.assign({}, state, newObj);

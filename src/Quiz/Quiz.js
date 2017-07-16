@@ -33,17 +33,14 @@ const toggleMask = () => {
 
 class Quiz extends Component {
 
-  // componentWillMount() {
-  //   const { resetThenHome } = this.props
-  //   if (!this.props.shuffledQuizStack || !this.props.currentMon) {
-  //     resetThenHome()
-  //   }
-  // }
+  componentWillMount() {
+    const { resetThenHome } = this.props
+    if (!this.props.shuffledQuizStack || !this.props.currentMon) {
+      resetThenHome()
+    }
+  }
 
   render() {
-    const { shuffledQuizStack, correctAnswerStack } = this.props
-    const quizLength = shuffledQuizStack ? shuffledQuizStack.length + correctAnswerStack.length : null
-
     return (
       <Grid fluid>
         <Row center="xs">
