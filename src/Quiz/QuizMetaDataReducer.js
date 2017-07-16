@@ -7,9 +7,7 @@ const INITIAL_STATE = {
   error: '', 
   message: '', 
   quizType: null,
-  quizGeneration: null,
-  quizPokemonType: null,
-  quizLegendary: null,
+  quizSet: null,
 };
 
 export default function (state = INITIAL_STATE, action) {
@@ -20,16 +18,14 @@ export default function (state = INITIAL_STATE, action) {
         error: '', 
         message: '', 
         quizType: null,
-        quizGeneration: null,
-        quizPokemonType: null,
-        quizLegendary: null,
+        quizSet: null,
       };
     case SET_GENERATION_NUMBER:
-      return { ...state, quizType: 'generation', quizGeneration: action.payload };
+      return { ...state, quizType: 'generation', quizSet: action.payload };
     case SET_POKEMON_TYPE:
-      return { ...state, quizType: 'type', quizPokemonType: action.payload };
+      return { ...state, quizType: 'type', quizSet: action.payload };
     case SET_LEGENDARY:
-      return { ...state, quizType: 'legendary', quizLegendary: action.payload };
+      return { ...state, quizType: 'legendary', quizSet: 'legendary' };
   }
 
   return state;
