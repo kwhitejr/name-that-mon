@@ -1,6 +1,7 @@
 import { push } from 'react-router-redux'
 import fetch from 'isomorphic-fetch'
 
+import { getPlaythruData } from './QuizSelectors'
 import { shuffle } from '../common'
 
 const API_URL = 'http://localhost:3000/api';
@@ -99,6 +100,34 @@ export function endCurrentQuiz() {
   return (dispatch) => {
     dispatch({ type: END_TIMER })
     dispatch({ type: INCREMENT_CLUE_COUNT })
+    dispatch(postPlaythruData())
     dispatch(push('/result'))
   }
 }
+
+export function postPlaythruData() {
+  return (dispatch, getState) => {
+    const playthruData = getPlaythruData(getState());
+    console.log("playthru: ", playthruData);
+
+    fetch(`${API_URL}/playthru/`, {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(playthruData),
+    })
+    .then(response => {
+      if (response.status >= 200 && response.status < 300) {
+        console.log(response);
+      } else {
+        const error = new Error(response.statusText);
+        error.response = response;
+        throw error;
+      }
+    })
+    .catch(error => { console.log('request failed', error); });
+  }
+}
+

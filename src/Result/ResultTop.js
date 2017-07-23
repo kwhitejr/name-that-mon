@@ -9,11 +9,11 @@ const styles = {
   }
 }
 
-const ResultTop = ({ endedOn }) => (
+const ResultTop = ({ wrongAnswer }) => (
   <div className="top">
     <GridList>
       <GridTile
-        key={endedOn.id}
+        key={wrongAnswer.id}
         actionPosition="right"
         title="Mon, you are done!"
         titlePosition="top"
@@ -21,7 +21,7 @@ const ResultTop = ({ endedOn }) => (
         style={styles.gridTile}
       >
         <img 
-          src={require(`../assets/pokemon/${endedOn.id}.png`)} 
+          src={require(`../assets/pokemon/${wrongAnswer.id}.png`)} 
           id="target-mon" 
           className="grayscale" 
           alt="Name that Mon" 

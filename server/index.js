@@ -15,3 +15,4 @@ db.sequelize
       console.log('listening on ' + PORT);
     });
   });
+  

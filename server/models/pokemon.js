@@ -21,7 +21,12 @@ module.exports = function (sequelize, DataTypes) {
   }, {
     timestamps: false,
     freezeTableName: true,
-    tableName: 'pokemon'
+    tableName: 'pokemon',
+    // classMethods: {
+    //   associate: function(models) {
+    //     Pokemon.belongsTo(models.Playthru);
+    //   }
+    // }
   });
 
   return Pokemon;

@@ -9,12 +9,12 @@ import {
   TableRowColumn,
 } from 'material-ui/Table'
 
-const ResultsTable = ({ correctAnswerStack, lastCorrectAnswer, endedOn, quizTotalTime }) => (
+const ResultsTable = ({ correctAnswerStack, lastCorrectAnswer, wrongAnswer, quizTotalTime }) => (
   <Table selectable={false} >
     <TableBody displayRowCheckbox={false} >
       <TableRow>
         <TableRowColumn>Ended On</TableRowColumn>
-        <TableRowColumn>{endedOn.name}</TableRowColumn>
+        <TableRowColumn>{wrongAnswer.name}</TableRowColumn>
       </TableRow>
       <TableRow>
         <TableRowColumn>Answer Streak</TableRowColumn>

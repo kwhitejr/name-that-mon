@@ -61,7 +61,7 @@ const mapStateToProps = (state) => ({
   correctAnswerStack:  state.quizInstance.correctAnswerStack,
   shuffledQuizStack:  state.quizInstance.shuffledQuizStack,
   lastCorrectAnswer: getLastCorrectAnswer(state),
-  endedOn: getCurrentMon(state),
+  wrongAnswer: getCurrentMon(state),
   quizTotalTime: getQuizTotalTime(state),
 });
 

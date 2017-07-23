@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 
 const db = require('./models');
 const Pokemon = db.Pokemon;
+const Playthru = db.Playthru;
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:htt
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 // Get Pokemon by ID number
 app.get('/api/pokemon/id/:id', (req, res) => {
@@ -92,6 +94,22 @@ app.get('/api/pokemon/legendary', (req, res) => {
     .catch( (err) => {
       res.send(err);
     });
+});
+
+app.post('/api/playthru', (req, res) => {
+  const playthruData = req.body
+  console.log("request body");
+  console.log(playthruData);
+  Playthru.create({
+    user_initials:        playthruData.user_initials,
+    quiz_type:            playthruData.quiz_type,
+    quiz_set:             playthruData.quiz_set,
+    start_time:           playthruData.start_time,
+    end_time:             playthruData.end_time,
+    clue_count:           playthruData.clue_count,
+    correct_answer_stack: playthruData.correct_answer_stack,
+    wrong_answer:         playthruData.wrong_answer,
+  });
 });
 
 // Always return the main index.html, so react-router render the route in the client
