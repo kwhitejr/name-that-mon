@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types'; 
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import { 
@@ -86,6 +87,18 @@ const mapDispatchToProps = (dispatch) => ({
   resetThenHome:    () => dispatch(resetThenHome()),
   useClue:          () => dispatch(useClue()),
 });
+
+Quiz.propTypes = {
+  reset: PropTypes.function,
+  setAnswer: PropTypes.function,
+  submitAnswer: PropTypes.function,
+  setNextQuestion: PropTypes.function,
+  useClue: PropTypes.function,
+  endCurrentQuiz: PropTypes.function,
+  isAnswerSelected: PropTypes.boolean,
+  isAnswerSubmitted: PropTypes.boolean,
+  isClueUsed: PropTypes.boolean,
+};
 
 export default connect(
   mapStateToProps,

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'; 
 import RaisedButton from 'material-ui/RaisedButton';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 import FlatButton from 'material-ui/FlatButton';
@@ -13,7 +14,7 @@ const styles = {
   },
 };
 
-class AnswerSelection extends Component {
+class QuizAnswers extends Component {
   state = {
     dialogOpen: false,
   };
@@ -103,4 +104,19 @@ class AnswerSelection extends Component {
   }
 }
 
-export default AnswerSelection;
+QuizAnswers.propTypes = {
+  reset: PropTypes.function,
+  setAnswer: PropTypes.function,
+  setNextQuestion: PropTypes.function,
+  useClue: PropTypes.function,
+  endCurrentQuiz: PropTypes.function,
+  toggleMask: PropTypes.function,
+  isAnswerSelected: PropTypes.boolean,
+  isAnswerSubmitted: PropTypes.boolean,
+  isClueUsed: PropTypes.boolean,
+  userAnswer: PropTypes.object,
+  currentMon: PropTypes.object,
+  answerChoices: PropTypes.array,
+};
+
+export default QuizAnswers;

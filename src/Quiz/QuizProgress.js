@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'; 
 import LinearProgress from 'material-ui/LinearProgress';
 
 const style = {
@@ -16,5 +17,10 @@ const QuizProgress = ({ correctAnswerStack, quizLength }) => (
     />
   </div>
 );
+
+QuizProgress.propTypes = {
+  correctAnswerStack: PropTypes.array,
+  quizLength: PropTypes.number,
+};
 
 export default QuizProgress;

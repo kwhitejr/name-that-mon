@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'; 
 import { GridList, GridTile } from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import HelpOutline from 'material-ui/svg-icons/action/help-outline';
@@ -13,7 +14,7 @@ const styles = {
   }
 }
 
-class QuizMon extends Component {
+class QuizTop extends Component {
   state = {
     dialogOpen: false,
     // isClueUsed: false,
@@ -75,4 +76,9 @@ class QuizMon extends Component {
   }
 }
 
-export default QuizMon;
+QuizTop.propTypes = {
+  currentMon: PropTypes.object,
+  useClue: PropTypes.function,
+};
+
+export default QuizTop;
