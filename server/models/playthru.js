@@ -15,13 +15,8 @@ module.exports = function (sequelize, DataTypes) {
     start_time:          DataTypes.BIGINT,
     end_time:            DataTypes.BIGINT,
     clue_count:          DataTypes.INTEGER,
-    correct_answer_stack: DataTypes.ARRAY(DataTypes.INTEGER)
-    // wrong_answer: {
-    //   type: DataTypes.INTEGER,
-    //   references: 'Pokemon',
-    //   referencesKey: 'id',
-    //   foreignKeyConstraint: true
-    // }
+    correct_answer_stack: DataTypes.ARRAY(DataTypes.INTEGER),
+    wrong_answer:  DataTypes.INTEGER,
   }, {
     timestamps: false,
     freezeTableName: true,

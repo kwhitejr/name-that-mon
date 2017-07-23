@@ -100,16 +100,9 @@ app.post('/api/playthru', (req, res) => {
   const playthruData = req.body
   console.log("request body");
   console.log(playthruData);
-  Playthru.create({
-    user_initials:        playthruData.user_initials,
-    quiz_type:            playthruData.quiz_type,
-    quiz_set:             playthruData.quiz_set,
-    start_time:           playthruData.start_time,
-    end_time:             playthruData.end_time,
-    clue_count:           playthruData.clue_count,
-    correct_answer_stack: playthruData.correct_answer_stack,
-    wrong_answer:         playthruData.wrong_answer,
-  });
+  Playthru.create(playthruData);
+
+  res.end('Successful POST!');
 });
 
 // Always return the main index.html, so react-router render the route in the client

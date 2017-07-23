@@ -100,8 +100,8 @@ export function endCurrentQuiz() {
   return (dispatch) => {
     dispatch({ type: END_TIMER })
     dispatch({ type: INCREMENT_CLUE_COUNT })
-    dispatch(postPlaythruData())
     dispatch(push('/result'))
+    dispatch(postPlaythruData())
   }
 }
 

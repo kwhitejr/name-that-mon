@@ -24,12 +24,12 @@ import './Result.css';
 
 class Result extends Component {
 
-  componentWillMount() {
-    const { resetThenHome } = this.props
-    if (!this.props.shuffledQuizStack || !this.props.endedOn) {
-      resetThenHome()
-    }
-  }
+  // componentWillMount() {
+  //   const { resetThenHome } = this.props
+  //   if (!this.props.shuffledQuizStack || !this.props.endedOn) {
+  //     resetThenHome()
+  //   }
+  // }
 
   render() {
     return (
