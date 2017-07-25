@@ -2,7 +2,7 @@ import moment from 'moment'
 import { shuffle } from '../common'
 
 const SET_ANSWER = 'SET_ANSWER',
-      RESET = 'RESET',
+      RESET_INSTANCE_DATA = 'RESET_INSTANCE_DATA',
       GET_QUIZ_DATA = 'GET_QUIZ_DATA',
       SUBMIT_ANSWER = 'SUBMIT_ANSWER',
       SET_ANSWER_CHOICES = 'SET_ANSWER_CHOICES',
@@ -12,7 +12,7 @@ const SET_ANSWER = 'SET_ANSWER',
       USE_CLUE = 'USE_CLUE',
       INCREMENT_CLUE_COUNT = 'INCREMENT_CLUE_COUNT';
 
-const INITIAL_STATE = { 
+export const INITIAL_STATE = { 
   error: '', 
   message: '', 
   isAnswerSelected: false, 
@@ -32,7 +32,7 @@ export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     case SET_ANSWER:
       return { ...state, isAnswerSelected: true, userAnswer: action.payload };
-    case RESET:
+    case RESET_INSTANCE_DATA:
       return { 
         error: '', 
         message: '', 

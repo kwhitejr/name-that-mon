@@ -2,7 +2,7 @@ import { push } from 'react-router-redux'
 import { shuffle } from '../common'
 
 import { 
-  RESET, 
+  RESET_INSTANCE_DATA, 
   RESET_META_DATA, 
 } from '../Quiz/QuizActionTypes'
 
@@ -13,7 +13,7 @@ export const  GET_QUIZ_DATA = 'GET_QUIZ_DATA',
 
 export function resetThenHome() {
   return (dispatch) => {
-    dispatch({ type: RESET })
+    dispatch({ type: RESET_INSTANCE_DATA })
     dispatch({ type: RESET_META_DATA })
     dispatch(push('/'))
   };
@@ -23,7 +23,7 @@ export function resetThenRestart() {
   // need to refactor the reload of pokemon
   const generation = 1
   return (dispatch) => {
-    dispatch({ type: RESET })
+    dispatch({ type: RESET_INSTANCE_DATA })
     return fetch(`${API_URL}/pokemon/generation/${generation}`)
       .then(res => res.json())
       .then(json => shuffle(json))

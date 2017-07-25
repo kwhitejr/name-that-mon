@@ -11,7 +11,7 @@ import {
   SET_GENERATION_NUMBER,
   SET_POKEMON_TYPE,
   SET_LEGENDARY,
-  RESET,
+  RESET_INSTANCE_DATA,
   RESET_META_DATA,
   GET_QUIZ_DATA,
   STACK_CORRECT_ANSWER,
@@ -26,7 +26,7 @@ const API_URL = 'http://localhost:3000/api';
 
 export function reset() {
   return (dispatch) => {
-    dispatch({ type: RESET })
+    dispatch({ type: RESET_INSTANCE_DATA })
     dispatch({ type: RESET_META_DATA })
    } 
 }

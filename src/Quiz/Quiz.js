@@ -32,7 +32,7 @@ const toggleMask = () => {
   pokemon.classList.toggle('mask');
 }
 
-class Quiz extends Component {
+export class Quiz extends Component {
 
   componentWillMount() {
     const { resetThenHome } = this.props
@@ -98,6 +98,7 @@ Quiz.propTypes = {
   isAnswerSelected: PropTypes.boolean,
   isAnswerSubmitted: PropTypes.boolean,
   isClueUsed: PropTypes.boolean,
+  currentMon: PropTypes.object,
 };
 
 export default connect(
