@@ -4,7 +4,7 @@ import { shuffle } from '../common'
 import { 
   RESET, 
   RESET_META_DATA, 
-} from '../Quiz/QuizActions'
+} from '../Quiz/QuizActionTypes'
 
 const API_URL = 'http://localhost:3000/api';
 

@@ -4,23 +4,25 @@ import fetch from 'isomorphic-fetch'
 import { getPlaythruData } from './QuizSelectors'
 import { shuffle } from '../common'
 
-const API_URL = 'http://localhost:3000/api';
+import {
+  SET_ANSWER,
+  SET_ANSWER_CHOICES,
+  SET_NEXT_QUESTION,
+  SET_GENERATION_NUMBER,
+  SET_POKEMON_TYPE,
+  SET_LEGENDARY,
+  RESET,
+  RESET_META_DATA,
+  GET_QUIZ_DATA,
+  STACK_CORRECT_ANSWER,
+  SUBMIT_ANSWER,
+  START_TIMER,
+  END_TIMER,
+  USE_CLUE,
+  INCREMENT_CLUE_COUNT,
+} from './QuizActionTypes'
 
-export const  SET_ANSWER = 'SET_ANSWER',
-              SET_ANSWER_CHOICES = 'SET_ANSWER_CHOICES',
-              SET_NEXT_QUESTION = 'SET_NEXT_QUESTION',
-              SET_GENERATION_NUMBER = 'SET_GENERATION_NUMBER',
-              SET_POKEMON_TYPE = 'SET_POKEMON_TYPE',
-              SET_LEGENDARY = 'SET_LEGENDARY',
-              RESET = 'RESET',
-              RESET_META_DATA = 'RESET_META_DATA',
-              GET_QUIZ_DATA = 'GET_QUIZ_DATA',
-              STACK_CORRECT_ANSWER = 'STACK_CORRECT_ANSWER',
-              SUBMIT_ANSWER = 'SUBMIT_ANSWER',
-              START_TIMER = 'START_TIMER',
-              END_TIMER = 'END_TIMER',
-              USE_CLUE = 'USE_CLUE',
-              INCREMENT_CLUE_COUNT = 'INCREMENT_CLUE_COUNT';
+const API_URL = 'http://localhost:3000/api';
 
 export function reset() {
   return (dispatch) => {
