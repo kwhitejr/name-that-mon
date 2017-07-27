@@ -54,7 +54,7 @@ export default function (state = INITIAL_STATE, action) {
     case SET_ANSWER_CHOICES:
       return setAnswerChoices(state);
     case STACK_CORRECT_ANSWER:
-      return stackCorrectAnswer(state);
+      return stackCorrectAnswerHelper(state);
     case START_TIMER:
       return { ...state, startTime: moment().valueOf() };
     case END_TIMER:
@@ -99,7 +99,7 @@ const setAnswerChoices = (state) => {
 }
 
 // When correct answer is submitted, add it to the correctAnswerStack
-const stackCorrectAnswer = (state) => {
+const stackCorrectAnswerHelper = (state) => {
   let shuffledQuizStack = state.shuffledQuizStack
   let correctAnswerStack = state.correctAnswerStack
   const lastDatum = shuffledQuizStack[shuffledQuizStack.length-1]

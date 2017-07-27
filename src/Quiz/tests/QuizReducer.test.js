@@ -4,10 +4,12 @@ import quizReducer, { INITIAL_STATE } from '../QuizReducer'
 
 describe('Quiz Reducer', () => {
 
+	// Initial State
   it('should have initial state', () => {
     expect(quizReducer(undefined, {})).toEqual(INITIAL_STATE);
   });
   
+  // RESET_INSTANCE_DATA
   it('should handle RESET_INSTANCE_DATA', () => {
     expect(
       quizReducer({
@@ -34,6 +36,7 @@ describe('Quiz Reducer', () => {
     ).toEqual(INITIAL_STATE);
 	});
 
+  // SET_ANSWER
   it('should handle SET_ANSWER', () => {
     expect(quizReducer({
     	isAnswerSelected: false,
@@ -56,6 +59,104 @@ describe('Quiz Reducer', () => {
 		  	{name: 'Pikachu'}, 
 		  	{name: 'Squirtle'}
 		  ],
+  	});
+  });
+
+  // TODO: `userAnswer` should be one of `answerChoices`
+
+  // GET_QUIZ_DATA
+  it('should handle GET_QUIZ_DATA', () => {
+    expect(quizReducer({
+    	shuffledQuizStack: [],
+    }, {
+    	type: types.GET_QUIZ_DATA,
+    	payload: [
+    		{name: 'Bulbasaur'}, 
+		  	{name: 'Charmander'}, 
+		  	{name: 'Pikachu'}, 
+		  	{name: 'Squirtle'}
+		  ]
+    })).toEqual({
+  		shuffledQuizStack: [
+		  	{name: 'Bulbasaur'}, 
+		  	{name: 'Charmander'}, 
+		  	{name: 'Pikachu'}, 
+		  	{name: 'Squirtle'}
+		  ],
+  	});
+  });
+
+  // SUBMIT_ANSWER
+  it('should handle SUBMIT_ANSWER', () => {
+    expect(quizReducer({
+    	isAnswerSubmitted: false,
+    }, {
+    	type: types.SUBMIT_ANSWER,
+    })).toEqual({
+  		isAnswerSubmitted: true
+  	});
+  });
+
+  // SET_ANSWER_CHOICES
+  it('should handle SET_ANSWER_CHOICES', () => {
+  	// TODO
+  	// reducers should have no side effects
+  	// this reducer contains the randomization logic 
+  });
+
+  // STACK_CORRECT_ANSWER
+  it('should handle STACK_CORRECT_ANSWER', () => {
+    expect(quizReducer({
+    	shuffledQuizStack: [
+		  	{name: 'Bulbasaur'}, 
+		  	{name: 'Charmander'}, 
+		  	{name: 'Pikachu'}, 
+		  	{name: 'Squirtle'},
+		  	{name: 'Metapod'}, 
+		  	{name: 'Beedrill'}, 
+		  	{name: 'Gyrados'},
+		  	{name: 'Magikarp'},
+		  ],
+	    correctAnswerStack: [
+		  	{name: 'Venusaur'}, 
+		  	{name: 'Charizard'}, 
+		  	{name: 'Raichu'}, 
+		  	{name: 'Wartortle'},
+		  ],
+	    isAnswerSubmitted: true,
+	    isAnswerSelected: true,
+	    isClueUsed: true,
+	    userAnswer: {name: 'Magikarp'}, 
+	    answerChoices: [
+		  	{name: 'Metapod'}, 
+		  	{name: 'Beedrill'}, 
+		  	{name: 'Gyrados'}, 
+		  	{name: 'Magikarp'},
+		  ],
+    }, {
+    	type: types.STACK_CORRECT_ANSWER,
+    })).toEqual({
+  		shuffledQuizStack: [
+		  	{name: 'Bulbasaur'}, 
+		  	{name: 'Charmander'}, 
+		  	{name: 'Pikachu'}, 
+		  	{name: 'Squirtle'},
+		  	{name: 'Metapod'}, 
+		  	{name: 'Beedrill'}, 
+		  	{name: 'Gyrados'},
+		  ],
+	    correctAnswerStack: [
+		  	{name: 'Venusaur'}, 
+		  	{name: 'Charizard'}, 
+		  	{name: 'Raichu'}, 
+		  	{name: 'Wartortle'},
+		  	{name: 'Magikarp'},
+		  ],
+	    isAnswerSubmitted: false,
+	    isAnswerSelected: false,
+	    isClueUsed: false,
+	    userAnswer: null, 
+	    answerChoices: [],
   	});
   });
 
