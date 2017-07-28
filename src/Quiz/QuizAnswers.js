@@ -105,16 +105,16 @@ class QuizAnswers extends Component {
 }
 
 QuizAnswers.propTypes = {
-  reset: PropTypes.function,
-  setAnswer: PropTypes.function,
-  setNextQuestion: PropTypes.function,
-  useClue: PropTypes.function,
-  endCurrentQuiz: PropTypes.function,
-  toggleMask: PropTypes.function,
-  isAnswerSelected: PropTypes.boolean,
-  isAnswerSubmitted: PropTypes.boolean,
-  isClueUsed: PropTypes.boolean,
-  userAnswer: PropTypes.object,
+  reset: PropTypes.func,
+  setAnswer: PropTypes.func,
+  setNextQuestion: PropTypes.func,
+  useClue: PropTypes.func,
+  endCurrentQuiz: PropTypes.func,
+  toggleMask: PropTypes.func,
+  isAnswerSelected: PropTypes.bool,
+  isAnswerSubmitted: PropTypes.bool,
+  isClueUsed: PropTypes.bool,
+  userAnswer: PropTypes.number,
   currentMon: PropTypes.object,
   answerChoices: PropTypes.array,
 };

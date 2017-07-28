@@ -89,15 +89,15 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 Quiz.propTypes = {
-  reset: PropTypes.function,
-  setAnswer: PropTypes.function,
-  submitAnswer: PropTypes.function,
-  setNextQuestion: PropTypes.function,
-  useClue: PropTypes.function,
-  endCurrentQuiz: PropTypes.function,
-  isAnswerSelected: PropTypes.boolean,
-  isAnswerSubmitted: PropTypes.boolean,
-  isClueUsed: PropTypes.boolean,
+  reset: PropTypes.func,
+  setAnswer: PropTypes.func,
+  submitAnswer: PropTypes.func,
+  setNextQuestion: PropTypes.func,
+  useClue: PropTypes.func,
+  endCurrentQuiz: PropTypes.func,
+  isAnswerSelected: PropTypes.bool,
+  isAnswerSubmitted: PropTypes.bool,
+  isClueUsed: PropTypes.bool,
   currentMon: PropTypes.object,
 };
 

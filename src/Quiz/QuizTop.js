@@ -78,7 +78,7 @@ class QuizTop extends Component {
 
 QuizTop.propTypes = {
   currentMon: PropTypes.object,
-  useClue: PropTypes.function,
+  useClue: PropTypes.func,
 };
 
 export default QuizTop;
