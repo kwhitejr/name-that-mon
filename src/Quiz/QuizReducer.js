@@ -51,7 +51,7 @@ export default function (state = INITIAL_STATE, action) {
     case SUBMIT_ANSWER:
       return { ...state, isAnswerSubmitted: true };
     case SET_ANSWER_CHOICES:
-      return setAnswerChoices(state);
+      return { ...state, answerChoices: action.payload };
     case STACK_CORRECT_ANSWER:
       return stackCorrectAnswerHelper(state);
     case START_TIMER:
@@ -66,35 +66,6 @@ export default function (state = INITIAL_STATE, action) {
   }
 
   return state;
-}
-
-// For each new question, get correct pokemon and three bogus pokemon, shuffle, and set.
-const setAnswerChoices = (state) => {
-  const shuffledQuizStack = state.shuffledQuizStack
-  const currentMon = shuffledQuizStack[shuffledQuizStack.length-1]
-  let answerChoices = []
-  let pickThree = null
-  answerChoices.push(currentMon)
-
-  // add bogus answers
-  const remainingMon = shuffle(shuffledQuizStack.slice(0,shuffledQuizStack.length-1))
-  if (remainingMon.length > 3) {
-    pickThree = remainingMon.slice(0,3);
-  } else {
-    pickThree = remainingMon
-  }
-  pickThree.forEach( (obj) => {
-    answerChoices.push(obj);
-  });
-
-  // shuffle the order
-  const shuffledAnswerChoices = shuffle(answerChoices)
-
-  // update `state`
-  const newObj = {
-    answerChoices: shuffledAnswerChoices,
-  };
-  return Object.assign({}, state, newObj);
 }
 
 // When correct answer is submitted, add it to the correctAnswerStack

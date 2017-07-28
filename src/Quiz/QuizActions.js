@@ -8,7 +8,6 @@ import { shuffle } from '../common'
 import {
   SET_ANSWER,
   SET_ANSWER_CHOICES,
-  SET_NEXT_QUESTION,
   SET_GENERATION_NUMBER,
   SET_POKEMON_TYPE,
   SET_LEGENDARY,
@@ -33,39 +32,39 @@ export function reset() {
 }
 
 export function beginGenerationQuiz(generationNumber) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     return fetch(`${API_URL}/pokemon/generation/${generationNumber}`)
       .then(res => res.json())
       .then(json => shuffle(json))
       .then(shuffledQuizStack => dispatch({ type: GET_QUIZ_DATA, payload: shuffledQuizStack }))
       .then(() => dispatch({ type: SET_GENERATION_NUMBER, payload: generationNumber }))
-      .then(() => dispatch({ type: SET_ANSWER_CHOICES }))
+      .then(() => dispatch({ type: SET_ANSWER_CHOICES, payload: getAnswerChoices(getState().quizInstance.shuffledQuizStack) }))
       .then(() => dispatch({ type: START_TIMER, payload: moment().valueOf() }))
       .then(() => dispatch(push('/quiz')));
   }
 }
 
 export function beginPokemonTypeQuiz(pokemonType) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     return fetch(`${API_URL}/pokemon/type/${pokemonType}`)
       .then(res => res.json())
       .then(json => shuffle(json))
       .then(shuffledQuizStack => dispatch({ type: GET_QUIZ_DATA, payload: shuffledQuizStack }))
       .then(() => dispatch({ type: SET_POKEMON_TYPE, payload: pokemonType }))
-      .then(() => dispatch({ type: SET_ANSWER_CHOICES }))
+      .then(() => dispatch({ type: SET_ANSWER_CHOICES, payload: getAnswerChoices(getState().quizInstance.shuffledQuizStack) }))
       .then(() => dispatch({ type: START_TIMER, payload: moment().valueOf() }))
       .then(() => dispatch(push('/quiz')));
   }
 }
 
 export function beginLegendaryQuiz() {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     return fetch(`${API_URL}/pokemon/legendary`)
       .then(res => res.json())
       .then(json => shuffle(json))
       .then(shuffledQuizStack => dispatch({ type: GET_QUIZ_DATA, payload: shuffledQuizStack }))
       .then(() => dispatch({ type: SET_LEGENDARY, payload: true }))
-      .then(() => dispatch({ type: SET_ANSWER_CHOICES }))
+      .then(() => dispatch({ type: SET_ANSWER_CHOICES, payload: getAnswerChoices(getState().quizInstance.shuffledQuizStack) }))
       .then(() => dispatch({ type: START_TIMER, payload: moment().valueOf() }))
       .then(() => dispatch(push('/quiz')));
   }
@@ -76,10 +75,10 @@ export function setAnswer(event, value) {
 }
 
 export function setNextQuestion() {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch({ type: INCREMENT_CLUE_COUNT })
     dispatch({ type: STACK_CORRECT_ANSWER })
-    dispatch({ type: SET_ANSWER_CHOICES })
+    dispatch({ type: SET_ANSWER_CHOICES, payload: getAnswerChoices(getState().quizInstance.shuffledQuizStack) })
   }
 }
 
@@ -89,10 +88,6 @@ export function stackCorrectAnswer() {
 
 export function submitAnswer() {
   return { type: SUBMIT_ANSWER }
-}
-
-export function setAnswerChoices() {
-  return { type: SET_ANSWER_CHOICES }
 }
 
 export function useClue() {
@@ -111,7 +106,6 @@ export function endCurrentQuiz() {
 export function postPlaythruData() {
   return (dispatch, getState) => {
     const playthruData = getPlaythruData(getState());
-    console.log("playthru: ", playthruData);
 
     fetch(`${API_URL}/playthru/`, {
       method: 'post',
@@ -134,3 +128,25 @@ export function postPlaythruData() {
   }
 }
 
+function getAnswerChoices(quizStack) {
+    const currentMon = quizStack[quizStack.length-1]
+    let answerChoices = []
+    let pickThree = null
+    answerChoices.push(currentMon)
+
+    // add bogus answers
+    const remainingMon = shuffle(quizStack.slice(0,quizStack.length-1))
+    if (remainingMon.length > 3) {
+      pickThree = remainingMon.slice(0,3);
+    } else {
+      pickThree = remainingMon
+    }
+    pickThree.forEach( (obj) => {
+      answerChoices.push(obj);
+    });
+
+    const shuffledAnswerChoices = shuffle(answerChoices)
+
+    // shuffle the order
+    return shuffledAnswerChoices
+}
