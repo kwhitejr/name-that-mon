@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 import * as actions from '../QuizActions'
 import * as types from '../QuizActionTypes'
 import quizReducer, { INITIAL_STATE } from '../QuizReducer'
@@ -157,6 +159,64 @@ describe('Quiz Reducer', () => {
 	    isClueUsed: false,
 	    userAnswer: null, 
 	    answerChoices: [],
+  	});
+  });
+
+  // START_TIMER
+  it('should handle START_TIMER', () => {
+    expect(quizReducer({
+    	startTime: null,
+    }, {
+    	type: types.START_TIMER,
+    	payload: 1234235423452
+    })).toEqual({
+  		startTime: 1234235423452
+  	});
+  });
+
+  // END_TIMER
+  it('should handle END_TIMER', () => {
+    expect(quizReducer({
+    	endTime: null,
+    }, {
+    	type: types.END_TIMER,
+    	payload: 1234235423452
+    })).toEqual({
+  		endTime: 1234235423452
+  	});
+  });
+
+  // USE_CLUE
+  it('should handle USE_CLUE', () => {
+    expect(quizReducer({
+    	isClueUsed: false,
+    }, {
+    	type: types.USE_CLUE,
+    })).toEqual({
+  		isClueUsed: true
+  	});
+  });
+
+  // INCREMENT_CLUE_COUNT
+  it('should handle INCREMENT_CLUE_COUNT', () => {
+    expect(quizReducer({
+    	clueCount: 7,
+    	isClueUsed: true,
+    }, {
+    	type: types.INCREMENT_CLUE_COUNT,
+    })).toEqual({
+    	clueCount: 8,
+  		isClueUsed: false,
+  	});
+
+  	expect(quizReducer({
+    	clueCount: 7,
+    	isClueUsed: false,
+    }, {
+    	type: types.INCREMENT_CLUE_COUNT,
+    })).toEqual({
+    	clueCount: 7,
+  		isClueUsed: false,
   	});
   });
 

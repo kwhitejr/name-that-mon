@@ -1,4 +1,3 @@
-import moment from 'moment'
 import { shuffle } from '../common'
 
 const SET_ANSWER = 'SET_ANSWER',
@@ -56,9 +55,9 @@ export default function (state = INITIAL_STATE, action) {
     case STACK_CORRECT_ANSWER:
       return stackCorrectAnswerHelper(state);
     case START_TIMER:
-      return { ...state, startTime: moment().valueOf() };
+      return { ...state, startTime: action.payload };
     case END_TIMER:
-      return { ...state, endTime: moment().valueOf() };
+      return { ...state, endTime: action.payload };
     case USE_CLUE:
       return { ...state, isClueUsed: true };
     case INCREMENT_CLUE_COUNT:

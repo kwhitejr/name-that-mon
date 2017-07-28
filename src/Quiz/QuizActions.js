@@ -1,3 +1,4 @@
+import moment from 'moment'
 import { push } from 'react-router-redux'
 import fetch from 'isomorphic-fetch'
 
@@ -39,7 +40,7 @@ export function beginGenerationQuiz(generationNumber) {
       .then(shuffledQuizStack => dispatch({ type: GET_QUIZ_DATA, payload: shuffledQuizStack }))
       .then(() => dispatch({ type: SET_GENERATION_NUMBER, payload: generationNumber }))
       .then(() => dispatch({ type: SET_ANSWER_CHOICES }))
-      .then(() => dispatch({ type: START_TIMER }))
+      .then(() => dispatch({ type: START_TIMER, payload: moment().valueOf() }))
       .then(() => dispatch(push('/quiz')));
   }
 }
@@ -52,7 +53,7 @@ export function beginPokemonTypeQuiz(pokemonType) {
       .then(shuffledQuizStack => dispatch({ type: GET_QUIZ_DATA, payload: shuffledQuizStack }))
       .then(() => dispatch({ type: SET_POKEMON_TYPE, payload: pokemonType }))
       .then(() => dispatch({ type: SET_ANSWER_CHOICES }))
-      .then(() => dispatch({ type: START_TIMER }))
+      .then(() => dispatch({ type: START_TIMER, payload: moment().valueOf() }))
       .then(() => dispatch(push('/quiz')));
   }
 }
@@ -65,7 +66,7 @@ export function beginLegendaryQuiz() {
       .then(shuffledQuizStack => dispatch({ type: GET_QUIZ_DATA, payload: shuffledQuizStack }))
       .then(() => dispatch({ type: SET_LEGENDARY, payload: true }))
       .then(() => dispatch({ type: SET_ANSWER_CHOICES }))
-      .then(() => dispatch({ type: START_TIMER }))
+      .then(() => dispatch({ type: START_TIMER, payload: moment().valueOf() }))
       .then(() => dispatch(push('/quiz')));
   }
 }
@@ -100,7 +101,7 @@ export function useClue() {
 
 export function endCurrentQuiz() {
   return (dispatch) => {
-    dispatch({ type: END_TIMER })
+    dispatch({ type: END_TIMER, payload: moment().valueOf() })
     dispatch({ type: INCREMENT_CLUE_COUNT })
     dispatch(push('/result'))
     dispatch(postPlaythruData())
