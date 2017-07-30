@@ -83,13 +83,6 @@ export function setNextQuestion() {
   }
 }
 
-export function stackCorrectAnswer() {
-  return (dispatch, getState) => {
-    let state = getState().quizInstance
-    dispatch({ type: STACK_CORRECT_ANSWER, payload: stackCorrectAnswerHelper(state.shuffledQuizStack, state.correctAnswerStack) })
-  }
-}
-
 export function submitAnswer() {
   return { type: SUBMIT_ANSWER }
 }

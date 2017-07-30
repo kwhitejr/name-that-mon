@@ -8,10 +8,8 @@ import {
 	beginGenerationQuiz,
 	beginPokemonTypeQuiz,
 	beginLegendaryQuiz,
-	// getAnswerChoices,
 	setAnswer,
 	setNextQuestion,
-	stackCorrectAnswer,
 	submitAnswer,
 	useClue,
 	endCurrentQuiz,
@@ -124,4 +122,6 @@ describe('actions', () => {
     store.dispatch(setNextQuestion())
 	  expect(store.getActions()).toEqual(expectedActions)
   })
+
+
 })
