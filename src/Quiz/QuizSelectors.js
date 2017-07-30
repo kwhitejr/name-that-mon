@@ -10,8 +10,8 @@ const getQuizMetaData = (state) => state.quizMetaData
 
 export const getCurrentMon = createSelector(
   [ getShuffledQuizStack ],
-  (getShuffledQuizStack) => {
-    return getShuffledQuizStack[getShuffledQuizStack.length-1]
+  (shuffledQuizStack) => {
+    return shuffledQuizStack[shuffledQuizStack.length-1]
   }
 )
 
