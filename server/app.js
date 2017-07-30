@@ -62,6 +62,8 @@ app.get('/api/pokemon/generation/:generation', (req, res) => {
 
   Pokemon.findAll({where: { generation: req.params.generation }})
     .then( (result) => {
+      // console.log(result)
+      // console.log("result: ", typeof result)
       res.send(result);
     })
     .catch( (err) => {

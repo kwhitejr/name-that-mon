@@ -37,11 +37,14 @@ export function beginGenerationQuiz(generationNumber) {
     return fetch(`${API_URL}/pokemon/generation/${generationNumber}`)
       .then(res => res.json())
       .then(json => shuffle(json))
-      .then(shuffledQuizStack => dispatch({ type: GET_QUIZ_DATA, payload: shuffledQuizStack }))
-      .then(() => dispatch({ type: SET_GENERATION_NUMBER, payload: generationNumber }))
-      .then(() => dispatch({ type: SET_ANSWER_CHOICES, payload: getAnswerChoices(getState().quizInstance.shuffledQuizStack) }))
-      .then(() => dispatch({ type: START_TIMER, payload: moment().valueOf() }))
-      .then(() => dispatch(push('/quiz')));
+      .then(shuffledQuizStack => {
+        dispatch({ type: GET_QUIZ_DATA, payload: shuffledQuizStack })
+        dispatch({ type: SET_GENERATION_NUMBER, payload: generationNumber })
+        dispatch({ type: SET_ANSWER_CHOICES, payload: getAnswerChoices(getState().quizInstance.shuffledQuizStack) })
+        dispatch({ type: START_TIMER, payload: moment().valueOf() })
+        dispatch(push('/quiz'));
+      })
+      .catch(ex => console.log(ex))
   }
 }
 
@@ -50,11 +53,14 @@ export function beginPokemonTypeQuiz(pokemonType) {
     return fetch(`${API_URL}/pokemon/type/${pokemonType}`)
       .then(res => res.json())
       .then(json => shuffle(json))
-      .then(shuffledQuizStack => dispatch({ type: GET_QUIZ_DATA, payload: shuffledQuizStack }))
-      .then(() => dispatch({ type: SET_POKEMON_TYPE, payload: pokemonType }))
-      .then(() => dispatch({ type: SET_ANSWER_CHOICES, payload: getAnswerChoices(getState().quizInstance.shuffledQuizStack) }))
-      .then(() => dispatch({ type: START_TIMER, payload: moment().valueOf() }))
-      .then(() => dispatch(push('/quiz')));
+      .then(shuffledQuizStack => {
+        dispatch({ type: GET_QUIZ_DATA, payload: shuffledQuizStack })
+        dispatch({ type: SET_POKEMON_TYPE, payload: pokemonType })
+        dispatch({ type: SET_ANSWER_CHOICES, payload: getAnswerChoices(getState().quizInstance.shuffledQuizStack) })
+        dispatch({ type: START_TIMER, payload: moment().valueOf() })
+        dispatch(push('/quiz'));
+      })
+      .catch(ex => console.log(ex))
   }
 }
 

@@ -47,28 +47,34 @@ describe('actions', () => {
   // beginGenerationQuiz
   it('beginGenerationQuiz gets Generation pokemon set', () => {
   	const generationNumber = 1
-
   	nock(API_URL)
-      .get(`/pokemon/generation/`)
-      .query({ generation: generationNumber})
-      .reply(200, { body: { shuffledQuizStack: [{},{},{},{},{}] } })
+      .get(`/pokemon/generation/${generationNumber}`)
+      .reply(200, [{},{},{},{},{}])
+  	// const res = {shuffledQuizStack: [
+  	// 	{id: 1},
+  	// 	{id: 2},
+  	// 	{id: 3},
+  	// 	{id: 4},
+  	// 	{id: 5}
+  	// ]}
+
 
     const expectedActions = [
     	{ type: types.GET_QUIZ_DATA, payload: [{},{},{},{},{}] },
       { type: types.SET_GENERATION_NUMBER, payload: 1 },
       { type: types.SET_ANSWER_CHOICES, payload: [{},{},{},{}] },
-      { type: types.START_TIMER, payload: 123456789098 },
+      { type: types.START_TIMER, payload: 1234567890 },
     ]
 
     const store = mockStore({
     	quizInstance: {
-    		shuffledQuizStack: [],
-    		answerChoices: [],
-    		startTime: null,
+    		// shuffledQuizStack: [],
+    		// answerChoices: [],
+    		// startTime: null,
 			},
 			quizMetaData: {
-				quizType: null,
-				quizSet: null,
+				// quizType: null,
+				// quizSet: null,
 			}
     })
 
@@ -159,9 +165,20 @@ describe('actions', () => {
 
   // postPlaythruData
   it('postPlaythruData posts data', () => {
+  	const playthruData = {
+    	user_initials: null,
+      quiz_type: 'generation',
+      quiz_set: 1,
+      start_time: 12354346765,
+      end_time: 12341278987,
+      clue_count: 3,
+      correct_answer_stack: [1,2,3,4,5,6],
+      wrong_answer: 7,
+    }
+
     nock(API_URL)
-      .post(`/playthru/`)
-      .reply(200, { body: { shuffledQuizStack: [{},{},{},{},{}] } })
+      .post(`/playthru/`, playthruData)
+      .reply(201, {})
 
     const expectedActions = [
     	{ type: types.POST_PLAYTHRU_SUCCESS }
@@ -176,5 +193,23 @@ describe('actions', () => {
 
     store.dispatch(postPlaythruData())
 	  expect(store.getActions()).toEqual(expectedActions)
+  })
+
+  // endCurrentQuiz
+  it('endCurrentQuiz dispatches END_TIMER, INCREMENT_CLUE_COUNT', () => {
+    const expectedActions = [
+      { type: types.END_TIMER, payload: 12312442343 },
+      { type: types.INCREMENT_CLUE_COUNT },
+    ]
+
+    const store = mockStore({ 
+    	quizMetaData: {
+    	},
+    	quizInstance: {
+    	}
+    })
+
+    store.dispatch(endCurrentQuiz())
+	  expect(store.getActions()).to.include(expectedActions)
   })
 })
