@@ -76,14 +76,18 @@ export function setAnswer(event, value) {
 
 export function setNextQuestion() {
   return (dispatch, getState) => {
+    let state = getState().quizInstance
     dispatch({ type: INCREMENT_CLUE_COUNT })
-    dispatch({ type: STACK_CORRECT_ANSWER })
+    dispatch({ type: STACK_CORRECT_ANSWER, payload: stackCorrectAnswerHelper(state.shuffledQuizStack, state.correctAnswerStack) })
     dispatch({ type: SET_ANSWER_CHOICES, payload: getAnswerChoices(getState().quizInstance.shuffledQuizStack) })
   }
 }
 
 export function stackCorrectAnswer() {
-  return { type: STACK_CORRECT_ANSWER }
+  return (dispatch, getState) => {
+    let state = getState().quizInstance
+    dispatch({ type: STACK_CORRECT_ANSWER, payload: stackCorrectAnswerHelper(state.shuffledQuizStack, state.correctAnswerStack) })
+  }
 }
 
 export function submitAnswer() {
@@ -128,7 +132,7 @@ export function postPlaythruData() {
   }
 }
 
-function getAnswerChoices(quizStack) {
+const getAnswerChoices = (quizStack) => {
     const currentMon = quizStack[quizStack.length-1]
     let answerChoices = []
     let pickThree = null
@@ -150,3 +154,17 @@ function getAnswerChoices(quizStack) {
     // shuffle the order
     return shuffledAnswerChoices
 }
+
+const stackCorrectAnswerHelper = (shuffledQuizStack, correctAnswerStack) => {
+  const lastDatum = shuffledQuizStack[shuffledQuizStack.length-1]
+
+  // add correct answer to `correctAnswerStack`
+  correctAnswerStack.push(lastDatum)
+
+  const newObj = {
+    shuffledQuizStack: shuffledQuizStack.slice(0,-1),
+    correctAnswerStack: correctAnswerStack,
+  };
+  return newObj;
+}
+

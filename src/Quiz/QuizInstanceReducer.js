@@ -53,7 +53,15 @@ export default function (state = INITIAL_STATE, action) {
     case SET_ANSWER_CHOICES:
       return { ...state, answerChoices: action.payload };
     case STACK_CORRECT_ANSWER:
-      return stackCorrectAnswerHelper(state);
+      return { ...state, 
+        shuffledQuizStack: action.payload.shuffledQuizStack,
+        correctAnswerStack: action.payload.correctAnswerStack,
+        isAnswerSubmitted: false,
+        isAnswerSelected: false,
+        isClueUsed: false,
+        userAnswer: null, 
+        answerChoices: [], 
+      };
     case START_TIMER:
       return { ...state, startTime: action.payload };
     case END_TIMER:
