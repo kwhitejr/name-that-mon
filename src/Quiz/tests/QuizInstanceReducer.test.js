@@ -137,6 +137,24 @@ describe('Quiz Reducer', () => {
 		  ],
     }, {
     	type: types.STACK_CORRECT_ANSWER,
+      payload: {
+        shuffledQuizStack: [
+          {name: 'Bulbasaur'}, 
+          {name: 'Charmander'}, 
+          {name: 'Pikachu'}, 
+          {name: 'Squirtle'},
+          {name: 'Metapod'}, 
+          {name: 'Beedrill'}, 
+          {name: 'Gyrados'},
+        ],
+        correctAnswerStack: [
+          {name: 'Venusaur'}, 
+          {name: 'Charizard'}, 
+          {name: 'Raichu'}, 
+          {name: 'Wartortle'},
+          {name: 'Magikarp'},
+        ],
+      }
     })).toEqual({
   		shuffledQuizStack: [
 		  	{name: 'Bulbasaur'}, 
