@@ -2,7 +2,7 @@ import moment from 'moment'
 
 import * as actions from '../QuizActions'
 import * as types from '../QuizActionTypes'
-import quizReducer, { INITIAL_STATE } from '../QuizReducer'
+import quizReducer, { INITIAL_STATE } from '../QuizInstanceReducer'
 
 describe('Quiz Reducer', () => {
 

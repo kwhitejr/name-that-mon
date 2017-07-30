@@ -3,7 +3,7 @@ const RESET_META_DATA = 'RESET_META_DATA',
       SET_POKEMON_TYPE = 'SET_POKEMON_TYPE',
       SET_LEGENDARY = 'SET_LEGENDARY';
 
-const INITIAL_STATE = { 
+export const INITIAL_STATE = { 
   error: '', 
   message: '', 
   quizType: null,
