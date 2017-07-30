@@ -20,6 +20,7 @@ import {
   END_TIMER,
   USE_CLUE,
   INCREMENT_CLUE_COUNT,
+  POST_PLAYTHRU_SUCCESS,
 } from './QuizActionTypes'
 
 const API_URL = 'http://localhost:3000/api';
@@ -114,6 +115,7 @@ export function postPlaythruData() {
     })
     .then(response => {
       if (response.status >= 200 && response.status < 300) {
+        dispatch({ type: POST_PLAYTHRU_SUCCESS })
         console.log(response);
       } else {
         const error = new Error(response.statusText);

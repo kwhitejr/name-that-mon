@@ -123,5 +123,58 @@ describe('actions', () => {
 	  expect(store.getActions()).toEqual(expectedActions)
   })
 
+  // submitAnswer
+  it('submitAnswer dispatches SUBMIT_ANSWER', () => {
+    const expectedActions = [
+      { type: types.SUBMIT_ANSWER },
+    ]
 
+    const store = mockStore({ 
+    	quizMetaData: {
+    	},
+    	quizInstance: {
+    	}
+    })
+
+    store.dispatch(submitAnswer())
+	  expect(store.getActions()).toEqual(expectedActions)
+  })
+
+  // useClue
+  it('useClue dispatches USE_CLUE', () => {
+    const expectedActions = [
+      { type: types.USE_CLUE },
+    ]
+
+    const store = mockStore({ 
+    	quizMetaData: {
+    	},
+    	quizInstance: {
+    	}
+    })
+
+    store.dispatch(useClue())
+	  expect(store.getActions()).toEqual(expectedActions)
+  })
+
+  // postPlaythruData
+  it('postPlaythruData posts data', () => {
+    nock(API_URL)
+      .post(`/playthru/`)
+      .reply(200, { body: { shuffledQuizStack: [{},{},{},{},{}] } })
+
+    const expectedActions = [
+    	{ type: types.POST_PLAYTHRU_SUCCESS }
+    ]
+
+    const store = mockStore({ 
+    	quizMetaData: {
+    	},
+    	quizInstance: {
+    	}
+    })
+
+    store.dispatch(postPlaythruData())
+	  expect(store.getActions()).toEqual(expectedActions)
+  })
 })
