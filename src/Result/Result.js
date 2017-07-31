@@ -22,7 +22,7 @@ import ResultTop from './ResultTop'
 
 import './Result.css';
 
-class Result extends Component {
+export class Result extends Component {
 
   // componentWillMount() {
   //   const { resetThenHome } = this.props

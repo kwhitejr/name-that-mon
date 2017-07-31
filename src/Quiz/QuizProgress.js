@@ -7,7 +7,7 @@ const style = {
   marginBottom: 15,
 }
 
-const QuizProgress = ({ correctAnswerStack, quizLength }) => (
+export const QuizProgress = ({ correctAnswerStack, quizLength }) => (
   <div>
     <LinearProgress 
       mode="determinate"

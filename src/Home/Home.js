@@ -13,7 +13,7 @@ import {
   beginLegendaryQuiz
 } from '../Quiz/QuizActions';
 
-class Home extends Component {
+export class Home extends Component {
 
   render() {
     return (
