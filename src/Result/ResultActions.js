@@ -1,15 +1,15 @@
 import { push } from 'react-router-redux'
-import { shuffle } from '../common'
 
+import { shuffle } from '../common'
+import { getAnswerChoices } from '../Quiz/QuizActions'
 import { 
   RESET_INSTANCE_DATA, 
   RESET_META_DATA, 
+  GET_QUIZ_DATA,
+  SET_ANSWER_CHOICES,
 } from '../Quiz/QuizActionTypes'
 
 const API_URL = 'http://localhost:3000/api';
-
-export const  GET_QUIZ_DATA = 'GET_QUIZ_DATA',
-              SET_ANSWER_CHOICES = 'SET_ANSWER_CHOICES';
 
 export function resetThenHome() {
   return (dispatch) => {
@@ -21,14 +21,18 @@ export function resetThenHome() {
 
 export function resetThenRestart() {
   // need to refactor the reload of pokemon
-  const generation = 1
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const quizType = getState().quizMetaData.quizType
+    const quizSet = getState().quizMetaData.quizSet
     dispatch({ type: RESET_INSTANCE_DATA })
-    return fetch(`${API_URL}/pokemon/generation/${generation}`)
+
+    return fetch(`${API_URL}/pokemon/${quizType}/${quizSet}`)
       .then(res => res.json())
       .then(json => shuffle(json))
-      .then(shuffledQuizStack => dispatch({ type: GET_QUIZ_DATA, payload: shuffledQuizStack }))
-      .then(() => dispatch({ type: SET_ANSWER_CHOICES }))
-      .then(() => dispatch(push('/quiz')));
+      .then(shuffledQuizStack => {
+        dispatch({ type: GET_QUIZ_DATA, payload: shuffledQuizStack })
+        dispatch({ type: SET_ANSWER_CHOICES, payload: getAnswerChoices(getState().quizInstance.shuffledQuizStack) })
+        dispatch(push('/quiz'));
+      })
   }
 }

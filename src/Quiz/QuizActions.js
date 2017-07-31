@@ -133,7 +133,7 @@ export function postPlaythruData() {
   }
 }
 
-const getAnswerChoices = (quizStack) => {
+export const getAnswerChoices = (quizStack) => {
     const currentMon = quizStack[quizStack.length-1]
     let answerChoices = []
     let pickThree = null
