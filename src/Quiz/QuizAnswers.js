@@ -4,6 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
+import TextField from 'material-ui/TextField';
 
 const styles = {
   raisedButton: {
@@ -29,14 +30,11 @@ class QuizAnswers extends Component {
 
   checkAnswer() {
     const {
-      // redux state 
       isAnswerSelected,
       userAnswer, 
       currentMon,
-      // actions 
       submitAnswer, 
       toggleMask, 
-      // endCurrentQuiz, 
     } = this.props
 
     if (isAnswerSelected && currentMon.id === userAnswer) {
@@ -98,6 +96,7 @@ class QuizAnswers extends Component {
           open={this.state.dialogOpen}
         >
           Game Over, Mon.
+          <TextFieldInitials />
         </Dialog>
       </div>
     );
@@ -120,3 +119,35 @@ QuizAnswers.propTypes = {
 };
 
 export default QuizAnswers;
+
+
+class TextFieldInitials extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      value: null,
+    };
+  }
+
+  handleChange = (event) => {
+    this.setState({
+      value: event.target.value,
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <TextField
+          id="text-field-controlled"
+          hint-text="Inititals"
+          maxLength="4"
+          value={this.state.value}
+          onChange={this.handleChange}
+        />
+      </div>
+    );
+  }
+}
