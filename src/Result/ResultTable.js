@@ -24,11 +24,11 @@ const ResultTable = ({ correctAnswerStack, lastCorrectAnswer, wrongAnswer, quizT
       </TableRow>
       <TableRow>
         <TableRowColumn>Total Quiz Time</TableRowColumn>
-        <TableRowColumn>{moment(quizTotalTime).format("mm:ss:SS")}</TableRowColumn>
+        <TableRowColumn>{moment(quizTotalTime).format("mm:ss.SS")}</TableRowColumn>
       </TableRow>
       <TableRow>
         <TableRowColumn>Avg Answer Time</TableRowColumn>
-        <TableRowColumn>{moment(quizTotalTime/correctAnswerStack.length).format("mm:ss:SS")}</TableRowColumn>
+        <TableRowColumn>{moment(quizTotalTime/correctAnswerStack.length).format("mm:ss.SS")}</TableRowColumn>
       </TableRow>
     </TableBody>
   </Table>
