@@ -133,6 +133,7 @@ export function postPlaythruData() {
   }
 }
 
+// TODO: convert this to Selector
 export const getAnswerChoices = (quizStack) => {
     const currentMon = quizStack[quizStack.length-1]
     let answerChoices = []
