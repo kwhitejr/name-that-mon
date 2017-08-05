@@ -1,13 +1,13 @@
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-The Internet's premiere Pokemon Identification Evaluator.
+The Internet's premiere Pokemon Identification K--- And Critical Heuristic Undertaking (P.I.K.A.C.H.U.).
 
 # Setup
 Install Packages
-`yarn install`
+`yarn install`  
 Install Database
-`TODO`
+`TODO`  
 Run Application
-`npm run start`
+`npm run start`  
 Run Tests
-`yarn test`
+`yarn test`  
