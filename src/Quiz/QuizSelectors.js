@@ -6,6 +6,7 @@ const getCorrectAnswerStack = (state) => state.quizInstance.correctAnswerStack
 const getStartTime = (state) => state.quizInstance.startTime
 const getEndTime = (state) => state.quizInstance.endTime
 const getClueCount = (state) => state.quizInstance.clueCount
+const getUserInitials = (state) => state.quizInstance.userInitials
 const getQuizMetaData = (state) => state.quizMetaData
 
 export const getCurrentMon = createSelector(
@@ -38,11 +39,12 @@ export const getPlaythruData = createSelector(
 		getEndTime, 
 		getClueCount, 
 		getCorrectAnswerIds,
-		getCurrentMon
+		getCurrentMon,
+    getUserInitials,
 	],
-	(getQuizMetaData, getStartTime, getEndTime, getClueCount, getCorrectAnswerIds, getCurrentMon) => {
+	(getQuizMetaData, getStartTime, getEndTime, getClueCount, getCorrectAnswerIds, getCurrentMon, getUserInitials) => {
 		return {
-			user_initials: null,
+			user_initials: getUserInitials,
       quiz_type: getQuizMetaData.quizType,
       quiz_set: getQuizMetaData.quizSet,
       start_time: getStartTime,

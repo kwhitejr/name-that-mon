@@ -7,12 +7,11 @@ import { shuffle } from '../common'
 
 import {
   SET_ANSWER,
+  SET_USER_INITIALS,
   SET_ANSWER_CHOICES,
   SET_GENERATION_NUMBER,
   SET_POKEMON_TYPE,
   SET_LEGENDARY,
-  RESET_INSTANCE_DATA,
-  RESET_META_DATA,
   GET_QUIZ_DATA,
   STACK_CORRECT_ANSWER,
   SUBMIT_ANSWER,
@@ -21,6 +20,8 @@ import {
   USE_CLUE,
   INCREMENT_CLUE_COUNT,
   POST_PLAYTHRU_SUCCESS,
+  RESET_INSTANCE_DATA,
+  RESET_META_DATA,
 } from './QuizActionTypes'
 
 const API_URL = 'http://localhost:3000/api';
@@ -98,8 +99,9 @@ export function useClue() {
   return { type: USE_CLUE }
 }
 
-export function endCurrentQuiz() {
+export function endCurrentQuiz(userInitials) {
   return (dispatch) => {
+    dispatch({ type: SET_USER_INITIALS, payload: userInitials })
     dispatch({ type: END_TIMER, payload: moment().valueOf() })
     dispatch({ type: INCREMENT_CLUE_COUNT })
     dispatch(push('/result'))

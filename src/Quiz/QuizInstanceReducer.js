@@ -1,6 +1,7 @@
 import { shuffle } from '../common'
 
 const SET_ANSWER = 'SET_ANSWER',
+      SET_USER_INITIALS = 'SET_USER_INITIALS',
       RESET_INSTANCE_DATA = 'RESET_INSTANCE_DATA',
       GET_QUIZ_DATA = 'GET_QUIZ_DATA',
       SUBMIT_ANSWER = 'SUBMIT_ANSWER',
@@ -22,6 +23,7 @@ export const INITIAL_STATE = {
   answerChoices: [], 
   shuffledQuizStack: [], 
   correctAnswerStack: [],
+  userInitials: null,
   startTime: null,
   endTime: null,
   clueCount: 0,
@@ -67,6 +69,8 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, startTime: action.payload };
     case END_TIMER:
       return { ...state, endTime: action.payload };
+    case SET_USER_INITIALS:
+      return { ...state, userInitials: action.payload };
     case USE_CLUE:
       return { ...state, isClueUsed: true };
     case INCREMENT_CLUE_COUNT:

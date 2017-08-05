@@ -18,6 +18,7 @@ const styles = {
 class QuizAnswers extends Component {
   state = {
     dialogOpen: false,
+    initialsValue: "",
   };
 
   handleOpen = () => {
@@ -26,6 +27,12 @@ class QuizAnswers extends Component {
 
   handleClose = () => {
     this.setState({dialogOpen: false});
+  };
+
+  handleChange = (event) => {
+    this.setState({
+      initialsValue: event.target.value.toUpperCase(),
+    });
   };
 
   checkAnswer() {
@@ -59,7 +66,7 @@ class QuizAnswers extends Component {
       <FlatButton
         label="Continue"
         primary={true}
-        onTouchTap={endCurrentQuiz}
+        onTouchTap={() => {endCurrentQuiz(this.state.initialsValue)}}
       />,
     ];
 
@@ -96,7 +103,15 @@ class QuizAnswers extends Component {
           open={this.state.dialogOpen}
         >
           Game Over, Mon.
-          <TextFieldInitials />
+          <div>
+            <TextField
+              id="text-field-controlled"
+              hintText="Inititals"
+              maxLength="3"
+              value={this.state.initialsValue}
+              onChange={this.handleChange}
+            />
+          </div>
         </Dialog>
       </div>
     );
@@ -120,14 +135,14 @@ QuizAnswers.propTypes = {
 
 export default QuizAnswers;
 
-
+/*
 class TextFieldInitials extends Component {
 
   constructor(props) {
     super(props);
 
     this.state = {
-      value: null,
+      value: "",
     };
   }
 
@@ -142,7 +157,7 @@ class TextFieldInitials extends Component {
       <div>
         <TextField
           id="text-field-controlled"
-          hint-text="Inititals"
+          hintText="Inititals"
           maxLength="4"
           value={this.state.value}
           onChange={this.handleChange}
@@ -151,3 +166,4 @@ class TextFieldInitials extends Component {
     );
   }
 }
+*/

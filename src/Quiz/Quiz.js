@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import { 
-  setAnswer, 
+  setAnswer,
   reset, 
   submitAnswer, 
   setNextQuestion,
@@ -83,7 +83,7 @@ const mapDispatchToProps = (dispatch) => ({
   reset:            () => dispatch(reset()),
   submitAnswer:     () => dispatch(submitAnswer()),
   setNextQuestion:  () => dispatch(setNextQuestion()),
-  endCurrentQuiz:   () => dispatch(endCurrentQuiz()),
+  endCurrentQuiz:   (userInitials) => dispatch(endCurrentQuiz(userInitials)),
   resetThenHome:    () => dispatch(resetThenHome()),
   useClue:          () => dispatch(useClue()),
 });

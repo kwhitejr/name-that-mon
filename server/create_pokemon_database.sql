@@ -22,3 +22,19 @@ CREATE TABLE pokemon(
 
 copy pokemon from '/Users/kevin/git/name-that-mon/server/pokemon-data.csv' DELIMITERS ',' CSV HEADER;
 -- copy pokemon from '/Users/kwhi32/Projects/name-that-mon/server/pokemon-data.csv' DELIMITERS ',' CSV HEADER;
+
+
+-- pg_ctl -D /usr/local/var/postgres9.6 -l logfile start
+
+/*
+pg_upgrade \
+  -d /usr/local/var/postgres \
+  -D /usr/local/var/postgres9.6 \
+  -b /usr/local/Cellar/postgresql/9.5.4_1/bin/ \
+  -B /usr/local/Cellar/postgresql/9.6.3/bin/ \
+  -v
+
+mv /usr/local/var/postgres /usr/local/var/postgres9.5
+mv /usr/local/var/postgres9.6 /usr/local/var/postgres
+
+*/
