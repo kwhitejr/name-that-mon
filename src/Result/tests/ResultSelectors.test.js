@@ -41,7 +41,7 @@ describe('QuizSelectors', () => {
   });
 
   it('`getQuizTotalTime` should get total play time', () => {
-    expect(selectors.getQuizTotalTime(mockState)).toEqual(moment(80000).format("mm:ss:SS"));
+    expect(selectors.getQuizTotalTime(mockState)).toEqual(80000));
   });
 
 });
