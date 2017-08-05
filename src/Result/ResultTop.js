@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'; 
 import { GridList, GridTile } from 'material-ui/GridList';
 
 const styles = {
@@ -31,5 +32,8 @@ const ResultTop = ({ wrongAnswer }) => (
   </div>
 )
 
+ResultTop.propTypes = {
+  wrongAnswer: PropTypes.object,
+};
 
 export default ResultTop;

@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import moment from 'moment' 
 import RaisedButton from 'material-ui/RaisedButton'
 import {
   Table,
@@ -9,7 +11,7 @@ import {
   TableRowColumn,
 } from 'material-ui/Table'
 
-const ResultsTable = ({ correctAnswerStack, lastCorrectAnswer, wrongAnswer, quizTotalTime }) => (
+const ResultTable = ({ correctAnswerStack, lastCorrectAnswer, wrongAnswer, quizTotalTime }) => (
   <Table selectable={false} >
     <TableBody displayRowCheckbox={false} >
       <TableRow>
@@ -22,14 +24,20 @@ const ResultsTable = ({ correctAnswerStack, lastCorrectAnswer, wrongAnswer, quiz
       </TableRow>
       <TableRow>
         <TableRowColumn>Total Quiz Time</TableRowColumn>
-        <TableRowColumn>{quizTotalTime}</TableRowColumn>
+        <TableRowColumn>{moment(quizTotalTime).format("mm:ss:SS")}</TableRowColumn>
       </TableRow>
       <TableRow>
         <TableRowColumn>Avg Answer Time</TableRowColumn>
-        <TableRowColumn>{}</TableRowColumn>
+        <TableRowColumn>{moment(quizTotalTime/correctAnswerStack.length).format("mm:ss:SS")}</TableRowColumn>
       </TableRow>
     </TableBody>
   </Table>
 )
 
-export default ResultsTable;
+ResultTable.propTypes = {
+  wrongAnswer: PropTypes.object,
+  correctAnswerStack: PropTypes.array,
+  quizTotalTime: PropTypes.number,
+};
+
+export default ResultTable;

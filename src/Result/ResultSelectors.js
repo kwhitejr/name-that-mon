@@ -16,6 +16,6 @@ export const getLastCorrectAnswer = createSelector(
 export const getQuizTotalTime = createSelector(
 	[ getStartTime, getEndTime ],
 	(getStartTime, getEndTime) => {
-		return moment(getEndTime - getStartTime).format("mm:ss:SS");
+		return getEndTime - getStartTime;
 	}
 )

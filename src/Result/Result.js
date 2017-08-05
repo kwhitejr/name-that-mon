@@ -24,13 +24,6 @@ import './Result.css';
 
 export class Result extends Component {
 
-  // componentWillMount() {
-  //   const { resetThenHome } = this.props
-  //   if (!this.props.shuffledQuizStack || !this.props.endedOn) {
-  //     resetThenHome()
-  //   }
-  // }
-
   render() {
     return (
       <Grid fluid>
