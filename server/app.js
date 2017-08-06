@@ -129,18 +129,7 @@ app.get('/api/stats/mostright', (req, res) => {
     res.send(mostright);
   });
 });
-/*
-SELECT *
-FROM pokemon
-WHERE id in (
-    SELECT pokemon_id
-    FROM answer
-    GROUP BY pokemon_id
-    ORDER BY COUNT(CASE WHEN NOT was_correct THEN 1 END) DESC LIMIT 1
-);
 
-ORDER BY COUNT(CASE WHEN was_correct THEN 1 END) DESC LIMIT 1;
-*/
 
 
 
