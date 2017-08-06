@@ -110,6 +110,14 @@ app.post('/api/playthru', (req, res) => {
         playthru_id: result.dataValues.id,
         was_correct: false
       });
+
+      result.dataValues.correct_answer_stack.map( (correct_answer) => {
+        Answer.create({
+          pokemon_id: correct_answer,
+          playthru_id: result.dataValues.id,
+          was_correct: true
+        });
+      })
     })
     .catch( (err) => {
       res.send(err);
