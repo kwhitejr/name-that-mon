@@ -1,5 +1,3 @@
-import { shuffle } from '../common'
-
 const SET_ANSWER = 'SET_ANSWER',
       SET_USER_INITIALS = 'SET_USER_INITIALS',
       RESET_INSTANCE_DATA = 'RESET_INSTANCE_DATA',
@@ -84,25 +82,4 @@ export default function (state = INITIAL_STATE, action) {
   }
 
   return state;
-}
-
-// When correct answer is submitted, add it to the correctAnswerStack
-const stackCorrectAnswerHelper = (state) => {
-  let shuffledQuizStack = state.shuffledQuizStack
-  let correctAnswerStack = state.correctAnswerStack
-  const lastDatum = shuffledQuizStack[shuffledQuizStack.length-1]
-
-  // add correct answer to `correctAnswerStack`
-  correctAnswerStack.push(lastDatum)
-
-  const newObj = {
-    shuffledQuizStack: shuffledQuizStack.slice(0,-1),
-    correctAnswerStack: correctAnswerStack,
-    isAnswerSubmitted: false,
-    isAnswerSelected: false,
-    isClueUsed: false,
-    userAnswer: null, 
-    answerChoices: [],
-  };
-  return Object.assign({}, state, newObj);
 }

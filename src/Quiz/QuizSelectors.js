@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect'
-import moment from 'moment'
 
 const getShuffledQuizStack = (state) => state.quizInstance.shuffledQuizStack
 const getCorrectAnswerStack = (state) => state.quizInstance.correctAnswerStack
