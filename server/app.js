@@ -99,6 +99,52 @@ app.get('/api/pokemon/legendary', (req, res) => {
     });
 });
 
+// Get Global Stats
+app.get('/api/stats/mostwrong', (req, res) => {
+  db.sequelize.query(
+    "SELECT id, name " +
+    "FROM pokemon " +
+    "WHERE id in (" +
+      "SELECT pokemon_id " +
+      "FROM answer " +
+      "GROUP BY pokemon_id " +
+      "ORDER BY COUNT(CASE WHEN NOT was_correct THEN 1 END) " +
+    "DESC LIMIT 1)", { type: db.sequelize.QueryTypes.SELECT}
+  ).then(mostwrong => {
+    res.send(mostwrong);
+  });
+});
+
+app.get('/api/stats/mostright', (req, res) => {
+  db.sequelize.query(
+    "SELECT id, name " +
+    "FROM pokemon " +
+    "WHERE id in (" +
+      "SELECT pokemon_id " +
+      "FROM answer " +
+      "GROUP BY pokemon_id " +
+      "ORDER BY COUNT(CASE WHEN was_correct THEN 1 END) " +
+    "DESC LIMIT 1)", { type: db.sequelize.QueryTypes.SELECT}
+  ).then(mostright => {
+    res.send(mostright);
+  });
+});
+/*
+SELECT *
+FROM pokemon
+WHERE id in (
+    SELECT pokemon_id
+    FROM answer
+    GROUP BY pokemon_id
+    ORDER BY COUNT(CASE WHEN NOT was_correct THEN 1 END) DESC LIMIT 1
+);
+
+ORDER BY COUNT(CASE WHEN was_correct THEN 1 END) DESC LIMIT 1;
+*/
+
+
+
+// Post Playthru and Answer data
 app.post('/api/playthru', (req, res) => {
   const playthruData = req.body
   Playthru.create(playthruData)
