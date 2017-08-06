@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const db = require('./models');
 const Pokemon = db.Pokemon;
 const Playthru = db.Playthru;
+const Answer = db.Answer;
 
 const app = express();
 
@@ -100,9 +101,19 @@ app.get('/api/pokemon/legendary', (req, res) => {
 
 app.post('/api/playthru', (req, res) => {
   const playthruData = req.body
-  console.log("request body");
-  console.log(playthruData);
-  Playthru.create(playthruData);
+  Playthru.create(playthruData)
+    .then( (result) => {
+      console.log(result.dataValues);
+      // submit incorrect answer
+      Answer.create({
+        pokemon_id: result.dataValues.wrong_answer,
+        playthru_id: result.dataValues.id,
+        was_correct: false
+      });
+    })
+    .catch( (err) => {
+      res.send(err);
+    });
 
   res.end('Successful POST!');
 });
