@@ -4,6 +4,8 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import HomeQuizList from './HomeQuizList';
 
+import Stats from '../Stats/Stats'
+
 import questionMark from '../assets/pokemon/0.png';
 import './Home.css';
 
@@ -30,7 +32,7 @@ export class Home extends Component {
             </div>
           </Col>
           <Col sm={4} md={3} lg={2}>
-            <p>This is the stat bar</p>
+            <Stats />
           </Col>
         </Row>
       </Grid>

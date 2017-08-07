@@ -5,10 +5,13 @@ The Internet's premiere Pokemon Identification K--- And Critical Heuristic Under
 # Setup
 Install Packages  
 `yarn install`  
+
 Install Database  
 `TODO`  
+
 Run Application  
 `npm run start`  
+
 Run Tests  
 `yarn test`  
 
