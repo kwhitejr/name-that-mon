@@ -111,7 +111,20 @@ app.get('/api/stats/mostwrong', (req, res) => {
       "ORDER BY COUNT(CASE WHEN NOT was_correct THEN 1 END) " +
     "DESC LIMIT 1)", { type: db.sequelize.QueryTypes.SELECT}
   ).then(mostwrong => {
-    res.send(mostwrong[0]);
+    res.send({mostwrong[0]});
+  });
+});
+
+app.get('/api/stats/wrongcount', (req, res) => {
+  db.sequelize.query(
+    "SELECT pokemon_id, " +
+      "COUNT(CASE WHEN NOT was_correct THEN 1 END) as incorrect_answers " +
+    "FROM answer " +
+    "GROUP BY pokemon_id " +
+    "ORDER BY incorrect_answers DESC LIMIT 1",
+    { type: db.sequelize.QueryTypes.SELECT })
+  .then(answercount => {
+    res.send(answercount[0]);
   });
 });
 
@@ -130,7 +143,18 @@ app.get('/api/stats/mostright', (req, res) => {
   });
 });
 
-
+app.get('/api/stats/rightcount', (req, res) => {
+  db.sequelize.query(
+    "SELECT pokemon_id, " +
+      "COUNT(CASE WHEN was_correct THEN 1 END) as correct_answers " +
+    "FROM answer " +
+    "GROUP BY pokemon_id " +
+    "ORDER BY correct_answers DESC LIMIT 1",
+    { type: db.sequelize.QueryTypes.SELECT })
+  .then(answercount => {
+    res.send(answercount[0]);
+  });
+});
 
 
 // Post Playthru and Answer data
