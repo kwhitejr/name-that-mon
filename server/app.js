@@ -111,7 +111,7 @@ app.get('/api/stats/mostwrong', (req, res) => {
       "ORDER BY COUNT(CASE WHEN NOT was_correct THEN 1 END) " +
     "DESC LIMIT 1)", { type: db.sequelize.QueryTypes.SELECT}
   ).then(mostwrong => {
-    res.send({mostwrong[0]});
+    res.send(mostwrong[0]);
   });
 });
 

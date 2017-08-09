@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import HomeQuizList from './HomeQuizList';
+import HomeTop from './HomeTop';
 
 import Stats from '../Stats/Stats'
 
@@ -23,11 +24,7 @@ export class Home extends Component {
         <Row center="xs">
           <Col xs={12} sm={6} smOffset={1} md={4} mdOffset={1} lg={3} lgOffset={2}>
             <div className="App">
-              <div className="App-header">
-                <img src={questionMark} className="App-logo" alt="logo" />
-                <h2>Read to Start?</h2>
-                <p>Pick a Quiz.</p>
-              </div>
+              <HomeTop />
               <HomeQuizList {...this.props} />
             </div>
           </Col>
@@ -54,3 +51,11 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(Home);
+
+/*
+<div className="App-header">
+                <img src={questionMark} className="App-logo" alt="logo" />
+                <h2>Read to Start?</h2>
+                <p>Pick a Quiz.</p>
+              </div>
+              */

@@ -5,7 +5,7 @@ import Avatar from 'material-ui/Avatar';
 
 const styles = {
   listItem: {
-    backgroundColor: "white",
+    backgroundColor: "#f0f0f0",
   }
 }
 
