@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'; 
 import { GridList, GridTile } from 'material-ui/GridList';
+
 import IconButton from 'material-ui/IconButton';
 import HelpOutline from 'material-ui/svg-icons/action/help-outline';
 import FlatButton from 'material-ui/FlatButton';
@@ -45,7 +46,9 @@ class QuizTop extends Component {
 
     return (
       <div className="top">
-        <GridList>
+        <GridList
+          cols={1}
+        >
           <GridTile
             key={currentMon.id}
             actionIcon={<IconButton onTouchTap={this.handleOpen}><HelpOutline color="white" /></IconButton>}
