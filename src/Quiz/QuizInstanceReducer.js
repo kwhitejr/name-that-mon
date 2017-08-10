@@ -50,7 +50,7 @@ export default function (state = INITIAL_STATE, action) {
     case GET_QUIZ_DATA:
       return { ...state, shuffledQuizStack: action.payload };
     case SUBMIT_ANSWER:
-      return { ...state, isAnswerSubmitted: true };
+      return { ...state, isAnswerSubmitted: true, isAnswerSelected: false };
     case SET_ANSWER_CHOICES:
       return { ...state, answerChoices: action.payload };
     case STACK_CORRECT_ANSWER:
