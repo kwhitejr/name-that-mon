@@ -23,3 +23,11 @@ body {
 .view-container {
   background: #f0f0f0;
 }
+
+.pokemon-red {
+  color: #f00000;
+}
+
+.pokemon-blue {
+  color: #3B4CCA;
+}

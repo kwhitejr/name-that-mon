@@ -43,15 +43,12 @@ const App = () => (
         <div>
           <Header />
           <Grid fluid>
-            <Row center="xs">
+            <Row>
               <Col 
                 xs={12} 
                 sm={7} 
-                // smOffset={1} 
-                md={5} 
-                // mdOffset={1} 
-                lg={5} 
-                // lgOffset={2}
+                md={5} mdOffset={1} 
+                lg={4} lgOffset={2}
               >
                 <Route exact path="/" component={Home}/>
                 <Route path="/quiz" component={Quiz}/>
