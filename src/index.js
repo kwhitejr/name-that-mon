@@ -44,12 +44,20 @@ const App = () => (
           <Header />
           <Grid fluid>
             <Row center="xs">
-              <Col xs={12} sm={6} smOffset={1} md={4} mdOffset={1} lg={3} lgOffset={2}>
+              <Col 
+                xs={12} 
+                sm={7} 
+                // smOffset={1} 
+                md={5} 
+                // mdOffset={1} 
+                lg={5} 
+                // lgOffset={2}
+              >
                 <Route exact path="/" component={Home}/>
                 <Route path="/quiz" component={Quiz}/>
                 <Route path="/result" component={Result}/>
               </Col>
-              <Col sm={4} md={3} lg={2}>
+              <Col xs={12} sm={5} md={5} lg={4}>
                 <Stats />
               </Col>
             </Row>
