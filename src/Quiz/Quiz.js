@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'; 
-import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import { 
   setAnswer,
@@ -43,25 +42,18 @@ export class Quiz extends Component {
 
   render() {
     return (
-      <Grid fluid>
-        <Row center="xs">
-          <Col xs={12} sm={6} smOffset={1} md={4} mdOffset={1} lg={3} lgOffset={2}>      
-            <QuizTop
-              {...this.props}
-            />
-            <QuizProgress 
-              {...this.props}
-            />
-            <QuizAnswers 
-              {...this.props}
-              toggleMask={toggleMask}
-            />
-          </Col>
-          <Col sm={4} md={3} lg={2}>
-            <p>This is the stat bar</p>
-          </Col>
-        </Row>
-      </Grid>
+      <div>
+        <QuizTop
+          {...this.props}
+        />
+        <QuizProgress 
+          {...this.props}
+        />
+        <QuizAnswers 
+          {...this.props}
+          toggleMask={toggleMask}
+        />
+      </div>          
     )
   }
 }

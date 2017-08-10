@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import { 
   resetThenHome, 
@@ -25,27 +24,18 @@ import './Result.css';
 export class Result extends Component {
 
   render() {
-    return (
-      <Grid fluid>
-        <Row center="xs">
-          <Col xs={12} sm={6} smOffset={1} md={4} mdOffset={1} lg={3} lgOffset={2}>
-            <div className="App">
-              <ResultTop 
-                {...this.props}
-              />
-              <ResultTable
-                {...this.props} 
-              />
-              <ResultNext 
-                {...this.props} 
-              />
-            </div>
-          </Col>
-          <Col sm={4} md={3} lg={2}>
-            <p>This is the stat bar</p>
-          </Col>
-        </Row>
-      </Grid>
+    return (      
+      <div className="App">
+        <ResultTop 
+          {...this.props}
+        />
+        <ResultTable
+          {...this.props} 
+        />
+        <ResultNext 
+          {...this.props} 
+        />
+      </div>
     );
   }
 }

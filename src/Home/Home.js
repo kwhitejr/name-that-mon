@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import HomeQuizList from './HomeQuizList';
 import HomeTop from './HomeTop';
 
-import Stats from '../Stats/Stats'
-
-import questionMark from '../assets/pokemon/0.png';
 import './Home.css';
 
 import { 
@@ -20,19 +16,10 @@ export class Home extends Component {
 
   render() {
     return (
-      <Grid fluid>
-        <Row center="xs">
-          <Col xs={12} sm={6} smOffset={1} md={4} mdOffset={1} lg={3} lgOffset={2}>
-            <div className="App">
-              <HomeTop />
-              <HomeQuizList {...this.props} />
-            </div>
-          </Col>
-          <Col sm={4} md={3} lg={2}>
-            <Stats />
-          </Col>
-        </Row>
-      </Grid>
+      <div>
+        <HomeTop />
+        <HomeQuizList {...this.props} />
+      </div>    
     );
   }
 }

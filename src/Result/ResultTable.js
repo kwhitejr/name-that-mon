@@ -1,12 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment' 
-import RaisedButton from 'material-ui/RaisedButton'
 import {
   Table,
   TableBody,
-  TableHeader,
-  TableHeaderColumn,
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table'

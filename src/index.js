@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Route } from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'
-// import createHistory from 'history/createBrowserHistory'
+import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -22,6 +22,7 @@ import Header from './Header/Header'
 import Home from './Home/Home.js';
 import Quiz from './Quiz/Quiz.js';
 import Result from './Result/Result.js';
+import Stats from './Stats/Stats.js';
 
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
@@ -41,9 +42,18 @@ const App = () => (
       <ConnectedRouter history={history}>
         <div>
           <Header />
-          <Route exact path="/" component={Home}/>
-          <Route path="/quiz" component={Quiz}/>
-          <Route path="/result" component={Result}/>
+          <Grid fluid>
+            <Row center="xs">
+              <Col xs={12} sm={6} smOffset={1} md={4} mdOffset={1} lg={3} lgOffset={2}>
+                <Route exact path="/" component={Home}/>
+                <Route path="/quiz" component={Quiz}/>
+                <Route path="/result" component={Result}/>
+              </Col>
+              <Col sm={4} md={3} lg={2}>
+                <Stats />
+              </Col>
+            </Row>
+          </Grid>
         </div>
       </ConnectedRouter>
     </Provider>
