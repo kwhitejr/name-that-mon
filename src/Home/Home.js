@@ -16,7 +16,7 @@ export class Home extends Component {
 
   render() {
     return (
-      <div>
+      <div className="view-container">
         <HomeTop />
         <HomeQuizList {...this.props} />
       </div>    
@@ -38,11 +38,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(Home);
-
-/*
-<div className="App-header">
-                <img src={questionMark} className="App-logo" alt="logo" />
-                <h2>Read to Start?</h2>
-                <p>Pick a Quiz.</p>
-              </div>
-              */

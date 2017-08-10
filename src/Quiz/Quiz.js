@@ -42,7 +42,7 @@ export class Quiz extends Component {
 
   render() {
     return (
-      <div>
+      <div className="view-container">
         <QuizTop
           {...this.props}
         />

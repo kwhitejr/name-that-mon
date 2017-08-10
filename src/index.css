@@ -19,3 +19,7 @@ body {
 .header {
   background: grey;
 }
+
+.view-container {
+  background: #f0f0f0;
+}

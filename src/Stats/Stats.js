@@ -9,15 +9,7 @@ import {
   getWrongiest,
 } from './StatsActions'
 
-// import QuizTop from './QuizTop';
-// import QuizAnswers from './QuizAnswers';
-// import QuizProgress from './QuizProgress';
-
 import './Stats.css';
-
-const styles = {
-  backgroundColor: "#f0f0f0",
-}
 
 export class Stats extends Component {
 
@@ -27,8 +19,10 @@ export class Stats extends Component {
   }
 
   render() {
-    return (      
-      <StatsList {...this.props} />
+    return (
+      <div className="view-container">      
+        <StatsList {...this.props} />
+      </div>
     )
   }
 
@@ -50,7 +44,7 @@ export default connect(
 )(Stats);
 
 const StatsList = ({rightiest, wrongiest}) => (
-  <List style={styles}>
+  <List>
     <ListItem
       leftIcon={<MoodGood />}
       primaryText="Rightiest Mon"
