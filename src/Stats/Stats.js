@@ -15,6 +15,10 @@ import {
 
 import './Stats.css';
 
+const styles = {
+  backgroundColor: "#f0f0f0",
+}
+
 export class Stats extends Component {
 
   componentWillMount() {
@@ -46,7 +50,7 @@ export default connect(
 )(Stats);
 
 const StatsList = ({rightiest, wrongiest}) => (
-  <List>
+  <List style={styles}>
     <ListItem
       leftIcon={<MoodGood />}
       primaryText="Rightiest Mon"

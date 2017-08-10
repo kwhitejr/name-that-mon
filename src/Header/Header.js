@@ -10,7 +10,7 @@ const Header = () => (
   <AppBar
     className="header"
     style={styles}
-    title="Name That Mon!"
+    title="Name That 'Mon!"
     iconClassNameRight="muidocs-icon-navigation-expand-more"
   />
 );
