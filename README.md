@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-The Internet's premiere **P**okemon **I**dentification **K**--- **A**nd **C**ritical **H**euristic **U**ndertaking (P.I.K.A.C.H.U.).
+The Internet's premiere **P**okemon **I**dentification, **K**lassification, **A**nd **C**ritical **H**euristic **U**ndertaking (P.I.K.A.C.H.U.).
 
 # Setup
 Install Packages  
