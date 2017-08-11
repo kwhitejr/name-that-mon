@@ -18,7 +18,7 @@ Run Tests
 # TODO
 ### Stats Component  
 - [ ] Concurrent Users  
-- [ ] All Time High Score (UserInitials, Date, Score, Percentage)  
+- [X] All Time High Score (UserInitials, Date, Score, Percentage)  
 - [ ] Quickest Playthru (Perfect score, Time, Avg Answer Time)  
 - [x] Wrongiest Pokemon   
 - [x] Rightiest Pokemon  
