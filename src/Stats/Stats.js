@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
@@ -7,6 +8,7 @@ import Subheader from 'material-ui/Subheader';
 import { 
   getRightiest,
   getWrongiest,
+  getHighScore,
 } from './StatsActions'
 
 import './Stats.css';
@@ -16,6 +18,7 @@ export class Stats extends Component {
   componentWillMount() {
     this.props.getRightiest()
     this.props.getWrongiest()
+    this.props.getHighScore()
   }
 
   render() {
@@ -31,11 +34,13 @@ export class Stats extends Component {
 const mapStateToProps = (state) => ({
   wrongiest:  state.stats.wrongiest,
   rightiest:  state.stats.rightiest,
+  highScore:  state.stats.highScore,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getRightiest: () => dispatch(getRightiest()),
   getWrongiest: () => dispatch(getWrongiest()),
+  getHighScore: () => dispatch(getHighScore()),
 });
 
 export default connect(
@@ -43,7 +48,7 @@ export default connect(
   mapDispatchToProps,
 )(Stats);
 
-const StatsList = ({rightiest, wrongiest}) => (
+const StatsList = ({rightiest, wrongiest, highScore}) => (
   <List>
     <Subheader>Some Facts, Mon!</Subheader>
     <Divider />
@@ -56,7 +61,7 @@ const StatsList = ({rightiest, wrongiest}) => (
     <ListItem
       leftIcon={<i className="fa fa-line-chart fa-2x" aria-hidden="true"></i>}
       primaryText="High Score"
-      secondaryText="KMW named 151 Mon on 3.14.2017"
+      secondaryText={`${highScore.userInitials} named ${highScore.correctAnswerStack.length} Mon on ${moment.unix(highScore.endTime/1000).format("MMMM DD, YYYY, h:mm a")}`}
     />
     <Divider />
     <ListItem

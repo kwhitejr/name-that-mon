@@ -115,19 +115,6 @@ app.get('/api/stats/mostwrong', (req, res) => {
   });
 });
 
-app.get('/api/stats/wrongcount', (req, res) => {
-  db.sequelize.query(
-    "SELECT pokemon_id, " +
-      "COUNT(CASE WHEN NOT was_correct THEN 1 END) as incorrect_answers " +
-    "FROM answer " +
-    "GROUP BY pokemon_id " +
-    "ORDER BY incorrect_answers DESC LIMIT 1",
-    { type: db.sequelize.QueryTypes.SELECT })
-  .then(answercount => {
-    res.send(answercount[0]);
-  });
-});
-
 app.get('/api/stats/mostright', (req, res) => {
   db.sequelize.query(
     "SELECT id, name " +
@@ -143,19 +130,21 @@ app.get('/api/stats/mostright', (req, res) => {
   });
 });
 
-app.get('/api/stats/rightcount', (req, res) => {
+app.get('/api/stats/highscore', (req, res) => {
   db.sequelize.query(
-    "SELECT pokemon_id, " +
-      "COUNT(CASE WHEN was_correct THEN 1 END) as correct_answers " +
-    "FROM answer " +
-    "GROUP BY pokemon_id " +
-    "ORDER BY correct_answers DESC LIMIT 1",
+    "SELECT * " +
+    "FROM playthru " +
+    "WHERE id in (" +
+      "SELECT playthru_id " +
+      "FROM answer " +
+      "GROUP BY playthru_id " +
+      "ORDER BY COUNT(CASE WHEN was_correct THEN 1 END) " +
+    "DESC LIMIT 1)",
     { type: db.sequelize.QueryTypes.SELECT })
-  .then(answercount => {
-    res.send(answercount[0]);
+  .then(highscore => {
+    res.send(highscore[0]);
   });
 });
-
 
 // Post Playthru and Answer data
 app.post('/api/playthru', (req, res) => {
