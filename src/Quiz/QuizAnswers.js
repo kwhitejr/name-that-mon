@@ -41,13 +41,15 @@ class QuizAnswers extends Component {
       userAnswer, 
       currentMon,
       submitAnswer, 
-      toggleMask, 
+      toggleMask,
+      endTimer, 
     } = this.props
 
     if (isAnswerSelected && currentMon.id === userAnswer) {
       toggleMask()
       submitAnswer()
     } else {
+      endTimer()
       this.handleOpen()
     }
   }

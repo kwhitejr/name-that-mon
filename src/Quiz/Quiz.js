@@ -7,6 +7,7 @@ import {
   reset, 
   submitAnswer, 
   setNextQuestion,
+  endTimer,
   endCurrentQuiz,
   useClue,
 } from './QuizActions'
@@ -75,6 +76,7 @@ const mapDispatchToProps = (dispatch) => ({
   reset:            () => dispatch(reset()),
   submitAnswer:     () => dispatch(submitAnswer()),
   setNextQuestion:  () => dispatch(setNextQuestion()),
+  endTimer:         () => dispatch(endTimer()),
   endCurrentQuiz:   (userInitials) => dispatch(endCurrentQuiz(userInitials)),
   resetThenHome:    () => dispatch(resetThenHome()),
   useClue:          () => dispatch(useClue()),
@@ -86,6 +88,7 @@ Quiz.propTypes = {
   submitAnswer: PropTypes.func,
   setNextQuestion: PropTypes.func,
   useClue: PropTypes.func,
+  endTimer: PropTypes.func,
   endCurrentQuiz: PropTypes.func,
   isAnswerSelected: PropTypes.bool,
   isAnswerSubmitted: PropTypes.bool,

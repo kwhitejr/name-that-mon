@@ -99,10 +99,13 @@ export function useClue() {
   return { type: USE_CLUE }
 }
 
+export function endTimer() {
+  return { type: END_TIMER, payload: moment().valueOf() }
+}
+
 export function endCurrentQuiz(userInitials) {
   return (dispatch) => {
     dispatch({ type: SET_USER_INITIALS, payload: userInitials })
-    dispatch({ type: END_TIMER, payload: moment().valueOf() })
     dispatch({ type: INCREMENT_CLUE_COUNT })
     dispatch(push('/result'))
     dispatch(postPlaythruData())
