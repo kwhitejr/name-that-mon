@@ -28,6 +28,18 @@ body {
   color: #f00000;
 }
 
+.pokemon-boston-red {
+  color: #cc0000;
+}
+
 .pokemon-blue {
   color: #3B4CCA;
+}
+
+.pokemon-yellow {
+  color: #ffde00;
+}
+
+.pokemon-citron {
+  color: #b3a125;
 }

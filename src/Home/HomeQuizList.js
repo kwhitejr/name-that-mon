@@ -2,12 +2,20 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {List, ListItem, makeSelectable} from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
+import Divider from 'material-ui/Divider';
+import Subheader from 'material-ui/Subheader';
 
-const styles = {
-  listItem: {
-    backgroundColor: "#f0f0f0",
-  }
-}
+// const styles = {
+//   generation: {
+//     backgroundColor: "#f00000",
+//   },
+//   type: {
+//     backgroundColor: "#3B4CCA",
+//   },
+//   legendary: {
+//     backgroundColor: "#b3a125",
+//   }
+// }
 
 const pokemonTypes = [
   { 
@@ -131,13 +139,6 @@ function wrapState(ComposedComponent) {
       });
     }
 
-    handleRequestChange = (event, value) => {
-      // console.log(value)
-      // const quizType = value.type
-      // const quizValue = value.value
-      // if (quizType === 'generation') { beginGenerationQuiz(quizValue); }
-    }
-
     render() {
       return (
         <ComposedComponent
@@ -155,16 +156,17 @@ SelectableList = wrapState(SelectableList);
 
 const HomeQuizList = ({ beginGenerationQuiz, beginPokemonTypeQuiz, beginLegendaryQuiz }) => (
   <SelectableList defaultValue={null} >
+    <Subheader>Pick a Quiz!</Subheader>
+    <Divider />
     <ListItem
       value="generation"
-      primaryText="Generations"
+      primaryText="Pokemon Generations"
       disabled={true}
-      style={styles.listItem}
+      // style={styles.generation}
       leftAvatar={<Avatar src="" />}
       nestedItems={pokemonGenerations.map( (generation, i) => (
         <ListItem
           key={i}
-          style={styles.listItem}
           value={{ 
             type: 'generation', 
             value: generation.number 
@@ -179,12 +181,11 @@ const HomeQuizList = ({ beginGenerationQuiz, beginPokemonTypeQuiz, beginLegendar
       value="type"
       primaryText="Pokemon Types"
       disabled={true}
-      style={styles.listItem}
+      // style={styles.type}
       leftAvatar={<Avatar src="" />}
       nestedItems={pokemonTypes.map( (type, i) => (
         <ListItem
           key={i}
-          style={styles.listItem}
           value={type.name}
           primaryText={type.name}
           leftAvatar={<Avatar src={type.sprite} />}
@@ -194,8 +195,8 @@ const HomeQuizList = ({ beginGenerationQuiz, beginPokemonTypeQuiz, beginLegendar
     />
     <ListItem
       value="legendary"
-      primaryText="Legendaries"
-      style={styles.listItem}
+      primaryText="Legendary Pokemon"
+      // style={styles.legendary}
       leftAvatar={<Avatar src="" />}
       onTouchTap={beginLegendaryQuiz}
     />
