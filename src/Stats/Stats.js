@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {List, ListItem} from 'material-ui/List';
-import MoodGood from 'material-ui/svg-icons/action/trending-up';
-import MoodBad from 'material-ui/svg-icons/action/trending-down';
+import Divider from 'material-ui/Divider';
+import Subheader from 'material-ui/Subheader';
 
 import { 
   getRightiest,
@@ -45,11 +45,14 @@ export default connect(
 
 const StatsList = ({rightiest, wrongiest}) => (
   <List>
+    <Subheader>Some Facts, Mon!</Subheader>
+    <Divider />
     <ListItem
       leftIcon={<i className="fa fa-arrow-up fa-2x pokemon-blue" aria-hidden="true"></i>}
       primaryText="Rightiest Mon"
       secondaryText={rightiest.name}
     />
+    <Divider />
     <ListItem
       leftIcon={<i className="fa fa-arrow-down fa-2x pokemon-red" aria-hidden="true"></i>}
       primaryText="Wrongiest Mon"
