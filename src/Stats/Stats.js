@@ -48,6 +48,24 @@ const StatsList = ({rightiest, wrongiest}) => (
     <Subheader>Some Facts, Mon!</Subheader>
     <Divider />
     <ListItem
+      leftIcon={<i className="fa fa-users fa-2x" aria-hidden="true"></i>}
+      primaryText="Concurrent Mon Namers"
+      secondaryText={54321}
+    />
+    <Divider />
+    <ListItem
+      leftIcon={<i className="fa fa-line-chart fa-2x" aria-hidden="true"></i>}
+      primaryText="High Score"
+      secondaryText="KMW named 151 Mon on 3.14.2017"
+    />
+    <Divider />
+    <ListItem
+      leftIcon={<i className="fa fa-hourglass-half fa-2x" aria-hidden="true"></i>}
+      primaryText="Fastest Playthru"
+      secondaryText="A Mere 5:30.27, Mon!"
+    />
+    <Divider />
+    <ListItem
       leftIcon={<i className="fa fa-arrow-up fa-2x pokemon-blue" aria-hidden="true"></i>}
       primaryText="Rightiest Mon"
       secondaryText={rightiest.name}
