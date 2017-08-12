@@ -1,7 +1,10 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-size: 10px;
+  font-smooth: never;
+  -webkit-font-smoothing: none;
+  font-family: 'pokemon-font', monospace;
   background: url('./assets/pokemon-all-2.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -10,6 +13,10 @@ body {
   background-color: #f0f0f0; 
   /*-webkit-filter: grayscale(100%);  Safari 6.0 - 9.0 
   filter: grayscale(100%);*/
+}
+
+.subheader {
+  font-size: 20px;
 }
 
 .top {

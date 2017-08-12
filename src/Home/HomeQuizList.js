@@ -5,17 +5,22 @@ import Avatar from 'material-ui/Avatar';
 import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
 
-// const styles = {
-//   generation: {
-//     backgroundColor: "#f00000",
-//   },
-//   type: {
-//     backgroundColor: "#3B4CCA",
-//   },
-//   legendary: {
-//     backgroundColor: "#b3a125",
-//   }
-// }
+const styles = {
+  subheader: {
+    "fontSmooth": "never",
+    "WebkitFontSmoothing": "none",
+    "fontFamily": "'pokemon-font', monospace", 
+    "fontSize": "30px",
+    color: "black",
+  },
+  listitem: {
+    "fontSmooth": "never",
+    "WebkitFontSmoothing": "none",
+    "fontFamily": "'pokemon-font', monospace", 
+    "fontSize": "20px",
+    color: "black",
+  }
+}
 
 const pokemonTypes = [
   { 
@@ -156,13 +161,15 @@ SelectableList = wrapState(SelectableList);
 
 const HomeQuizList = ({ beginGenerationQuiz, beginPokemonTypeQuiz, beginLegendaryQuiz }) => (
   <SelectableList defaultValue={null} >
-    <Subheader>Pick a Quiz!</Subheader>
+    <Subheader
+      style={styles.subheader}
+    >Pick a Quiz!</Subheader>
     <Divider />
     <ListItem
       value="generation"
       primaryText="Pokemon Generations"
-      disabled={true}
-      // style={styles.generation}
+      // disabled={true}
+      style={styles.listitem}
       leftAvatar={<Avatar src="" />}
       nestedItems={pokemonGenerations.map( (generation, i) => (
         <ListItem
@@ -181,7 +188,7 @@ const HomeQuizList = ({ beginGenerationQuiz, beginPokemonTypeQuiz, beginLegendar
       value="type"
       primaryText="Pokemon Types"
       disabled={true}
-      // style={styles.type}
+      style={styles.listitem}
       leftAvatar={<Avatar src="" />}
       nestedItems={pokemonTypes.map( (type, i) => (
         <ListItem
@@ -196,7 +203,7 @@ const HomeQuizList = ({ beginGenerationQuiz, beginPokemonTypeQuiz, beginLegendar
     <ListItem
       value="legendary"
       primaryText="Legendary Pokemon"
-      // style={styles.legendary}
+      style={styles.listitem}
       leftAvatar={<Avatar src="" />}
       onTouchTap={beginLegendaryQuiz}
     />
