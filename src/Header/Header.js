@@ -2,16 +2,29 @@ import React from 'react';
 import AppBar from 'material-ui/AppBar';
 
 const styles = {
-  backgroundColor: "#f00000",
-  textColor: "#222224", // #222224 #f0f0f0
+  appBar: {
+    backgroundColor: "#f00000",
+    fontColor: "#222224",
+  },
+  title: {
+    color: "#222224",
+    "fontSmooth": "never",
+    "WebkitFontSmoothing": "none",
+    "fontFamily": "'pokemon-font', monospace", 
+    "fontSize": "30px",
+  }
 }
 
 const Header = () => (
   <AppBar
     className="header"
-    style={styles}
+    style={styles.appBar}
     title="Name That Mon!"
-    iconClassNameRight="muidocs-icon-navigation-expand-more"
+    titleStyle={styles.title}
+    // showMenuIconButton={false}
+    // iconElementLeft={<FontIcon className="muidocs-icon-action-home"></FontIcon>}
+    iconClassNameLeft="fa fa-home fa-2x header-logo"
+    // iconClassNameRight="muidocs-icon-navigation-expand-more" 
   />
 );
 

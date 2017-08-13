@@ -50,17 +50,17 @@ export default connect(
 
 const styles = {
   subheader: {
-    "font-smooth": "never",
-    "-webkit-font-smoothing": "none",
-    "font-family": "'pokemon-font', monospace", 
-    "font-size": "30px",
+    "fontSmooth": "never",
+    "WebkitFontSmoothing": "none",
+    "fontFamily": "'pokemon-font', monospace", 
+    "fontSize": "30px",
     color: "black",
   },
   listitem: {
-    "font-smooth": "never",
-    "-webkit-font-smoothing": "none",
-    "font-family": "'pokemon-font', monospace", 
-    "font-size": "20px",
+    "fontSmooth": "never",
+    "WebkitFontSmoothing": "none",
+    "fontFamily": "'pokemon-font', monospace", 
+    "fontSize": "20px",
     color: "black",
   }
 }
@@ -86,8 +86,8 @@ const StatsList = ({rightiest, wrongiest, highScore}) => (
     <ListItem
       style={styles.listitem}
       leftIcon={<i className="fa fa-hourglass-half fa-2x" aria-hidden="true"></i>}
-      primaryText="Fastest Playthru"
-      secondaryText="A Mere 5:30.27, Mon!"
+      primaryText="Playthrus Served"
+      secondaryText="09876"
     />
     <Divider />
     <ListItem
