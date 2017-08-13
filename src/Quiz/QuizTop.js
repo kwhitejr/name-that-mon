@@ -12,6 +12,7 @@ const styles = {
     backgroundColor: "gray",
     // height: 200,
     width: 200,
+    // color: "black",
   }
 }
 
@@ -53,7 +54,7 @@ class QuizTop extends Component {
             key={currentMon.id}
             actionIcon={<IconButton onTouchTap={this.handleOpen}><HelpOutline color="white" /></IconButton>}
             actionPosition="right"
-            title="Name That Mon!"
+            title="Who dis?"
             titlePosition="top"
             titleBackground="linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
             style={styles.gridTile}

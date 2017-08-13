@@ -146,6 +146,15 @@ app.get('/api/stats/highscore', (req, res) => {
   });
 });
 
+app.get('/api/stats/totalplaythrus', (req, res) => {
+  db.sequelize.query(
+    "SELECT count(*) from playthru",
+    { type: db.sequelize.QueryTypes.SELECT })
+  .then(total => {
+    res.send(total[0]);
+  });
+});
+
 // Post Playthru and Answer data
 app.post('/api/playthru', (req, res) => {
   const playthruData = req.body

@@ -2,6 +2,7 @@ import {
   SET_RIGHTIEST, 
   SET_WRONGIEST, 
   SET_HIGH_SCORE, 
+  SET_TOTAL_PLAYTHRUS, 
 } from './StatsActionTypes'
 
 const API_URL = 'http://localhost:3000/api';
@@ -32,6 +33,16 @@ export function getHighScore() {
       .then(res => res.json())
       .then(highScore => {
         dispatch({ type: SET_HIGH_SCORE, payload: highScore })
+      })
+  }
+}
+
+export function getTotalPlaythrus() {
+  return (dispatch) => {
+    return fetch(`${API_URL}/stats/totalplaythrus`)
+      .then(res => res.json())
+      .then(totalPlaythrus => {
+        dispatch({ type: SET_TOTAL_PLAYTHRUS, payload: totalPlaythrus.count })
       })
   }
 }

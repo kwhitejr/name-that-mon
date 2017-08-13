@@ -9,6 +9,7 @@ import {
   getRightiest,
   getWrongiest,
   getHighScore,
+  getTotalPlaythrus,
 } from './StatsActions'
 
 import './Stats.css';
@@ -19,6 +20,7 @@ export class Stats extends Component {
     this.props.getRightiest()
     this.props.getWrongiest()
     this.props.getHighScore()
+    this.props.getTotalPlaythrus()
   }
 
   render() {
@@ -35,12 +37,14 @@ const mapStateToProps = (state) => ({
   wrongiest:  state.stats.wrongiest,
   rightiest:  state.stats.rightiest,
   highScore:  state.stats.highScore,
+  totalPlaythrus:  state.stats.totalPlaythrus,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getRightiest: () => dispatch(getRightiest()),
   getWrongiest: () => dispatch(getWrongiest()),
   getHighScore: () => dispatch(getHighScore()),
+  getTotalPlaythrus: () => dispatch(getTotalPlaythrus()),
 });
 
 export default connect(
@@ -65,7 +69,7 @@ const styles = {
   }
 }
 
-const StatsList = ({rightiest, wrongiest, highScore}) => (
+const StatsList = ({rightiest, wrongiest, highScore, totalPlaythrus}) => (
   <List>
     <Subheader style={styles.subheader}>Some Facts, Mon!</Subheader>
     <Divider />
@@ -87,7 +91,7 @@ const StatsList = ({rightiest, wrongiest, highScore}) => (
       style={styles.listitem}
       leftIcon={<i className="fa fa-hourglass-half fa-2x" aria-hidden="true"></i>}
       primaryText="Playthrus Served"
-      secondaryText="09876"
+      secondaryText={totalPlaythrus}
     />
     <Divider />
     <ListItem

@@ -11,8 +11,17 @@ const styles = {
     margin: 6,
   },
   radioButton: {
-    marginBottom: 16,
-  },
+    label: {
+      "fontSmooth": "never",
+      "WebkitFontSmoothing": "none",
+      "fontFamily": "'pokemon-font', monospace", 
+      "fontSize": "20px",
+    },
+    style: {
+      marginTop: 10,
+      marginBottom: 10,
+    },
+  }
 };
 
 class QuizAnswers extends Component {
@@ -80,7 +89,8 @@ class QuizAnswers extends Component {
               key={i}
               value={datum.id}
               label={datum.name}
-              style={styles.radioButton}
+              style={styles.radioButton.style}
+              labelStyle={styles.radioButton.label}
             />
           ))}
         </RadioButtonGroup>
