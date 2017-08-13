@@ -186,7 +186,7 @@ const HomeQuizList = ({ beginGenerationQuiz, beginPokemonTypeQuiz, beginLegendar
     <ListItem
       value="generation"
       primaryText="Pokemon Generations"
-      // disabled={true}
+      primaryTogglesNestedList={true}
       style={styles.listitem}
       // hoverColor="#3B4CCA"
       leftAvatar={<Avatar src="" />}
@@ -207,7 +207,7 @@ const HomeQuizList = ({ beginGenerationQuiz, beginPokemonTypeQuiz, beginLegendar
     <ListItem
       value="type"
       primaryText="Pokemon Types"
-      // disabled={true}
+      primaryTogglesNestedList={true}
       style={styles.listitem}
       // hoverColor="#cc0000"
       leftAvatar={<Avatar src="" />}
