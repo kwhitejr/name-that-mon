@@ -23,3 +23,12 @@ Run Tests
 - [ ] Quickest Playthru (Perfect score, Time, Avg Answer Time)  
 - [x] Wrongiest Pokemon   
 - [x] Rightiest Pokemon  
+
+### Header Container  
+- [ ] Correct action when click Home Icon
+
+### ResultsTable Component  
+- [ ] Correct Calculation for Avg Time
+
+### Business Logic  
+- [ ] Quiz end with 100% correct  
