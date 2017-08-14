@@ -5,6 +5,8 @@ import fetch from 'isomorphic-fetch'
 import { getPlaythruData } from './QuizSelectors'
 import { shuffle } from '../common'
 
+import mockData from '../mockData'
+
 import {
   SET_ANSWER,
   SET_USER_INITIALS,
@@ -39,7 +41,7 @@ export function beginGenerationQuiz(generationNumber) {
       .then(res => res.json())
       .then(json => shuffle(json))
       .then(shuffledQuizStack => {
-        dispatch({ type: GET_QUIZ_DATA, payload: shuffledQuizStack })
+        dispatch({ type: GET_QUIZ_DATA, payload: mockData })
         dispatch({ type: SET_GENERATION_NUMBER, payload: generationNumber })
         dispatch({ type: SET_ANSWER_CHOICES, payload: getAnswerChoices(getState().quizInstance.shuffledQuizStack) })
         dispatch({ type: START_TIMER, payload: moment().valueOf() })
@@ -146,17 +148,18 @@ export const getAnswerChoices = (quizStack) => {
     answerChoices.push(currentMon)
 
     // add bogus answers
-    const remainingMon = shuffle(quizStack.slice(0,quizStack.length-1))
-    if (remainingMon.length > 3) {
-      pickThree = remainingMon.slice(0,3);
-    } else {
-      pickThree = remainingMon
-    }
-    pickThree.forEach( (obj) => {
+    const remainingMon = quizStack.length > 3 ? shuffle(quizStack.slice(0,quizStack.length-1)).slice(0,3) : quizStack.slice(0,quizStack.length-1)
+
+    // if (remainingMon.length > 3) {
+    //   pickThree = remainingMon.slice(0,3);
+    // } else {
+    //   pickThree = remainingMon
+    // }
+    remainingMon.forEach( (obj) => {
       answerChoices.push(obj);
     });
 
-    const shuffledAnswerChoices = shuffle(answerChoices)
+    const shuffledAnswerChoices = answerChoices.length > 2 ? shuffle(answerChoices) : answerChoices
 
     // shuffle the order
     return shuffledAnswerChoices
