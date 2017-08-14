@@ -165,7 +165,6 @@ export const getAnswerChoices = (quizStack) => {
 const stackCorrectAnswerHelper = (shuffledQuizStack, correctAnswerStack) => {
   const lastDatum = shuffledQuizStack[shuffledQuizStack.length-1]
 
-  // add correct answer to `correctAnswerStack`
   correctAnswerStack.push(lastDatum)
 
   const newObj = {

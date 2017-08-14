@@ -5,6 +5,8 @@ import LinearProgress from 'material-ui/LinearProgress';
 const style = {
   marginTop: 15,
   marginBottom: 15,
+  // marginLeft: 15,
+  // marginRight: 15,
 }
 
 export const QuizProgress = ({ correctAnswerStack, quizLength }) => (
@@ -13,7 +15,8 @@ export const QuizProgress = ({ correctAnswerStack, quizLength }) => (
       mode="determinate"
       style={style} 
       value={correctAnswerStack.length} 
-      max={quizLength} 
+      max={quizLength}
+      color="#f00000" 
     />
   </div>
 );

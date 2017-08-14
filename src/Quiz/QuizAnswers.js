@@ -21,8 +21,19 @@ const styles = {
       marginTop: 10,
       marginBottom: 10,
     },
+  },
+  radioButtonGroup: {
+    marginLeft: "25px",
+  },
+  dialog: {
+    "fontSmooth": "never",
+    "WebkitFontSmoothing": "none",
+    "fontFamily": "'pokemon-font', monospace", 
+    "fontSize": "20px",
   }
 };
+
+// let Pokeball = require("../assets/pokeball.ico")
 
 class QuizAnswers extends Component {
   state = {
@@ -71,6 +82,7 @@ class QuizAnswers extends Component {
       setNextQuestion, 
       answerChoices,
       endCurrentQuiz, 
+      shuffledQuizStack,
     } = this.props
 
     const actions = [
@@ -81,9 +93,16 @@ class QuizAnswers extends Component {
       />,
     ];
 
+    const dialogTitle = shuffledQuizStack.length > 0 ? "Oh Noes!" : "Congrats!"
+    const dialogMsg = shuffledQuizStack.length > 0 ? "Game Over, Mon" : "You Hacked Da Mainframe!"
+
     return (
       <div className="answers">
-        <RadioButtonGroup name="answers" onChange={setAnswer} >
+        <RadioButtonGroup 
+          name="answers"  
+          onChange={setAnswer}
+          style={styles.radioButtonGroup} 
+        >
           {answerChoices.map( (datum, i) => (
             <RadioButton
               key={i}
@@ -91,6 +110,7 @@ class QuizAnswers extends Component {
               label={datum.name}
               style={styles.radioButton.style}
               labelStyle={styles.radioButton.label}
+              // checkedIcon={<Pokeball />}
             />
           ))}
         </RadioButtonGroup>
@@ -109,12 +129,13 @@ class QuizAnswers extends Component {
           onTouchTap={setNextQuestion}
         />
         <Dialog
-          title="Oh Noes!"
+          title={dialogTitle}
           actions={actions}
+          style={styles.dialog}
           modal={true}
           open={this.state.dialogOpen}
         >
-          Game Over, Mon.
+          {dialogMsg}
           <div>
             <TextField
               id="text-field-controlled"
@@ -146,36 +167,3 @@ QuizAnswers.propTypes = {
 };
 
 export default QuizAnswers;
-
-/*
-class TextFieldInitials extends Component {
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      value: "",
-    };
-  }
-
-  handleChange = (event) => {
-    this.setState({
-      value: event.target.value,
-    });
-  };
-
-  render() {
-    return (
-      <div>
-        <TextField
-          id="text-field-controlled"
-          hintText="Inititals"
-          maxLength="4"
-          value={this.state.value}
-          onChange={this.handleChange}
-        />
-      </div>
-    );
-  }
-}
-*/

@@ -1,5 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
 import AppBar from 'material-ui/AppBar';
+
+import { 
+  resetThenHome, 
+} from '../Result/ResultActions';
 
 const styles = {
   appBar: {
@@ -21,11 +27,20 @@ const Header = () => (
     style={styles.appBar}
     title="Name That Mon!"
     titleStyle={styles.title}
-    // showMenuIconButton={false}
-    // iconElementLeft={<FontIcon className="muidocs-icon-action-home"></FontIcon>}
     iconClassNameLeft="fa fa-home fa-2x header-logo"
-    // iconClassNameRight="muidocs-icon-navigation-expand-more" 
+    onLeftIconButtonTouchTap={resetThenHome} 
   />
 );
 
-export default Header;
+const mapStateToProps = (state) => ({
+
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  resetThenHome: (e) => dispatch(resetThenHome()),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Header);

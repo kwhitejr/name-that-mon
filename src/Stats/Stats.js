@@ -89,7 +89,7 @@ const StatsList = ({rightiest, wrongiest, highScore, totalPlaythrus}) => (
     <Divider />
     <ListItem
       style={styles.listitem}
-      leftIcon={<i className="fa fa-hourglass-half fa-2x" aria-hidden="true"></i>}
+      leftIcon={<i className="fa fa-gamepad fa-2x" aria-hidden="true"></i>}
       primaryText="Playthrus Served"
       secondaryText={totalPlaythrus}
     />

@@ -8,8 +8,18 @@ import {
   TableRowColumn,
 } from 'material-ui/Table'
 
+const styles = {
+  table: {
+    "fontSmooth": "never",
+    "WebkitFontSmoothing": "none",
+    "fontFamily": "'pokemon-font', monospace", 
+    "fontSize": "20px",
+    color: "black",
+  },
+}
+
 const ResultTable = ({ correctAnswerStack, lastCorrectAnswer, wrongAnswer, quizTotalTime }) => (
-  <Table selectable={false} >
+  <Table selectable={false} style={styles.table}>
     <TableBody displayRowCheckbox={false} >
       <TableRow>
         <TableRowColumn>Ended On</TableRowColumn>
