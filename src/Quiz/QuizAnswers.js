@@ -85,6 +85,12 @@ class QuizAnswers extends Component {
     }
   }
 
+  endQuiz() {
+    const { isAnswerCorrect, stackCorrectAnswer, endCurrentQuiz } = this.props
+    if (isAnswerCorrect) { stackCorrectAnswer() }
+    endCurrentQuiz(this.state.initialsValue)
+  }
+
   render() {
     const { 
       setAnswer,
@@ -107,7 +113,7 @@ class QuizAnswers extends Component {
       <FlatButton
         label="Continue"
         primary={true}
-        onTouchTap={() => {endCurrentQuiz(this.state.initialsValue)}}
+        onTouchTap={() => this.endQuiz()}
       />,
     ];
 

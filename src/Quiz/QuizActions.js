@@ -88,11 +88,8 @@ export function setAnswer(event, value) {
 
 export function stackCorrectAnswer() {
   return (dispatch, getState) => {
-    // let state = getState().quizInstance
-    // dispatch({ type: INCREMENT_CLUE_COUNT })
-    dispatch({ type: END_TIMER, payload: moment().valueOf() })
-    // dispatch({ type: STACK_CORRECT_ANSWER, payload: stackCorrectAnswerHelper(state.shuffledQuizStack, state.correctAnswerStack) })
-    // dispatch(push('/result'))
+    let state = getState().quizInstance
+    dispatch({ type: STACK_CORRECT_ANSWER, payload: stackCorrectAnswerHelper(state.shuffledQuizStack, state.correctAnswerStack) })
   }
 }
 
@@ -130,7 +127,7 @@ export function endCurrentQuiz(userInitials) {
     let state = getState().quizInstance
     dispatch({ type: SET_USER_INITIALS, payload: userInitials })
     dispatch({ type: INCREMENT_CLUE_COUNT })
-    dispatch({ type: STACK_CORRECT_ANSWER, payload: stackCorrectAnswerHelper(state.shuffledQuizStack, state.correctAnswerStack) })
+    // dispatch({ type: STACK_CORRECT_ANSWER, payload: stackCorrectAnswerHelper(state.shuffledQuizStack, state.correctAnswerStack) })
     dispatch(push('/result'))
     dispatch(postPlaythruData())
   }

@@ -42,11 +42,14 @@ export const getPlaythruData = createSelector(
 		getStartTime, 
 		getEndTime, 
 		getClueCount, 
+    getShuffledQuizStack,
 		getCorrectAnswerIds,
 		getCurrentMon,
     getUserInitials,
 	],
-	(getQuizMetaData, getStartTime, getEndTime, getClueCount, getCorrectAnswerIds, getCurrentMon, getUserInitials) => {
+	(getQuizMetaData, getStartTime, getEndTime, getClueCount, getShuffledQuizStack, getCorrectAnswerIds, getCurrentMon, getUserInitials) => {
+    let wrongAnswer = getShuffledQuizStack.length > 0 ? getCurrentMon.id : null
+
 		return {
 			user_initials: getUserInitials,
       quiz_type: getQuizMetaData.quizType,
@@ -55,7 +58,7 @@ export const getPlaythruData = createSelector(
       end_time: getEndTime,
       clue_count: getClueCount,
       correct_answer_stack: getCorrectAnswerIds,
-      wrong_answer: getCurrentMon.id,
+      wrong_answer: wrongAnswer,
 		}
 	}
 )
