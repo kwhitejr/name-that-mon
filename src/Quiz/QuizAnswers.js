@@ -60,7 +60,10 @@ class QuizAnswers extends Component {
       isAnswerSelected,
       userAnswer, 
       currentMon,
-      submitAnswer, 
+      shuffledQuizStack,
+      submitAnswer,
+      setQuizCompleteFlag, 
+      setAnswerCorrectFlag, 
       toggleMask,
       endTimer, 
     } = this.props
@@ -68,6 +71,14 @@ class QuizAnswers extends Component {
     if (isAnswerSelected && currentMon.id === userAnswer) {
       toggleMask()
       submitAnswer()
+      setAnswerCorrectFlag()
+      
+      if (shuffledQuizStack.length > 1) {
+      } else {
+        endTimer()
+        setQuizCompleteFlag()
+        this.handleOpen()
+      }
     } else {
       endTimer()
       this.handleOpen()
@@ -76,14 +87,21 @@ class QuizAnswers extends Component {
 
   render() {
     const { 
-      setAnswer, 
+      setAnswer,
+      currentMon,
+      userAnswer, 
       isAnswerSelected, 
-      isAnswerSubmitted, 
+      isAnswerSubmitted,
+      isAnswerCorrect, 
+      isQuizComplete, 
       setNextQuestion, 
       answerChoices,
       endCurrentQuiz, 
       shuffledQuizStack,
     } = this.props
+
+    const dialogTitle = isQuizComplete && isAnswerCorrect ? "Congrats!" : "Oh Noes!"
+    const dialogMsg = isQuizComplete && isAnswerCorrect ? "You Hacked Da Mainframe!" : "Game Over, Mon"
 
     const actions = [
       <FlatButton
@@ -92,9 +110,6 @@ class QuizAnswers extends Component {
         onTouchTap={() => {endCurrentQuiz(this.state.initialsValue)}}
       />,
     ];
-
-    const dialogTitle = shuffledQuizStack.length > 0 ? "Oh Noes!" : "Congrats!"
-    const dialogMsg = shuffledQuizStack.length > 0 ? "Game Over, Mon" : "You Hacked Da Mainframe!"
 
     return (
       <div className="answers">

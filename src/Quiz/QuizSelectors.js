@@ -1,3 +1,4 @@
+
 import { createSelector } from 'reselect'
 
 const getShuffledQuizStack = (state) => state.quizInstance.shuffledQuizStack
@@ -9,9 +10,13 @@ const getUserInitials = (state) => state.quizInstance.userInitials
 const getQuizMetaData = (state) => state.quizMetaData
 
 export const getCurrentMon = createSelector(
-  getShuffledQuizStack,
-  (shuffledQuizStack) => {
-    return shuffledQuizStack[shuffledQuizStack.length-1]
+  [ getShuffledQuizStack, getCorrectAnswerStack ],
+  (shuffledQuizStack, correctAnswerStack) => {
+    if (shuffledQuizStack.length > 0) {
+      return shuffledQuizStack[shuffledQuizStack.length-1]
+    } else {
+      return correctAnswerStack[correctAnswerStack.length-1]
+    }
   }
 )
 

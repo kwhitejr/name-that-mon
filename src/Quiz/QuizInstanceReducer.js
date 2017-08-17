@@ -4,6 +4,8 @@ const SET_ANSWER = 'SET_ANSWER',
       GET_QUIZ_DATA = 'GET_QUIZ_DATA',
       SUBMIT_ANSWER = 'SUBMIT_ANSWER',
       SET_ANSWER_CHOICES = 'SET_ANSWER_CHOICES',
+      SET_QUIZ_COMPLETE_FLAG = 'SET_QUIZ_COMPLETE_FLAG',
+      SET_ANSWER_CORRECT_FLAG = 'SET_ANSWER_CORRECT_FLAG',
       STACK_CORRECT_ANSWER = 'STACK_CORRECT_ANSWER',
       START_TIMER = 'START_TIMER',
       END_TIMER = 'END_TIMER',
@@ -16,7 +18,8 @@ export const INITIAL_STATE = {
   message: '', 
   isAnswerSelected: false, 
   isAnswerSubmitted: false, 
-  isClueUsed: false, 
+  isClueUsed: false,
+  isQuizComplete: false,
   userAnswer: null, 
   answerChoices: [], 
   shuffledQuizStack: [], 
@@ -38,7 +41,9 @@ export default function (state = INITIAL_STATE, action) {
         message: '', 
         isAnswerSelected: false, 
         isAnswerSubmitted: false, 
+        isAnswerCorrect: false, 
         isClueUsed: false, 
+        isQuizComplete: false,
         userAnswer: null, 
         answerChoices: [], 
         shuffledQuizStack: [], 
@@ -51,6 +56,10 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, shuffledQuizStack: action.payload };
     case SUBMIT_ANSWER:
       return { ...state, isAnswerSubmitted: true, isAnswerSelected: false };
+    case SET_ANSWER_CORRECT_FLAG:
+      return { ...state, isAnswerCorrect: true };
+    case SET_QUIZ_COMPLETE_FLAG:
+      return { ...state, isQuizComplete: true };
     case SET_ANSWER_CHOICES:
       return { ...state, answerChoices: action.payload };
     case STACK_CORRECT_ANSWER:
@@ -59,6 +68,7 @@ export default function (state = INITIAL_STATE, action) {
         correctAnswerStack: action.payload.correctAnswerStack,
         isAnswerSubmitted: false,
         isAnswerSelected: false,
+        isAnswerCorrect: false,
         isClueUsed: false,
         userAnswer: null, 
         answerChoices: [], 
