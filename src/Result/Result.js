@@ -43,6 +43,7 @@ export class Result extends Component {
 const mapStateToProps = (state) => ({
   correctAnswerStack:  state.quizInstance.correctAnswerStack,
   shuffledQuizStack:  state.quizInstance.shuffledQuizStack,
+  isQuizComplete:  state.quizInstance.isQuizComplete,
   lastCorrectAnswer: getLastCorrectAnswer(state),
   wrongAnswer: getCurrentMon(state),
   quizTotalTime: getQuizTotalTime(state),

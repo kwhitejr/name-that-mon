@@ -18,7 +18,7 @@ const styles = {
   },
 }
 
-const ResultTable = ({ correctAnswerStack, lastCorrectAnswer, wrongAnswer, quizTotalTime }) => (
+const ResultTable = ({ correctAnswerStack, lastCorrectAnswer, wrongAnswer, quizTotalTime, isQuizComplete }) => (
   <Table selectable={false} style={styles.table}>
     <TableBody displayRowCheckbox={false} >
       <TableRow>
@@ -35,7 +35,11 @@ const ResultTable = ({ correctAnswerStack, lastCorrectAnswer, wrongAnswer, quizT
       </TableRow>
       <TableRow>
         <TableRowColumn>Avg Answer Time</TableRowColumn>
-        <TableRowColumn>{moment(quizTotalTime/correctAnswerStack.length).format("mm:ss.SS")}</TableRowColumn>
+        { isQuizComplete ? (
+          <TableRowColumn>{moment(quizTotalTime/correctAnswerStack.length).format("mm:ss.SS")}</TableRowColumn>            
+        ) : (
+          <TableRowColumn>{moment(quizTotalTime/(correctAnswerStack.length + 1)).format("mm:ss.SS")}</TableRowColumn>
+        )}
       </TableRow>
     </TableBody>
   </Table>

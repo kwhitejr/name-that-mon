@@ -127,7 +127,6 @@ export function endCurrentQuiz(userInitials) {
     let state = getState().quizInstance
     dispatch({ type: SET_USER_INITIALS, payload: userInitials })
     dispatch({ type: INCREMENT_CLUE_COUNT })
-    // dispatch({ type: STACK_CORRECT_ANSWER, payload: stackCorrectAnswerHelper(state.shuffledQuizStack, state.correctAnswerStack) })
     dispatch(push('/result'))
     dispatch(postPlaythruData())
   }
