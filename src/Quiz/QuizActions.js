@@ -28,6 +28,13 @@ import {
   RESET_META_DATA,
 } from './QuizActionTypes'
 
+import { 
+  getRightiest,
+  getWrongiest,
+  getHighScore,
+  getTotalPlaythrus,
+} from '../Stats/StatsActions'
+
 const API_URL = 'http://localhost:3000/api';
 
 export function reset() {
@@ -154,6 +161,11 @@ export function postPlaythruData() {
       }
     })
     .catch(error => { console.log('request failed', error); });
+
+    dispatch(getRightiest())
+    dispatch(getWrongiest())
+    dispatch(getHighScore())
+    dispatch(getTotalPlaythrus())
   }
 }
 

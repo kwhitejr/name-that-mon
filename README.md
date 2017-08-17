@@ -28,7 +28,7 @@ Run Tests
 - [ ] Correct action when click Home Icon
 
 ### ResultsTable Component  
-- [ ] Correct Calculation for Avg Time
+- [x] Correct Calculation for Avg Time
 
 ### Business Logic  
-- [ ] Quiz end with 100% correct  
+- [x] Quiz end with 100% correct  
