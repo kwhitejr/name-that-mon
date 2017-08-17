@@ -161,11 +161,13 @@ app.post('/api/playthru', (req, res) => {
   Playthru.create(playthruData)
     .then( (result) => {
       // submit incorrect answer
-      Answer.create({
-        pokemon_id: result.dataValues.wrong_answer,
-        playthru_id: result.dataValues.id,
-        was_correct: false
-      });
+      if (result.dataValues.wrong_answer !== null) {
+        Answer.create({
+          pokemon_id: result.dataValues.wrong_answer,
+          playthru_id: result.dataValues.id,
+          was_correct: false
+        });
+      }
       // submit correct answers
       result.dataValues.correct_answer_stack.map( (correct_answer) => {
         Answer.create({
