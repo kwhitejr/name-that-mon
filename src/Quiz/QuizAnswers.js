@@ -93,17 +93,13 @@ class QuizAnswers extends Component {
 
   render() {
     const { 
-      setAnswer,
-      currentMon,
-      userAnswer, 
+      setAnswer, 
       isAnswerSelected, 
       isAnswerSubmitted,
       isAnswerCorrect, 
       isQuizComplete, 
       setNextQuestion, 
       answerChoices,
-      endCurrentQuiz, 
-      shuffledQuizStack,
     } = this.props
 
     const dialogTitle = isQuizComplete && isAnswerCorrect ? "Congrats!" : "Oh Noes!"

@@ -123,8 +123,7 @@ export function endTimer() {
 }
 
 export function endCurrentQuiz(userInitials) {
-  return (dispatch, getState) => {
-    let state = getState().quizInstance
+  return (dispatch) => {
     dispatch({ type: SET_USER_INITIALS, payload: userInitials })
     dispatch({ type: INCREMENT_CLUE_COUNT })
     dispatch(push('/result'))
@@ -162,17 +161,11 @@ export function postPlaythruData() {
 export const getAnswerChoices = (quizStack) => {
     const currentMon = quizStack[quizStack.length-1]
     let answerChoices = []
-    let pickThree = null
     answerChoices.push(currentMon)
 
     // add bogus answers
     const remainingMon = quizStack.length > 3 ? shuffle(quizStack.slice(0,quizStack.length-1)).slice(0,3) : quizStack.slice(0,quizStack.length-1)
 
-    // if (remainingMon.length > 3) {
-    //   pickThree = remainingMon.slice(0,3);
-    // } else {
-    //   pickThree = remainingMon
-    // }
     remainingMon.forEach( (obj) => {
       answerChoices.push(obj);
     });
