@@ -125,6 +125,7 @@ class QuizAnswers extends Component {
               key={i}
               value={datum.id}
               label={datum.name}
+              disabled={isAnswerSubmitted}
               style={styles.radioButton.style}
               labelStyle={styles.radioButton.label}
               // checkedIcon={<Pokeball />}

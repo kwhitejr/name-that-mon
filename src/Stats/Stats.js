@@ -75,13 +75,6 @@ const StatsList = ({rightiest, wrongiest, highScore, totalPlaythrus}) => (
     <Divider />
     <ListItem
       style={styles.listitem}
-      leftIcon={<i className="fa fa-users fa-2x" aria-hidden="true"></i>}
-      primaryText="Concurrent Mon Namers"
-      secondaryText={54321}
-    />
-    <Divider />
-    <ListItem
-      style={styles.listitem}
       leftIcon={<i className="fa fa-line-chart fa-2x" aria-hidden="true"></i>}
       primaryText={`High Score: ${highScore.userInitials}`}
       secondaryText={`Named ${highScore.correctAnswerStack.length} Mon on ${moment.unix(highScore.endTime/1000).format("MMMM DD, YYYY, h:mm a")}`}
@@ -109,3 +102,13 @@ const StatsList = ({rightiest, wrongiest, highScore, totalPlaythrus}) => (
     />
   </List>
 )
+
+/*
+ <Divider />
+    <ListItem
+      style={styles.listitem}
+      leftIcon={<i className="fa fa-users fa-2x" aria-hidden="true"></i>}
+      primaryText="Concurrent Mon Namers"
+      secondaryText={54321}
+    />
+    */
