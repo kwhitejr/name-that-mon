@@ -8,8 +8,18 @@ import {
   TableRowColumn,
 } from 'material-ui/Table'
 
-const ResultTable = ({ correctAnswerStack, lastCorrectAnswer, wrongAnswer, quizTotalTime }) => (
-  <Table selectable={false} >
+const styles = {
+  table: {
+    "fontSmooth": "never",
+    "WebkitFontSmoothing": "none",
+    "fontFamily": "'pokemon-font', monospace", 
+    "fontSize": "20px",
+    color: "black",
+  },
+}
+
+const ResultTable = ({ correctAnswerStack, lastCorrectAnswer, wrongAnswer, quizTotalTime, isQuizComplete }) => (
+  <Table selectable={false} style={styles.table}>
     <TableBody displayRowCheckbox={false} >
       <TableRow>
         <TableRowColumn>Ended On</TableRowColumn>
@@ -25,7 +35,11 @@ const ResultTable = ({ correctAnswerStack, lastCorrectAnswer, wrongAnswer, quizT
       </TableRow>
       <TableRow>
         <TableRowColumn>Avg Answer Time</TableRowColumn>
-        <TableRowColumn>{moment(quizTotalTime/correctAnswerStack.length).format("mm:ss.SS")}</TableRowColumn>
+        { isQuizComplete ? (
+          <TableRowColumn>{moment(quizTotalTime/correctAnswerStack.length).format("mm:ss.SS")}</TableRowColumn>            
+        ) : (
+          <TableRowColumn>{moment(quizTotalTime/(correctAnswerStack.length + 1)).format("mm:ss.SS")}</TableRowColumn>
+        )}
       </TableRow>
     </TableBody>
   </Table>

@@ -5,6 +5,8 @@ import fetch from 'isomorphic-fetch'
 import { getPlaythruData } from './QuizSelectors'
 import { shuffle } from '../common'
 
+import mockData from '../mockData'
+
 import {
   SET_ANSWER,
   SET_USER_INITIALS,
@@ -15,6 +17,8 @@ import {
   GET_QUIZ_DATA,
   STACK_CORRECT_ANSWER,
   SUBMIT_ANSWER,
+  SET_QUIZ_COMPLETE_FLAG,
+  SET_ANSWER_CORRECT_FLAG,
   START_TIMER,
   END_TIMER,
   USE_CLUE,
@@ -23,6 +27,13 @@ import {
   RESET_INSTANCE_DATA,
   RESET_META_DATA,
 } from './QuizActionTypes'
+
+import { 
+  getRightiest,
+  getWrongiest,
+  getHighScore,
+  getTotalPlaythrus,
+} from '../Stats/StatsActions'
 
 const API_URL = 'http://localhost:3000/api';
 
@@ -39,7 +50,7 @@ export function beginGenerationQuiz(generationNumber) {
       .then(res => res.json())
       .then(json => shuffle(json))
       .then(shuffledQuizStack => {
-        dispatch({ type: GET_QUIZ_DATA, payload: shuffledQuizStack })
+        dispatch({ type: GET_QUIZ_DATA, payload: mockData })
         dispatch({ type: SET_GENERATION_NUMBER, payload: generationNumber })
         dispatch({ type: SET_ANSWER_CHOICES, payload: getAnswerChoices(getState().quizInstance.shuffledQuizStack) })
         dispatch({ type: START_TIMER, payload: moment().valueOf() })
@@ -82,6 +93,13 @@ export function setAnswer(event, value) {
   return { type: SET_ANSWER, payload: value }
 }
 
+export function stackCorrectAnswer() {
+  return (dispatch, getState) => {
+    let state = getState().quizInstance
+    dispatch({ type: STACK_CORRECT_ANSWER, payload: stackCorrectAnswerHelper(state.shuffledQuizStack, state.correctAnswerStack) })
+  }
+}
+
 export function setNextQuestion() {
   return (dispatch, getState) => {
     let state = getState().quizInstance
@@ -97,6 +115,14 @@ export function submitAnswer() {
 
 export function useClue() {
   return { type: USE_CLUE }
+}
+
+export function setAnswerCorrectFlag() {
+  return { type: SET_ANSWER_CORRECT_FLAG }
+}
+
+export function setQuizCompleteFlag() {
+  return { type: SET_QUIZ_COMPLETE_FLAG }
 }
 
 export function endTimer() {
@@ -135,6 +161,11 @@ export function postPlaythruData() {
       }
     })
     .catch(error => { console.log('request failed', error); });
+
+    dispatch(getRightiest())
+    dispatch(getWrongiest())
+    dispatch(getHighScore())
+    dispatch(getTotalPlaythrus())
   }
 }
 
@@ -142,21 +173,16 @@ export function postPlaythruData() {
 export const getAnswerChoices = (quizStack) => {
     const currentMon = quizStack[quizStack.length-1]
     let answerChoices = []
-    let pickThree = null
     answerChoices.push(currentMon)
 
     // add bogus answers
-    const remainingMon = shuffle(quizStack.slice(0,quizStack.length-1))
-    if (remainingMon.length > 3) {
-      pickThree = remainingMon.slice(0,3);
-    } else {
-      pickThree = remainingMon
-    }
-    pickThree.forEach( (obj) => {
+    const remainingMon = quizStack.length > 3 ? shuffle(quizStack.slice(0,quizStack.length-1)).slice(0,3) : quizStack.slice(0,quizStack.length-1)
+
+    remainingMon.forEach( (obj) => {
       answerChoices.push(obj);
     });
 
-    const shuffledAnswerChoices = shuffle(answerChoices)
+    const shuffledAnswerChoices = answerChoices.length > 2 ? shuffle(answerChoices) : answerChoices
 
     // shuffle the order
     return shuffledAnswerChoices
@@ -165,11 +191,10 @@ export const getAnswerChoices = (quizStack) => {
 const stackCorrectAnswerHelper = (shuffledQuizStack, correctAnswerStack) => {
   const lastDatum = shuffledQuizStack[shuffledQuizStack.length-1]
 
-  // add correct answer to `correctAnswerStack`
   correctAnswerStack.push(lastDatum)
 
   const newObj = {
-    shuffledQuizStack: shuffledQuizStack.slice(0,-1),
+    shuffledQuizStack: shuffledQuizStack.slice(0,-1) || [],
     correctAnswerStack: correctAnswerStack,
   };
   return newObj;

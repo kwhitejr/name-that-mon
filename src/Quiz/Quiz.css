@@ -3,9 +3,15 @@
 }
 
 .answers {
-  background: lightgreen;
+  /*background: lightgreen;*/
 }
 
 .progress-bar {
-  background: lightblue;
+  /*background: lightblue;*/
+  /*margin-left: 5px;*/
+  /*margin-right: 5px;*/
+}
+
+.top {
+  background: gray;
 }

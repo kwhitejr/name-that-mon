@@ -9,6 +9,7 @@ import {
   getRightiest,
   getWrongiest,
   getHighScore,
+  getTotalPlaythrus,
 } from './StatsActions'
 
 import './Stats.css';
@@ -19,6 +20,7 @@ export class Stats extends Component {
     this.props.getRightiest()
     this.props.getWrongiest()
     this.props.getHighScore()
+    this.props.getTotalPlaythrus()
   }
 
   render() {
@@ -35,12 +37,14 @@ const mapStateToProps = (state) => ({
   wrongiest:  state.stats.wrongiest,
   rightiest:  state.stats.rightiest,
   highScore:  state.stats.highScore,
+  totalPlaythrus:  state.stats.totalPlaythrus,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getRightiest: () => dispatch(getRightiest()),
   getWrongiest: () => dispatch(getWrongiest()),
   getHighScore: () => dispatch(getHighScore()),
+  getTotalPlaythrus: () => dispatch(getTotalPlaythrus()),
 });
 
 export default connect(
@@ -48,38 +52,63 @@ export default connect(
   mapDispatchToProps,
 )(Stats);
 
-const StatsList = ({rightiest, wrongiest, highScore}) => (
+const styles = {
+  subheader: {
+    "fontSmooth": "never",
+    "WebkitFontSmoothing": "none",
+    "fontFamily": "'pokemon-font', monospace", 
+    "fontSize": "30px",
+    color: "black",
+  },
+  listitem: {
+    "fontSmooth": "never",
+    "WebkitFontSmoothing": "none",
+    "fontFamily": "'pokemon-font', monospace", 
+    "fontSize": "20px",
+    color: "black",
+  }
+}
+
+const StatsList = ({rightiest, wrongiest, highScore, totalPlaythrus}) => (
   <List>
-    <Subheader>Some Facts, Mon!</Subheader>
+    <Subheader style={styles.subheader}>Some Facts, Mon!</Subheader>
     <Divider />
     <ListItem
-      leftIcon={<i className="fa fa-users fa-2x" aria-hidden="true"></i>}
-      primaryText="Concurrent Mon Namers"
-      secondaryText={54321}
-    />
-    <Divider />
-    <ListItem
+      style={styles.listitem}
       leftIcon={<i className="fa fa-line-chart fa-2x" aria-hidden="true"></i>}
-      primaryText="High Score"
-      secondaryText={`${highScore.userInitials} named ${highScore.correctAnswerStack.length} Mon on ${moment.unix(highScore.endTime/1000).format("MMMM DD, YYYY, h:mm a")}`}
+      primaryText={`High Score: ${highScore.userInitials}`}
+      secondaryText={`Named ${highScore.correctAnswerStack.length} Mon on ${moment.unix(highScore.endTime/1000).format("MMMM DD, YYYY, h:mm a")}`}
     />
     <Divider />
     <ListItem
-      leftIcon={<i className="fa fa-hourglass-half fa-2x" aria-hidden="true"></i>}
-      primaryText="Fastest Playthru"
-      secondaryText="A Mere 5:30.27, Mon!"
+      style={styles.listitem}
+      leftIcon={<i className="fa fa-gamepad fa-2x" aria-hidden="true"></i>}
+      primaryText="Playthrus Served"
+      secondaryText={totalPlaythrus}
     />
     <Divider />
     <ListItem
+      style={styles.listitem}
       leftIcon={<i className="fa fa-arrow-up fa-2x pokemon-blue" aria-hidden="true"></i>}
       primaryText="Rightiest Mon"
       secondaryText={rightiest.name}
     />
     <Divider />
     <ListItem
+      style={styles.listitem}
       leftIcon={<i className="fa fa-arrow-down fa-2x pokemon-red" aria-hidden="true"></i>}
       primaryText="Wrongiest Mon"
       secondaryText={wrongiest.name}
     />
   </List>
 )
+
+/*
+ <Divider />
+    <ListItem
+      style={styles.listitem}
+      leftIcon={<i className="fa fa-users fa-2x" aria-hidden="true"></i>}
+      primaryText="Concurrent Mon Namers"
+      secondaryText={54321}
+    />
+    */

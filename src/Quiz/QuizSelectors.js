@@ -1,3 +1,4 @@
+
 import { createSelector } from 'reselect'
 
 const getShuffledQuizStack = (state) => state.quizInstance.shuffledQuizStack
@@ -9,9 +10,13 @@ const getUserInitials = (state) => state.quizInstance.userInitials
 const getQuizMetaData = (state) => state.quizMetaData
 
 export const getCurrentMon = createSelector(
-  getShuffledQuizStack,
-  (shuffledQuizStack) => {
-    return shuffledQuizStack[shuffledQuizStack.length-1]
+  [ getShuffledQuizStack, getCorrectAnswerStack ],
+  (shuffledQuizStack, correctAnswerStack) => {
+    if (shuffledQuizStack.length > 0) {
+      return shuffledQuizStack[shuffledQuizStack.length-1]
+    } else {
+      return correctAnswerStack[correctAnswerStack.length-1]
+    }
   }
 )
 
@@ -37,11 +42,14 @@ export const getPlaythruData = createSelector(
 		getStartTime, 
 		getEndTime, 
 		getClueCount, 
+    getShuffledQuizStack,
 		getCorrectAnswerIds,
 		getCurrentMon,
     getUserInitials,
 	],
-	(getQuizMetaData, getStartTime, getEndTime, getClueCount, getCorrectAnswerIds, getCurrentMon, getUserInitials) => {
+	(getQuizMetaData, getStartTime, getEndTime, getClueCount, getShuffledQuizStack, getCorrectAnswerIds, getCurrentMon, getUserInitials) => {
+    let wrongAnswer = getShuffledQuizStack.length > 0 ? getCurrentMon.id : null
+
 		return {
 			user_initials: getUserInitials,
       quiz_type: getQuizMetaData.quizType,
@@ -50,7 +58,7 @@ export const getPlaythruData = createSelector(
       end_time: getEndTime,
       clue_count: getClueCount,
       correct_answer_stack: getCorrectAnswerIds,
-      wrong_answer: getCurrentMon.id,
+      wrong_answer: wrongAnswer,
 		}
 	}
 )

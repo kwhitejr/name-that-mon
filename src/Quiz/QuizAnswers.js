@@ -11,9 +11,29 @@ const styles = {
     margin: 6,
   },
   radioButton: {
-    marginBottom: 16,
+    label: {
+      "fontSmooth": "never",
+      "WebkitFontSmoothing": "none",
+      "fontFamily": "'pokemon-font', monospace", 
+      "fontSize": "20px",
+    },
+    style: {
+      marginTop: 10,
+      marginBottom: 10,
+    },
   },
+  radioButtonGroup: {
+    marginLeft: "25px",
+  },
+  dialog: {
+    "fontSmooth": "never",
+    "WebkitFontSmoothing": "none",
+    "fontFamily": "'pokemon-font', monospace", 
+    "fontSize": "20px",
+  }
 };
+
+// let Pokeball = require("../assets/pokeball.ico")
 
 class QuizAnswers extends Component {
   state = {
@@ -40,7 +60,10 @@ class QuizAnswers extends Component {
       isAnswerSelected,
       userAnswer, 
       currentMon,
-      submitAnswer, 
+      shuffledQuizStack,
+      submitAnswer,
+      setQuizCompleteFlag, 
+      setAnswerCorrectFlag, 
       toggleMask,
       endTimer, 
     } = this.props
@@ -48,39 +71,64 @@ class QuizAnswers extends Component {
     if (isAnswerSelected && currentMon.id === userAnswer) {
       toggleMask()
       submitAnswer()
+      setAnswerCorrectFlag()
+      
+      if (shuffledQuizStack.length > 1) {
+      } else {
+        endTimer()
+        setQuizCompleteFlag()
+        this.handleOpen()
+      }
     } else {
       endTimer()
       this.handleOpen()
     }
   }
 
+  endQuiz() {
+    const { isAnswerCorrect, stackCorrectAnswer, endCurrentQuiz } = this.props
+    if (isAnswerCorrect) { stackCorrectAnswer() }
+    endCurrentQuiz(this.state.initialsValue)
+  }
+
   render() {
     const { 
       setAnswer, 
       isAnswerSelected, 
-      isAnswerSubmitted, 
+      isAnswerSubmitted,
+      isAnswerCorrect, 
+      isQuizComplete, 
       setNextQuestion, 
       answerChoices,
-      endCurrentQuiz, 
     } = this.props
+
+    const dialogTitle = isQuizComplete && isAnswerCorrect ? "Congrats!" : "Oh Noes!"
+    const dialogMsg = isQuizComplete && isAnswerCorrect ? "You Hacked Da Mainframe!" : "Game Over, Mon"
 
     const actions = [
       <FlatButton
         label="Continue"
         primary={true}
-        onTouchTap={() => {endCurrentQuiz(this.state.initialsValue)}}
+        onTouchTap={() => this.endQuiz()}
       />,
     ];
 
     return (
       <div className="answers">
-        <RadioButtonGroup name="answers" onChange={setAnswer} >
+        <RadioButtonGroup 
+          name="answers"  
+          onChange={setAnswer}
+          style={styles.radioButtonGroup} 
+        >
           {answerChoices.map( (datum, i) => (
             <RadioButton
               key={i}
               value={datum.id}
               label={datum.name}
-              style={styles.radioButton}
+              disabled={isAnswerSubmitted}
+              style={styles.radioButton.style}
+              labelStyle={styles.radioButton.label}
+              // checkedIcon={<Pokeball />}
             />
           ))}
         </RadioButtonGroup>
@@ -99,12 +147,13 @@ class QuizAnswers extends Component {
           onTouchTap={setNextQuestion}
         />
         <Dialog
-          title="Oh Noes!"
+          title={dialogTitle}
           actions={actions}
+          style={styles.dialog}
           modal={true}
           open={this.state.dialogOpen}
         >
-          Game Over, Mon.
+          {dialogMsg}
           <div>
             <TextField
               id="text-field-controlled"
@@ -136,36 +185,3 @@ QuizAnswers.propTypes = {
 };
 
 export default QuizAnswers;
-
-/*
-class TextFieldInitials extends Component {
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      value: "",
-    };
-  }
-
-  handleChange = (event) => {
-    this.setState({
-      value: event.target.value,
-    });
-  };
-
-  render() {
-    return (
-      <div>
-        <TextField
-          id="text-field-controlled"
-          hintText="Inititals"
-          maxLength="4"
-          value={this.state.value}
-          onChange={this.handleChange}
-        />
-      </div>
-    );
-  }
-}
-*/

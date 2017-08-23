@@ -13,16 +13,8 @@ const ResultsTable = ({ resetThenHome, resetThenRestart }) => (
     <RaisedButton 
       label="Home"
       primary={true}
-      // disabled={!isAnswerSelected}
       style={styles.raisedButton}
       onTouchTap={resetThenHome}
-    />
-    <RaisedButton 
-      label="Restart"
-      secondary={true}
-      // disabled={!isAnswerSubmitted}
-      style={styles.raisedButton}
-      onTouchTap={resetThenRestart}
     />
   </div>
 )

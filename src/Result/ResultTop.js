@@ -5,14 +5,20 @@ import { GridList, GridTile } from 'material-ui/GridList';
 const styles = {
   gridTile: {
     backgroundColor: "gray",
-    // height: 200,
-    width: 200,
+    // height: "50%",
+    width: "50%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    // color: "black",
   }
 }
 
 const ResultTop = ({ wrongAnswer }) => (
   <div className="top">
-    <GridList>
+    <GridList
+      cols={1}
+      cellHeight={200}
+    >
       <GridTile
         key={wrongAnswer.id}
         actionPosition="right"

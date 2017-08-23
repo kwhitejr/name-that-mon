@@ -2,6 +2,7 @@ import {
   SET_RIGHTIEST, 
   SET_WRONGIEST,
   SET_HIGH_SCORE,
+  SET_TOTAL_PLAYTHRUS,
 } from './StatsActionTypes'
 
 const INITIAL_STATE = { 
@@ -27,7 +28,8 @@ const INITIAL_STATE = {
     clueCount: 0,
     correctAnswerStack: [],
     wrongAnswer: null,
-  }  
+  },
+  totalPlaythrus: 0,  
 };
 
 export default function (state = INITIAL_STATE, action) {
@@ -51,7 +53,9 @@ export default function (state = INITIAL_STATE, action) {
           correctAnswerStack: action.payload.correct_answer_stack,
           wrongAnswer: action.payload.wrong_answer, 
         }
-      }; 
+      };
+    case SET_TOTAL_PLAYTHRUS:
+      return { ...state, totalPlaythrus: action.payload }; 
   }
 
   return state;

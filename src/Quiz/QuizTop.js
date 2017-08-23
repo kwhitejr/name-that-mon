@@ -10,9 +10,15 @@ import Dialog from 'material-ui/Dialog';
 const styles = {
   gridTile: {
     backgroundColor: "gray",
-    // height: 200,
-    width: 200,
-  }
+    // height: "50%",
+    width: "50%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    // color: "black",
+  },
+  gridList: {
+
+  },
 }
 
 class QuizTop extends Component {
@@ -48,12 +54,13 @@ class QuizTop extends Component {
       <div className="top">
         <GridList
           cols={1}
+          cellHeight={200}
         >
           <GridTile
             key={currentMon.id}
             actionIcon={<IconButton onTouchTap={this.handleOpen}><HelpOutline color="white" /></IconButton>}
             actionPosition="right"
-            title="Name That Mon!"
+            title="Who dis?"
             titlePosition="top"
             titleBackground="linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
             style={styles.gridTile}
@@ -62,7 +69,7 @@ class QuizTop extends Component {
               src={imgUrl} 
               id="target-mon" 
               className="mask" 
-              alt="Name that Mon" 
+              alt="Name that Mon"
             />
           </GridTile>
         </GridList>
