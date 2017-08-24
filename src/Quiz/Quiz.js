@@ -21,7 +21,8 @@ import {
 
 import { 
   getCurrentMon,
-  getQuizLength
+  getQuizLength,
+  getAnswerChoices,
 } from './QuizSelectors'
 
 import QuizTop from './QuizTop';
@@ -35,9 +36,21 @@ const toggleMask = () => {
   pokemon.classList.toggle('mask');
 }
 
+const stackCorrectAnswerHelper = (shuffledQuizStack, correctAnswerStack) => {
+  const lastDatum = shuffledQuizStack[shuffledQuizStack.length-1]
+  correctAnswerStack.push(lastDatum)
+
+  const newObj = {
+    shuffledQuizStack: shuffledQuizStack.slice(0,-1) || [],
+    correctAnswerStack: correctAnswerStack,
+  };
+  return newObj;
+}
+
 export class Quiz extends Component {
 
   componentWillMount() {
+    // TODO: refactor this away
     const { resetThenHome } = this.props
     if (!this.props.shuffledQuizStack || !this.props.currentMon) {
       resetThenHome()
@@ -56,6 +69,8 @@ export class Quiz extends Component {
         <QuizAnswers 
           {...this.props}
           toggleMask={toggleMask}
+          getAnswerChoices={getAnswerChoices}
+          stackCorrectAnswerHelper={stackCorrectAnswerHelper}
         />
       </div>          
     )
@@ -77,17 +92,17 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setAnswer:        (event, value) => dispatch(setAnswer(event, value)),
-  reset:            () => dispatch(reset()),
-  submitAnswer:     () => dispatch(submitAnswer()),
-  setNextQuestion:  () => dispatch(setNextQuestion()),
+  setAnswer:            (event, value) => dispatch(setAnswer(event, value)),
+  reset:                () => dispatch(reset()),
+  submitAnswer:         () => dispatch(submitAnswer()),
+  setNextQuestion:      (arrObj, answerChoices) => dispatch(setNextQuestion(arrObj, answerChoices)),
   setQuizCompleteFlag:  () => dispatch(setQuizCompleteFlag()),
   setAnswerCorrectFlag: () => dispatch(setAnswerCorrectFlag()),
-  stackCorrectAnswer:   () => dispatch(stackCorrectAnswer()),
-  endTimer:         () => dispatch(endTimer()),
-  endCurrentQuiz:   (userInitials) => dispatch(endCurrentQuiz(userInitials)),
-  resetThenHome:    () => dispatch(resetThenHome()),
-  useClue:          () => dispatch(useClue()),
+  stackCorrectAnswer:   (arrObj) => dispatch(stackCorrectAnswer(arrObj)),
+  endTimer:             () => dispatch(endTimer()),
+  endCurrentQuiz:       (userInitials) => dispatch(endCurrentQuiz(userInitials)),
+  resetThenHome:        () => dispatch(resetThenHome()),
+  useClue:              () => dispatch(useClue()),
 });
 
 Quiz.propTypes = {

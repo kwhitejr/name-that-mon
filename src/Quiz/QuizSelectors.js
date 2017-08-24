@@ -1,4 +1,4 @@
-
+import { shuffle } from '../common'
 import { createSelector } from 'reselect'
 
 const getShuffledQuizStack = (state) => state.quizInstance.shuffledQuizStack
@@ -61,4 +61,24 @@ export const getPlaythruData = createSelector(
       wrong_answer: wrongAnswer,
 		}
 	}
+)
+
+export const getAnswerChoices = createSelector(
+  [ getShuffledQuizStack, getCurrentMon ],
+  (getShuffledQuizStack, getCurrentMon) => {
+    let answerChoices = []
+    answerChoices.push(getCurrentMon)
+
+    // add bogus answers
+    const remainingMon = getShuffledQuizStack.length > 3 ? shuffle(getShuffledQuizStack.slice(0,getShuffledQuizStack.length-1)).slice(0,3) : getShuffledQuizStack.slice(0,getShuffledQuizStack.length-1)
+
+    remainingMon.forEach( (obj) => {
+      answerChoices.push(obj);
+    });
+
+    const shuffledAnswerChoices = answerChoices.length > 2 ? shuffle(answerChoices) : answerChoices
+
+    // shuffle the order
+    return shuffledAnswerChoices
+  }
 )

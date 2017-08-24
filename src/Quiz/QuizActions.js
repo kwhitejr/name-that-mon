@@ -93,19 +93,16 @@ export function setAnswer(event, value) {
   return { type: SET_ANSWER, payload: value }
 }
 
-export function stackCorrectAnswer() {
-  return (dispatch, getState) => {
-    let state = getState().quizInstance
-    dispatch({ type: STACK_CORRECT_ANSWER, payload: stackCorrectAnswerHelper(state.shuffledQuizStack, state.correctAnswerStack) })
-  }
+export function stackCorrectAnswer(arrObj) {
+  return { type: STACK_CORRECT_ANSWER, payload: arrObj }
 }
 
-export function setNextQuestion() {
+export function setNextQuestion(arrObj, answerChoices) {
   return (dispatch, getState) => {
     let state = getState().quizInstance
     dispatch({ type: INCREMENT_CLUE_COUNT })
-    dispatch({ type: STACK_CORRECT_ANSWER, payload: stackCorrectAnswerHelper(state.shuffledQuizStack, state.correctAnswerStack) })
-    dispatch({ type: SET_ANSWER_CHOICES, payload: getAnswerChoices(getState().quizInstance.shuffledQuizStack) })
+    dispatch({ type: STACK_CORRECT_ANSWER, payload: arrObj) })
+    dispatch({ type: SET_ANSWER_CHOICES, payload: answerChoices })
   }
 }
 

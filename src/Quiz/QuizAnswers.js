@@ -39,23 +39,23 @@ class QuizAnswers extends Component {
   state = {
     dialogOpen: false,
     initialsValue: "",
-  };
+  }
 
   handleOpen = () => {
     this.setState({dialogOpen: true});
-  };
+  }
 
   handleClose = () => {
     this.setState({dialogOpen: false});
-  };
+  }
 
-  handleChange = (event) => {
+  handleInitialsChange = (event) => {
     this.setState({
       initialsValue: event.target.value.toUpperCase(),
     });
-  };
+  }
 
-  checkAnswer() {
+  handleCheckAnswer = () => {
     const {
       isAnswerSelected,
       userAnswer, 
@@ -85,21 +85,41 @@ class QuizAnswers extends Component {
     }
   }
 
-  endQuiz() {
-    const { isAnswerCorrect, stackCorrectAnswer, endCurrentQuiz } = this.props
-    if (isAnswerCorrect) { stackCorrectAnswer() }
+  handleSetNextQuestion = () => {
+    const { stackCorrectAnswerHelper, shuffledQuizStack, correctAnswerStack, getAnswerChoices, setNextQuestion } = this.props
+    const arrObj = stackCorrectAnswerHelper(shuffledQuizStack, correctAnswerStack) 
+    const answerChoices = getAnswerChoices()
+
+    setNextQuestion(arrObj, answerChoices)
+  }
+
+  handleEndQuiz = () => {
+    const { 
+      isAnswerCorrect, 
+      shuffledQuizStack, 
+      correctAnswerStack, 
+      stackCorrectAnswer, 
+      stackCorrectAnswerHelper, 
+      endCurrentQuiz 
+    } = this.props
+
+    if (isAnswerCorrect) { 
+      stackCorrectAnswer(stackCorrectAnswerHelper(shuffledQuizStack, correctAnswerStack)) 
+    }
+
     endCurrentQuiz(this.state.initialsValue)
   }
 
   render() {
     const { 
-      setAnswer, 
       isAnswerSelected, 
       isAnswerSubmitted,
       isAnswerCorrect, 
-      isQuizComplete, 
-      setNextQuestion, 
+      isQuizComplete,
+      shuffledQuizStack, 
       answerChoices,
+      setAnswer, 
+      setNextQuestion, 
     } = this.props
 
     const dialogTitle = isQuizComplete && isAnswerCorrect ? "Congrats!" : "Oh Noes!"
@@ -109,7 +129,7 @@ class QuizAnswers extends Component {
       <FlatButton
         label="Continue"
         primary={true}
-        onTouchTap={() => this.endQuiz()}
+        onTouchTap={this.handleEndQuiz}
       />,
     ];
 
@@ -137,14 +157,14 @@ class QuizAnswers extends Component {
           primary={isAnswerSelected}
           disabled={!isAnswerSelected}
           style={styles.raisedButton}
-          onTouchTap={this.checkAnswer.bind(this)}
+          onTouchTap={this.handleCheckAnswer}
         />
         <RaisedButton 
           label="Next"
           secondary={isAnswerSubmitted}
           disabled={!isAnswerSubmitted}
           style={styles.raisedButton}
-          onTouchTap={setNextQuestion}
+          onTouchTap={this.handleSetNextQuestion}
         />
         <Dialog
           title={dialogTitle}
@@ -160,7 +180,7 @@ class QuizAnswers extends Component {
               hintText="Inititals"
               maxLength="3"
               value={this.state.initialsValue}
-              onChange={this.handleChange}
+              onChange={this.handleInitialsChange}
             />
           </div>
         </Dialog>
