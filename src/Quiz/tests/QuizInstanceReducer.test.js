@@ -27,8 +27,8 @@ describe('Quiz Reducer', () => {
 			  	{name: 'Pikachu'}, 
 			  	{name: 'Squirtle'}
 			  ], 
-			  shuffledQuizStack: [{},{},{},{},{}], 
-			  correctAnswerStack: [{},{},{},{},{}],
+			  questionStack: [{},{},{},{},{}], 
+			  answerStack: [{},{},{},{},{}],
 			  startTime: 1500993571199,
 			  endTime: 1500993592773,
 			  clueCount: 7,
@@ -69,7 +69,7 @@ describe('Quiz Reducer', () => {
   // GET_QUIZ_DATA
   it('should handle GET_QUIZ_DATA', () => {
     expect(quizReducer({
-    	shuffledQuizStack: [],
+    	questionStack: [],
     }, {
     	type: types.GET_QUIZ_DATA,
     	payload: [
@@ -79,7 +79,7 @@ describe('Quiz Reducer', () => {
 		  	{name: 'Squirtle'}
 		  ]
     })).toEqual({
-  		shuffledQuizStack: [
+  		questionStack: [
 		  	{name: 'Bulbasaur'}, 
 		  	{name: 'Charmander'}, 
 		  	{name: 'Pikachu'}, 
@@ -106,10 +106,10 @@ describe('Quiz Reducer', () => {
   	// this reducer contains the randomization logic 
   });
 
-  // STACK_CORRECT_ANSWER
-  it('should handle STACK_CORRECT_ANSWER', () => {
+  // STACK_ANSWER
+  it('should handle STACK_ANSWER', () => {
     expect(quizReducer({
-    	shuffledQuizStack: [
+    	questionStack: [
 		  	{name: 'Bulbasaur'}, 
 		  	{name: 'Charmander'}, 
 		  	{name: 'Pikachu'}, 
@@ -119,7 +119,7 @@ describe('Quiz Reducer', () => {
 		  	{name: 'Gyrados'},
 		  	{name: 'Magikarp'},
 		  ],
-	    correctAnswerStack: [
+	    answerStack: [
 		  	{name: 'Venusaur'}, 
 		  	{name: 'Charizard'}, 
 		  	{name: 'Raichu'}, 
@@ -136,9 +136,9 @@ describe('Quiz Reducer', () => {
 		  	{name: 'Magikarp'},
 		  ],
     }, {
-    	type: types.STACK_CORRECT_ANSWER,
+    	type: types.STACK_ANSWER,
       payload: {
-        shuffledQuizStack: [
+        questionStack: [
           {name: 'Bulbasaur'}, 
           {name: 'Charmander'}, 
           {name: 'Pikachu'}, 
@@ -147,7 +147,7 @@ describe('Quiz Reducer', () => {
           {name: 'Beedrill'}, 
           {name: 'Gyrados'},
         ],
-        correctAnswerStack: [
+        answerStack: [
           {name: 'Venusaur'}, 
           {name: 'Charizard'}, 
           {name: 'Raichu'}, 
@@ -156,7 +156,7 @@ describe('Quiz Reducer', () => {
         ],
       }
     })).toEqual({
-  		shuffledQuizStack: [
+  		questionStack: [
 		  	{name: 'Bulbasaur'}, 
 		  	{name: 'Charmander'}, 
 		  	{name: 'Pikachu'}, 
@@ -165,7 +165,7 @@ describe('Quiz Reducer', () => {
 		  	{name: 'Beedrill'}, 
 		  	{name: 'Gyrados'},
 		  ],
-	    correctAnswerStack: [
+	    answerStack: [
 		  	{name: 'Venusaur'}, 
 		  	{name: 'Charizard'}, 
 		  	{name: 'Raichu'}, 

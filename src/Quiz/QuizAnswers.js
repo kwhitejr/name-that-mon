@@ -33,11 +33,12 @@ const styles = {
   }
 };
 
-// let Pokeball = require("../assets/pokeball.ico")
-
 class QuizAnswers extends Component {
   state = {
     dialogOpen: false,
+    isAnswerSelected: false,
+    isAnswerSubmitted: false,
+    isAnswerCorrect: false,
     initialsValue: "",
   }
 
@@ -55,70 +56,74 @@ class QuizAnswers extends Component {
     });
   }
 
-  handleCheckAnswer = () => {
+  handleSelectedAnswer = (event, value) => {
+    this.setState({isAnswerSelected: true});
+    this.props.setSelectedAnswer(value)
+  }
+
+  handleSubmitAnswer = () => {
     const {
-      isAnswerSelected,
+      isAnswerSelected
+    } = this.state
+
+    const {
       userAnswer, 
       currentMon,
-      shuffledQuizStack,
-      submitAnswer,
-      setQuizCompleteFlag, 
-      setAnswerCorrectFlag, 
+      questionStack,
       toggleMask,
-      endTimer, 
+      endQuiz, 
     } = this.props
 
+    // Set Flags
+    this.setState({
+      isAnswerSelected: false,
+      isAnswerSubmitted: true,
+    });
+
     if (isAnswerSelected && currentMon.id === userAnswer) {
+      // Branch 1a: Correct Answer
       toggleMask()
-      submitAnswer()
-      setAnswerCorrectFlag()
+      this.setState({isAnswerCorrect: true});
       
-      if (shuffledQuizStack.length > 1) {
-      } else {
-        endTimer()
-        setQuizCompleteFlag()
+      if (questionStack.length === 1) {
+      // Branch 1b: Quiz Finished (100%!)
+        endQuiz(true) // quizComplete = true, incrementClue, stackAnswer
         this.handleOpen()
       }
     } else {
-      endTimer()
+      // Branch 2: Incorrect Answer
+      endQuiz(false) // quizComplete = false, incrementClue
       this.handleOpen()
     }
   }
 
   handleSetNextQuestion = () => {
-    const { stackCorrectAnswerHelper, shuffledQuizStack, correctAnswerStack, getAnswerChoices, setNextQuestion } = this.props
-    const arrObj = stackCorrectAnswerHelper(shuffledQuizStack, correctAnswerStack) 
-    const answerChoices = getAnswerChoices()
-
-    setNextQuestion(arrObj, answerChoices)
+    this.setState({
+      dialogOpen: false,
+      isAnswerSelected: false,
+      isAnswerSubmitted: false,
+      isAnswerCorrect: false,
+    })
+    this.props.setNextQuestion()
   }
 
-  handleEndQuiz = () => {
-    const { 
-      isAnswerCorrect, 
-      shuffledQuizStack, 
-      correctAnswerStack, 
-      stackCorrectAnswer, 
-      stackCorrectAnswerHelper, 
-      endCurrentQuiz 
-    } = this.props
-
-    if (isAnswerCorrect) { 
-      stackCorrectAnswer(stackCorrectAnswerHelper(shuffledQuizStack, correctAnswerStack)) 
-    }
-
-    endCurrentQuiz(this.state.initialsValue)
+  handleMoveToResults = () => {
+    this.props.setUserInitials(this.state.initialsValue)
+    this.props.moveToResults()
   }
 
-  render() {
-    const { 
+  render = () => {
+    const {
       isAnswerSelected, 
       isAnswerSubmitted,
-      isAnswerCorrect, 
+      isAnswerCorrect,
+    } = this.state
+
+    const { 
       isQuizComplete,
-      shuffledQuizStack, 
+      questionStack, 
       answerChoices,
-      setAnswer, 
+      setUserAnswer, 
       setNextQuestion, 
     } = this.props
 
@@ -129,7 +134,7 @@ class QuizAnswers extends Component {
       <FlatButton
         label="Continue"
         primary={true}
-        onTouchTap={this.handleEndQuiz}
+        onTouchTap={this.handleMoveToResults}
       />,
     ];
 
@@ -137,7 +142,7 @@ class QuizAnswers extends Component {
       <div className="answers">
         <RadioButtonGroup 
           name="answers"  
-          onChange={setAnswer}
+          onChange={this.handleSetUserAnswer}
           style={styles.radioButtonGroup} 
         >
           {answerChoices.map( (datum, i) => (
@@ -157,7 +162,7 @@ class QuizAnswers extends Component {
           primary={isAnswerSelected}
           disabled={!isAnswerSelected}
           style={styles.raisedButton}
-          onTouchTap={this.handleCheckAnswer}
+          onTouchTap={this.handleSubmitAnswer}
         />
         <RaisedButton 
           label="Next"
@@ -166,6 +171,7 @@ class QuizAnswers extends Component {
           style={styles.raisedButton}
           onTouchTap={this.handleSetNextQuestion}
         />
+
         <Dialog
           title={dialogTitle}
           actions={actions}
@@ -189,19 +195,19 @@ class QuizAnswers extends Component {
   }
 }
 
-QuizAnswers.propTypes = {
-  reset: PropTypes.func,
-  setAnswer: PropTypes.func,
-  setNextQuestion: PropTypes.func,
-  useClue: PropTypes.func,
-  endCurrentQuiz: PropTypes.func,
-  toggleMask: PropTypes.func,
-  isAnswerSelected: PropTypes.bool,
-  isAnswerSubmitted: PropTypes.bool,
-  isClueUsed: PropTypes.bool,
-  userAnswer: PropTypes.number,
-  currentMon: PropTypes.object,
-  answerChoices: PropTypes.array,
-};
+// QuizAnswers.propTypes = {
+//   reset: PropTypes.func,
+//   setUserAnswer: PropTypes.func,
+//   setNextQuestion: PropTypes.func,
+//   useClue: PropTypes.func,
+//   endCurrentQuiz: PropTypes.func,
+//   toggleMask: PropTypes.func,
+//   isAnswerSelected: PropTypes.bool,
+//   isAnswerSubmitted: PropTypes.bool,
+//   isClueUsed: PropTypes.bool,
+//   userAnswer: PropTypes.number,
+//   currentMon: PropTypes.object,
+//   answerChoices: PropTypes.array,
+// };
 
 export default QuizAnswers;

@@ -2,7 +2,7 @@ import * as selectors from '../QuizSelectors'
 
 const mockState = {
 	quizInstance: {
-		shuffledQuizStack: [
+		questionStack: [
 	  	{name: 'Bulbasaur', id: 1}, 
 	  	{name: 'Charmander', id: 2}, 
 	  	{name: 'Pikachu', id: 3}, 
@@ -11,7 +11,7 @@ const mockState = {
 	  	{name: 'Beedrill', id: 6}, 
 	  	{name: 'Gyrados', id: 7},
 	  ],
-	  correctAnswerStack: [
+	  answerStack: [
 	  	{name: 'Venusaur', id: 8}, 
 	  	{name: 'Charizard', id: 9}, 
 	  	{name: 'Raichu', id: 10}, 

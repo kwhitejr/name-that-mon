@@ -9,12 +9,12 @@ const style = {
   // marginRight: 15,
 }
 
-export const QuizProgress = ({ correctAnswerStack, quizLength }) => (
+export const QuizProgress = ({ answerStack, quizLength }) => (
   <div>
     <LinearProgress 
       mode="determinate"
       style={style} 
-      value={correctAnswerStack.length} 
+      value={answerStack.length} 
       max={quizLength}
       color="#f00000" 
     />
@@ -22,7 +22,7 @@ export const QuizProgress = ({ correctAnswerStack, quizLength }) => (
 );
 
 QuizProgress.propTypes = {
-  correctAnswerStack: PropTypes.array,
+  answerStack: PropTypes.array,
   quizLength: PropTypes.number,
 };
 

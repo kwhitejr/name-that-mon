@@ -10,7 +10,7 @@ export default function (state = INITIAL_STATE, action) {
     case RESET:
       return { INITIAL_STATE };
     // case GET_QUIZ_DATA:
-    //   return { ...state, shuffledQuizStack: action.payload };
+    //   return { ...state, questionStack: action.payload };
     // case STORE_USER:
     //   return { ...state, user: action.payload };
   }

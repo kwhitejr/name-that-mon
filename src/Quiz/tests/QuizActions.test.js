@@ -50,7 +50,7 @@ describe('actions', () => {
   	nock(API_URL)
       .get(`/pokemon/generation/${generationNumber}`)
       .reply(200, [{},{},{},{},{}])
-  	// const res = {shuffledQuizStack: [
+  	// const res = {questionStack: [
   	// 	{id: 1},
   	// 	{id: 2},
   	// 	{id: 3},
@@ -68,7 +68,7 @@ describe('actions', () => {
 
     const store = mockStore({
     	quizInstance: {
-    		// shuffledQuizStack: [],
+    		// questionStack: [],
     		// answerChoices: [],
     		// startTime: null,
 			},
@@ -109,10 +109,10 @@ describe('actions', () => {
   })
 
   // setNextQuestion
-  it('setNextQuestion dispatches INCREMENT_CLUE_COUNT, STACK_CORRECT_ANSWER, & SET_ANSWER_CHOICES', () => {
+  it('setNextQuestion dispatches INCREMENT_CLUE_COUNT, STACK_ANSWER, & SET_ANSWER_CHOICES', () => {
     const expectedActions = [
       { type: types.INCREMENT_CLUE_COUNT },
-      { type: types.STACK_CORRECT_ANSWER, payload: {shuffledQuizStack: [{},{},{},{}], correctAnswerStack: [{},{}]} },
+      { type: types.STACK_ANSWER, payload: {questionStack: [{},{},{},{}], answerStack: [{},{}]} },
       { type: types.SET_ANSWER_CHOICES, payload: [{},{},{},{}] },
     ]
 
@@ -120,8 +120,8 @@ describe('actions', () => {
     	quizMetaData: {
     	},
     	quizInstance: {
-    		shuffledQuizStack: [{},{},{},{},{}],
-    		correctAnswerStack: [{}]
+    		questionStack: [{},{},{},{},{}],
+    		answerStack: [{}]
     	}
     })
 

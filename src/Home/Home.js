@@ -29,9 +29,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  beginGenerationQuiz:  (generationNumber) => dispatch(beginGenerationQuiz(generationNumber)),
-  beginPokemonTypeQuiz:  (pokemonType) => dispatch(beginPokemonTypeQuiz(pokemonType)),
-  beginLegendaryQuiz:  () => dispatch(beginLegendaryQuiz()),
+  fetchQuizData:  (quizType, quizSet) => dispatch(fetchQuizData(quizType, quizSet)),
 });
 
 export default connect(

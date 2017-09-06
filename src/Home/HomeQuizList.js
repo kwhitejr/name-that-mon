@@ -24,92 +24,92 @@ const styles = {
 
 const pokemonTypes = [
   { 
-    name: "Normal", 
+    quizSet: "Normal", 
     sprite: null,
     color: "#C4C1BB",
   },
   {
-    name: "Bug",
+    quizSet: "Bug",
     sprite: null,
     color: "#A2B21B",
   },
   {
-    name: "Dark",
+    quizSet: "Dark",
     sprite: null,
     color: "#3C2C22",
   },
   {
-    name: "Dragon",
+    quizSet: "Dragon",
     sprite: null,
     color: "#735BDC",
   },
   {
-    name: "Electric",
+    quizSet: "Electric",
     sprite: null,
     color: "#F9B816",
   },
   {
-    name: "Fairy",
+    quizSet: "Fairy",
     sprite: null,
     color: "#F8B2F4",
   },
   {
-    name: "Fighting",
+    quizSet: "Fighting",
     sprite: null,
     color: "#7E321B",
   },
   {
-    name: "Fire",
+    quizSet: "Fire",
     sprite: null,
     color: "#C82003",
   },
   {
-    name: "Flying",
+    quizSet: "Flying",
     sprite: null,
     color: "#8BA1EE",
   },
   {
-    name: "Ghost",
+    quizSet: "Ghost",
     sprite: null,
     color: "#5E5EB0",
   },
   {
-    name: "Grass",
+    quizSet: "Grass",
     sprite: null,
     color: "#66BB2B",
   },
   {
-    name: "Ground",
+    quizSet: "Ground",
     sprite: null,
     color: "#CAAB4F",
   },
   {
-    name: "Ice",
+    quizSet: "Ice",
     sprite: null,
     color: "#6BD3F4",
   },
   {
-    name: "Poison",
+    quizSet: "Poison",
     sprite: null,
     color: "#68296A",
   },
   {
-    name: "Psychic",
+    quizSet: "Psychic",
     sprite: null,
     color: "#E03167",
   },
   {
-    name: "Rock",
+    quizSet: "Rock",
     sprite: null,
     color: "#9E853E",
   },
   {
-    name: "Steel",
+    quizSet: "Steel",
     sprite: null,
     color: "#8F8EA1",
   },
   {
-    name: "Water",
+    quizSet: "Water",
     sprite: null,
     color: "#0D66C3",
   },
@@ -117,34 +117,33 @@ const pokemonTypes = [
 
 const pokemonGenerations = [
   {
-    number: 1,
+    quizSet: 1,
     sprite: null
   },
   {
-    number: 2,
+    quizSet: 2,
     sprite: null
   },
   {
-    number: 3,
+    quizSet: 3,
     sprite: null
   },
   {
-    number: 4,
+    quizSet: 4,
     sprite: null
   },
   {
-    number: 5,
+    quizSet: 5,
     sprite: null
   },
   {
-    number: 6,
+    quizSet: 6,
     sprite: null
   },
   {
-    number: 7,
+    quizSet: 7,
     sprite: null
   },
-
 ]
 
 let SelectableList = makeSelectable(List);
@@ -177,61 +176,70 @@ function wrapState(ComposedComponent) {
 
 SelectableList = wrapState(SelectableList);
 
-const HomeQuizList = ({ beginGenerationQuiz, beginPokemonTypeQuiz, beginLegendaryQuiz }) => (
-  <SelectableList defaultValue={null} >
-    <Subheader
-      style={styles.subheader}
-    >Pick a Quiz!</Subheader>
-    <Divider />
-    <ListItem
-      value="generation"
-      primaryText="Pokemon Generations"
-      primaryTogglesNestedList={true}
-      style={styles.listitem}
-      // hoverColor="#3B4CCA"
-      leftAvatar={<Avatar src="" />}
-      nestedItems={pokemonGenerations.map( (generation, i) => (
+class HomeQuizList extends Component {
+  handleFetchQuiz = (quizType, quizSet) => {
+    const { fetchQuizData } = this.props
+    fetchQuizData(quizType, quizSet)
+  }
+
+  render() {
+    <div>
+      <SelectableList defaultValue={null} >
+        <Subheader
+          style={styles.subheader}
+        >Pick a Quiz!</Subheader>
+        <Divider />
         <ListItem
-          key={i}
-          value={{ 
-            type: 'generation', 
-            value: generation.number 
-          }}
+          value="generation"
+          primaryText="Pokemon Generations"
+          primaryTogglesNestedList={true}
           style={styles.listitem}
-          primaryText={`Generation ${generation.number}`}
-          leftAvatar={<Avatar src={generation.sprite} />}
-          onTouchTap={beginGenerationQuiz.bind(this, generation.number)}
+          // hoverColor="#3B4CCA"
+          leftAvatar={<Avatar src="" />}
+          nestedItems={pokemonGenerations.map( (generation, i) => (
+            <ListItem
+              key={i}
+              value={{ 
+                type: 'generation', 
+                value: generation.quizSet 
+              }}
+              style={styles.listitem}
+              primaryText={`Generation ${generation.quizSet}`}
+              leftAvatar={<Avatar src={generation.sprite} />}
+              onTouchTap={this.handleFetchQuiz('generation', generation.quizSet)}
+            />
+          ))}
         />
-      ))}
-    />
-    <ListItem
-      value="type"
-      primaryText="Pokemon Types"
-      primaryTogglesNestedList={true}
-      style={styles.listitem}
-      // hoverColor="#cc0000"
-      leftAvatar={<Avatar src="" />}
-      nestedItems={pokemonTypes.map( (type, i) => (
         <ListItem
-          key={i}
-          value={type.name}
+          value="type"
+          primaryText="Pokemon Types"
+          primaryTogglesNestedList={true}
           style={styles.listitem}
-          primaryText={type.name}
-          hoverColor={type.color}
-          leftAvatar={<Avatar src={type.sprite} />}
-          onTouchTap={beginPokemonTypeQuiz.bind(this, type.name)}
+          // hoverColor="#cc0000"
+          leftAvatar={<Avatar src="" />}
+          nestedItems={pokemonTypes.map( (type, i) => (
+            <ListItem
+              key={i}
+              value={type.name}
+              style={styles.listitem}
+              primaryText={type.name}
+              hoverColor={type.color}
+              leftAvatar={<Avatar src={type.sprite} />}
+              onTouchTap={this.handleFetchQuiz('type', type.quizSet)}
+            />
+          ))}
         />
-      ))}
-    />
-    <ListItem
-      value="legendary"
-      primaryText="Legendary Pokemon"
-      style={styles.listitem}
-      // hoverColor="#b3a125"
-      leftAvatar={<Avatar src="" />}
-      onTouchTap={beginLegendaryQuiz}
-    />
-  </SelectableList>
-);
+        <ListItem
+          value="legendary"
+          primaryText="Legendary Pokemon"
+          style={styles.listitem}
+          // hoverColor="#b3a125"
+          leftAvatar={<Avatar src="" />}
+          onTouchTap={this.handleFetchQuiz('legendary', null)}
+        />
+      </SelectableList>
+    </div>
+  }
+}
 
 export default HomeQuizList;

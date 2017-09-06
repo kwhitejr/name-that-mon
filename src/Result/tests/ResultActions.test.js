@@ -52,7 +52,7 @@ describe('actions', () => {
 
     const store = mockStore({
       quizInstance: {
-        // shuffledQuizStack: [],
+        // questionStack: [],
         // answerChoices: [],
         // startTime: null,
       },

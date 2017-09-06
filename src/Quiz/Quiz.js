@@ -3,16 +3,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types'; 
 
 import { 
-  setAnswer,
-  reset, 
-  submitAnswer, 
-  setAnswerCorrectFlag,
-  setQuizCompleteFlag,
+  reset,
+  resetThenHome,
+  setSelectedAnswer,
   setNextQuestion,
-  stackCorrectAnswer,
-  endTimer,
-  endCurrentQuiz,
+  setQuizCompleteFlag,
   useClue,
+  endQuiz,
+  moveToResults,
 } from './QuizActions'
 
 import {
@@ -36,23 +34,23 @@ const toggleMask = () => {
   pokemon.classList.toggle('mask');
 }
 
-const stackCorrectAnswerHelper = (shuffledQuizStack, correctAnswerStack) => {
-  const lastDatum = shuffledQuizStack[shuffledQuizStack.length-1]
-  correctAnswerStack.push(lastDatum)
+// const stackCorrectAnswerHelper = (questionStack, answerStack) => {
+//   const lastDatum = questionStack[questionStack.length-1]
+//   answerStack.push(lastDatum)
 
-  const newObj = {
-    shuffledQuizStack: shuffledQuizStack.slice(0,-1) || [],
-    correctAnswerStack: correctAnswerStack,
-  };
-  return newObj;
-}
+//   const newObj = {
+//     questionStack: questionStack.slice(0,-1) || [],
+//     answerStack: answerStack,
+//   };
+//   return newObj;
+// }
 
 export class Quiz extends Component {
 
   componentWillMount() {
     // TODO: refactor this away
     const { resetThenHome } = this.props
-    if (!this.props.shuffledQuizStack || !this.props.currentMon) {
+    if (!this.props.questionStack || !this.props.currentMon) {
       resetThenHome()
     }
   }
@@ -69,8 +67,8 @@ export class Quiz extends Component {
         <QuizAnswers 
           {...this.props}
           toggleMask={toggleMask}
-          getAnswerChoices={getAnswerChoices}
-          stackCorrectAnswerHelper={stackCorrectAnswerHelper}
+          // getAnswerChoices={getAnswerChoices}
+          // stackCorrectAnswerHelper={stackCorrectAnswerHelper}
         />
       </div>          
     )
@@ -78,46 +76,40 @@ export class Quiz extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  isAnswerSelected:  state.quizInstance.isAnswerSelected,
-  isAnswerSubmitted:  state.quizInstance.isAnswerSubmitted,
-  isAnswerCorrect:  state.quizInstance.isAnswerCorrect,
-  isClueUsed:  state.quizInstance.isClueUsed,
-  isQuizComplete:  state.quizInstance.isQuizComplete,
-  userAnswer:  state.quizInstance.userAnswer,
-  shuffledQuizStack:  state.quizInstance.shuffledQuizStack,
-  answerChoices:  state.quizInstance.answerChoices,
-  correctAnswerStack:  state.quizInstance.correctAnswerStack,
-  currentMon: getCurrentMon(state),
-  quizLength: getQuizLength(state),
+  isClueUsed:         state.quizInstance.isClueUsed,
+  isQuizComplete:     state.quizInstance.isQuizComplete,
+  userAnswer:         state.quizInstance.userAnswer,
+  questionStack:      state.quizInstance.questionStack,
+  answerStack:        state.quizInstance.answerStack,
+  answerChoices:      getAnswerChoices(state),
+  currentMon:         getCurrentMon(state),
+  quizLength:         getQuizLength(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setAnswer:            (event, value) => dispatch(setAnswer(event, value)),
   reset:                () => dispatch(reset()),
-  submitAnswer:         () => dispatch(submitAnswer()),
-  setNextQuestion:      (arrObj, answerChoices) => dispatch(setNextQuestion(arrObj, answerChoices)),
-  setQuizCompleteFlag:  () => dispatch(setQuizCompleteFlag()),
-  setAnswerCorrectFlag: () => dispatch(setAnswerCorrectFlag()),
-  stackCorrectAnswer:   (arrObj) => dispatch(stackCorrectAnswer(arrObj)),
-  endTimer:             () => dispatch(endTimer()),
-  endCurrentQuiz:       (userInitials) => dispatch(endCurrentQuiz(userInitials)),
   resetThenHome:        () => dispatch(resetThenHome()),
-  useClue:              () => dispatch(useClue()),
+  setSelectedAnswer:    (value) => dispatch(setSelectedAnswer(value)),
+  setNextQuestion:      () => dispatch(setNextQuestion()),
+  setQuizCompleteFlag:  () => dispatch(setQuizCompleteFlag()),
+  incrementClueCount:   () => dispatch(incrementClueCount()),
+  endQuiz:              () => dispatch(endQuiz()),
+  moveToResults:        () => dispatch(moveToResults()),
 });
 
-Quiz.propTypes = {
-  reset: PropTypes.func,
-  setAnswer: PropTypes.func,
-  submitAnswer: PropTypes.func,
-  setNextQuestion: PropTypes.func,
-  useClue: PropTypes.func,
-  endTimer: PropTypes.func,
-  endCurrentQuiz: PropTypes.func,
-  isAnswerSelected: PropTypes.bool,
-  isAnswerSubmitted: PropTypes.bool,
-  isClueUsed: PropTypes.bool,
-  currentMon: PropTypes.object,
-};
+// Quiz.propTypes = {
+//   reset: PropTypes.func,
+//   setSelectedAnswer: PropTypes.func,
+//   submitAnswer: PropTypes.func,
+//   setNextQuestion: PropTypes.func,
+//   useClue: PropTypes.func,
+//   endTimer: PropTypes.func,
+//   endCurrentQuiz: PropTypes.func,
+//   isAnswerSelected: PropTypes.bool,
+//   isAnswerSubmitted: PropTypes.bool,
+//   isClueUsed: PropTypes.bool,
+//   currentMon: PropTypes.object,
+// };
 
 export default connect(
   mapStateToProps,

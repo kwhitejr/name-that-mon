@@ -18,7 +18,7 @@ const styles = {
   },
 }
 
-const ResultTable = ({ correctAnswerStack, lastCorrectAnswer, wrongAnswer, quizTotalTime, isQuizComplete }) => (
+const ResultTable = ({ answerStack, lastCorrectAnswer, wrongAnswer, quizTotalTime, isQuizComplete }) => (
   <Table selectable={false} style={styles.table}>
     <TableBody displayRowCheckbox={false} >
       <TableRow>
@@ -27,7 +27,7 @@ const ResultTable = ({ correctAnswerStack, lastCorrectAnswer, wrongAnswer, quizT
       </TableRow>
       <TableRow>
         <TableRowColumn>Answer Streak</TableRowColumn>
-        <TableRowColumn>{correctAnswerStack.length}</TableRowColumn>
+        <TableRowColumn>{answerStack.length}</TableRowColumn>
       </TableRow>
       <TableRow>
         <TableRowColumn>Total Quiz Time</TableRowColumn>
@@ -36,9 +36,9 @@ const ResultTable = ({ correctAnswerStack, lastCorrectAnswer, wrongAnswer, quizT
       <TableRow>
         <TableRowColumn>Avg Answer Time</TableRowColumn>
         { isQuizComplete ? (
-          <TableRowColumn>{moment(quizTotalTime/correctAnswerStack.length).format("mm:ss.SS")}</TableRowColumn>            
+          <TableRowColumn>{moment(quizTotalTime/answerStack.length).format("mm:ss.SS")}</TableRowColumn>            
         ) : (
-          <TableRowColumn>{moment(quizTotalTime/(correctAnswerStack.length + 1)).format("mm:ss.SS")}</TableRowColumn>
+          <TableRowColumn>{moment(quizTotalTime/(answerStack.length + 1)).format("mm:ss.SS")}</TableRowColumn>
         )}
       </TableRow>
     </TableBody>
@@ -47,7 +47,7 @@ const ResultTable = ({ correctAnswerStack, lastCorrectAnswer, wrongAnswer, quizT
 
 ResultTable.propTypes = {
   wrongAnswer: PropTypes.object,
-  correctAnswerStack: PropTypes.array,
+  answerStack: PropTypes.array,
   quizTotalTime: PropTypes.number,
 };
 

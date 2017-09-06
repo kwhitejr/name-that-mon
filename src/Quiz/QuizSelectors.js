@@ -1,8 +1,8 @@
 import { shuffle } from '../common'
 import { createSelector } from 'reselect'
 
-const getShuffledQuizStack = (state) => state.quizInstance.shuffledQuizStack
-const getCorrectAnswerStack = (state) => state.quizInstance.correctAnswerStack
+const getQuestionStack = (state) => state.quizInstance.questionStack
+const getAnswerStack = (state) => state.quizInstance.answerStack
 const getStartTime = (state) => state.quizInstance.startTime
 const getEndTime = (state) => state.quizInstance.endTime
 const getClueCount = (state) => state.quizInstance.clueCount
@@ -10,27 +10,27 @@ const getUserInitials = (state) => state.quizInstance.userInitials
 const getQuizMetaData = (state) => state.quizMetaData
 
 export const getCurrentMon = createSelector(
-  [ getShuffledQuizStack, getCorrectAnswerStack ],
-  (shuffledQuizStack, correctAnswerStack) => {
-    if (shuffledQuizStack.length > 0) {
-      return shuffledQuizStack[shuffledQuizStack.length-1]
+  [ getQuestionStack, getAnswerStack ],
+  (questionStack, answerStack) => {
+    if (questionStack.length > 0) {
+      return questionStack[questionStack.length-1]
     } else {
-      return correctAnswerStack[correctAnswerStack.length-1]
+      return answerStack[answerStack.length-1]
     }
   }
 )
 
 export const getQuizLength = createSelector(
-  [ getShuffledQuizStack, getCorrectAnswerStack ],
-  (getShuffledQuizStack, getCorrectAnswerStack) => {
-    return getShuffledQuizStack.length + getCorrectAnswerStack.length
+  [ getQuestionStack, getAnswerStack ],
+  (getQuestionStack, getAnswerStack) => {
+    return getQuestionStack.length + getAnswerStack.length
   }
 )
 
 export const getCorrectAnswerIds = createSelector(
-	[ getCorrectAnswerStack ],
-	(getCorrectAnswerStack) => {
-		return getCorrectAnswerStack.map( (a) => {
+	[ getAnswerStack ],
+	(getAnswerStack) => {
+		return getAnswerStack.map( (a) => {
 			return a.id;
 		})
 	}
@@ -42,13 +42,13 @@ export const getPlaythruData = createSelector(
 		getStartTime, 
 		getEndTime, 
 		getClueCount, 
-    getShuffledQuizStack,
+    getQuestionStack,
 		getCorrectAnswerIds,
 		getCurrentMon,
     getUserInitials,
 	],
-	(getQuizMetaData, getStartTime, getEndTime, getClueCount, getShuffledQuizStack, getCorrectAnswerIds, getCurrentMon, getUserInitials) => {
-    let wrongAnswer = getShuffledQuizStack.length > 0 ? getCurrentMon.id : null
+	(getQuizMetaData, getStartTime, getEndTime, getClueCount, getQuestionStack, getCorrectAnswerIds, getCurrentMon, getUserInitials) => {
+    let wrongAnswer = getQuestionStack.length > 0 ? getCurrentMon.id : null
 
 		return {
 			user_initials: getUserInitials,
@@ -64,13 +64,13 @@ export const getPlaythruData = createSelector(
 )
 
 export const getAnswerChoices = createSelector(
-  [ getShuffledQuizStack, getCurrentMon ],
-  (getShuffledQuizStack, getCurrentMon) => {
+  [ getQuestionStack, getCurrentMon ],
+  (getQuestionStack, getCurrentMon) => {
     let answerChoices = []
     answerChoices.push(getCurrentMon)
 
     // add bogus answers
-    const remainingMon = getShuffledQuizStack.length > 3 ? shuffle(getShuffledQuizStack.slice(0,getShuffledQuizStack.length-1)).slice(0,3) : getShuffledQuizStack.slice(0,getShuffledQuizStack.length-1)
+    const remainingMon = getQuestionStack.length > 3 ? shuffle(getQuestionStack.slice(0,getQuestionStack.length-1)).slice(0,3) : getQuestionStack.slice(0,getQuestionStack.length-1)
 
     remainingMon.forEach( (obj) => {
       answerChoices.push(obj);

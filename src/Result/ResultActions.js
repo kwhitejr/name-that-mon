@@ -29,9 +29,9 @@ export function resetThenRestart() {
     return fetch(`${API_URL}/pokemon/${quizType}/${quizSet}`)
       .then(res => res.json())
       .then(json => shuffle(json))
-      .then(shuffledQuizStack => {
-        dispatch({ type: GET_QUIZ_DATA, payload: shuffledQuizStack })
-        dispatch({ type: SET_ANSWER_CHOICES, payload: getAnswerChoices(getState().quizInstance.shuffledQuizStack) })
+      .then(questionStack => {
+        dispatch({ type: GET_QUIZ_DATA, payload: questionStack })
+        dispatch({ type: SET_ANSWER_CHOICES, payload: getAnswerChoices(getState().quizInstance.questionStack) })
         dispatch(push('/quiz'));
       })
   }

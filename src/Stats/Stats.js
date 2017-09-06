@@ -77,7 +77,7 @@ const StatsList = ({rightiest, wrongiest, highScore, totalPlaythrus}) => (
       style={styles.listitem}
       leftIcon={<i className="fa fa-line-chart fa-2x" aria-hidden="true"></i>}
       primaryText={`High Score: ${highScore.userInitials}`}
-      secondaryText={`Named ${highScore.correctAnswerStack.length} Mon on ${moment.unix(highScore.endTime/1000).format("MMMM DD, YYYY, h:mm a")}`}
+      secondaryText={`Named ${highScore.answerStack.length} Mon on ${moment.unix(highScore.endTime/1000).format("MMMM DD, YYYY, h:mm a")}`}
     />
     <Divider />
     <ListItem

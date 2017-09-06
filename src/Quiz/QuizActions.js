@@ -8,24 +8,23 @@ import { shuffle } from '../common'
 import mockData from '../mockData'
 
 import {
-  SET_ANSWER,
+  RESET_INSTANCE_DATA,
+  RESET_META_DATA,
+  FETCH_QUIZ_REQUEST,
+  FETCH_QUIZ_SUCCESS,
+  FETCH_QUIZ_FAIL,
+
+  SET_SELECTED_ANSWER,
   SET_USER_INITIALS,
-  SET_ANSWER_CHOICES,
-  SET_GENERATION_NUMBER,
-  SET_POKEMON_TYPE,
-  SET_LEGENDARY,
-  GET_QUIZ_DATA,
-  STACK_CORRECT_ANSWER,
-  SUBMIT_ANSWER,
   SET_QUIZ_COMPLETE_FLAG,
-  SET_ANSWER_CORRECT_FLAG,
+  SET_CLUE_FLAG,
+
+  STACK_ANSWER,
   START_TIMER,
   END_TIMER,
   USE_CLUE,
   INCREMENT_CLUE_COUNT,
   POST_PLAYTHRU_SUCCESS,
-  RESET_INSTANCE_DATA,
-  RESET_META_DATA,
 } from './QuizActionTypes'
 
 import { 
@@ -37,105 +36,120 @@ import {
 
 const API_URL = 'http://localhost:3000/api';
 
-export function reset() {
+export const reset = () => {
   return (dispatch) => {
     dispatch({ type: RESET_INSTANCE_DATA })
     dispatch({ type: RESET_META_DATA })
    } 
 }
 
-export function beginGenerationQuiz(generationNumber) {
-  return (dispatch, getState) => {
-    return fetch(`${API_URL}/pokemon/generation/${generationNumber}`)
-      .then(res => res.json())
-      .then(json => shuffle(json))
-      .then(shuffledQuizStack => {
-        dispatch({ type: GET_QUIZ_DATA, payload: mockData })
-        dispatch({ type: SET_GENERATION_NUMBER, payload: generationNumber })
-        dispatch({ type: SET_ANSWER_CHOICES, payload: getAnswerChoices(getState().quizInstance.shuffledQuizStack) })
-        dispatch({ type: START_TIMER, payload: moment().valueOf() })
-        dispatch(push('/quiz'));
-      })
-      .catch(ex => console.log(ex))
-  }
-}
-
-export function beginPokemonTypeQuiz(pokemonType) {
-  return (dispatch, getState) => {
-    return fetch(`${API_URL}/pokemon/type/${pokemonType}`)
-      .then(res => res.json())
-      .then(json => shuffle(json))
-      .then(shuffledQuizStack => {
-        dispatch({ type: GET_QUIZ_DATA, payload: shuffledQuizStack })
-        dispatch({ type: SET_POKEMON_TYPE, payload: pokemonType })
-        dispatch({ type: SET_ANSWER_CHOICES, payload: getAnswerChoices(getState().quizInstance.shuffledQuizStack) })
-        dispatch({ type: START_TIMER, payload: moment().valueOf() })
-        dispatch(push('/quiz'));
-      })
-      .catch(ex => console.log(ex))
-  }
-}
-
-export function beginLegendaryQuiz() {
-  return (dispatch, getState) => {
-    return fetch(`${API_URL}/pokemon/legendary`)
-      .then(res => res.json())
-      .then(json => shuffle(json))
-      .then(shuffledQuizStack => dispatch({ type: GET_QUIZ_DATA, payload: shuffledQuizStack }))
-      .then(() => dispatch({ type: SET_LEGENDARY, payload: true }))
-      .then(() => dispatch({ type: SET_ANSWER_CHOICES, payload: getAnswerChoices(getState().quizInstance.shuffledQuizStack) }))
-      .then(() => dispatch({ type: START_TIMER, payload: moment().valueOf() }))
-      .then(() => dispatch(push('/quiz')));
-  }
-}
-
-export function setAnswer(event, value) {
-  return { type: SET_ANSWER, payload: value }
-}
-
-export function stackCorrectAnswer(arrObj) {
-  return { type: STACK_CORRECT_ANSWER, payload: arrObj }
-}
-
-export function setNextQuestion(arrObj, answerChoices) {
-  return (dispatch, getState) => {
-    let state = getState().quizInstance
-    dispatch({ type: INCREMENT_CLUE_COUNT })
-    dispatch({ type: STACK_CORRECT_ANSWER, payload: arrObj) })
-    dispatch({ type: SET_ANSWER_CHOICES, payload: answerChoices })
-  }
-}
-
-export function submitAnswer() {
-  return { type: SUBMIT_ANSWER }
-}
-
-export function useClue() {
-  return { type: USE_CLUE }
-}
-
-export function setAnswerCorrectFlag() {
-  return { type: SET_ANSWER_CORRECT_FLAG }
-}
-
-export function setQuizCompleteFlag() {
-  return { type: SET_QUIZ_COMPLETE_FLAG }
-}
-
-export function endTimer() {
-  return { type: END_TIMER, payload: moment().valueOf() }
-}
-
-export function endCurrentQuiz(userInitials) {
+export const fetchQuizData = (quizType, quizSet) => {
   return (dispatch) => {
-    dispatch({ type: SET_USER_INITIALS, payload: userInitials })
-    dispatch({ type: INCREMENT_CLUE_COUNT })
-    dispatch(push('/result'))
-    dispatch(postPlaythruData())
+    dispatch({ type: FETCH_QUIZ_REQUEST })
+    return fetch(`${API_URL}/pokemon/${quizType}/${quizSet}`)
+      .then(data => {
+        let shuffledData = shuffle(data.json())
+        dispatch({ type: SET_META_DATA, quizType, quizSet }) // set meta data
+        dispatch({ type: FETCH_QUIZ_SUCCESS, shuffledData }) // set questionStack
+        dispatch(startQuiz())
+      })
+      .catch(err => {
+        dispatch({ type: FETCH_QUIZ_FAIL, err })
+      })
   }
 }
 
-export function postPlaythruData() {
+export const startQuiz = () => {
+  return (dispatch) => {
+    dispatch({ type: START_TIMER, time: moment().valueOf() }) // set startTimer
+    dispatch(push('/quiz'));
+  }
+}
+
+// export const beginGenerationQuiz = (generationNumber) => {
+//   return (dispatch, getState) => {
+//     return fetch(`${API_URL}/pokemon/generation/${generationNumber}`)
+//       .then(res => res.json())
+//       .then(json => shuffle(json))
+//       .then(questionStack => {
+//         dispatch({ type: GET_QUIZ_DATA, payload: mockData })
+//         dispatch({ type: SET_GENERATION_NUMBER, payload: generationNumber })
+//         dispatch({ type: SET_ANSWER_CHOICES, payload: getAnswerChoices(getState().quizInstance.questionStack) })
+//         dispatch({ type: START_TIMER, payload: moment().valueOf() })
+//         dispatch(push('/quiz'));
+//       })
+//       .catch(ex => console.log(ex))
+//   }
+// }
+
+// export function beginPokemonTypeQuiz(pokemonType) {
+//   return (dispatch, getState) => {
+//     return fetch(`${API_URL}/pokemon/type/${pokemonType}`)
+//       .then(res => res.json())
+//       .then(json => shuffle(json))
+//       .then(questionStack => {
+//         dispatch({ type: GET_QUIZ_DATA, payload: questionStack })
+//         dispatch({ type: SET_POKEMON_TYPE, payload: pokemonType })
+//         dispatch({ type: SET_ANSWER_CHOICES, payload: getAnswerChoices(getState().quizInstance.questionStack) })
+//         dispatch({ type: START_TIMER, payload: moment().valueOf() })
+//         dispatch(push('/quiz'));
+//       })
+//       .catch(ex => console.log(ex))
+//   }
+// }
+
+// export function beginLegendaryQuiz() {
+//   return (dispatch, getState) => {
+//     return fetch(`${API_URL}/pokemon/legendary`)
+//       .then(res => res.json())
+//       .then(json => shuffle(json))
+//       .then(questionStack => dispatch({ type: GET_QUIZ_DATA, payload: questionStack }))
+//       .then(() => dispatch({ type: SET_LEGENDARY, payload: true }))
+//       .then(() => dispatch({ type: SET_ANSWER_CHOICES, payload: getAnswerChoices(getState().quizInstance.questionStack) }))
+//       .then(() => dispatch({ type: START_TIMER, payload: moment().valueOf() }))
+//       .then(() => dispatch(push('/quiz')));
+//   }
+// }
+
+export const setSelectedAnswer = (value) => {
+  return { type: SET_SELECTED_ANSWER, value }
+}
+
+export const endQuiz = (isQuizComplete) => {
+  return (dispatch) => {
+    dispatch({ type: END_TIMER, payload: moment().valueOf() })
+    dispatch({ type: SET_QUIZ_COMPLETE_FLAG, isQuizComplete })
+    dispatch({ type: INCREMENT_CLUE_COUNT })
+    if (isQuizComplete) { dispatch({ type: STACK_ANSWER }) } // `isQuizComplete` also approximates whether last answer was correct (`true`)
+  }
+}
+
+export const setNextQuestion = () => {
+  return (dispatch) => {
+    dispatch({ type: INCREMENT_CLUE_COUNT })
+    dispatch({ type: STACK_ANSWER) })
+  }
+}
+
+export const incrementClueCount = () => {
+  return { type: INCREMENT_CLUE_COUNT }
+}
+
+export const useClue = () => {
+  return { type: SET_CLUE_FLAG }
+}
+
+export const setUserInitials = (userInitials) => {
+  return { type: SET_USER_INITIALS, payload: userInitials }
+}
+
+export const moveToResults = () => {
+  return (dispatch) => {
+    dispatch(postPlaythruData())
+    dispatch(push('/result'))
+  }}
+
+export const postPlaythruData = () => {
   return (dispatch, getState) => {
     const playthruData = getPlaythruData(getState());
 
@@ -165,35 +179,3 @@ export function postPlaythruData() {
     dispatch(getTotalPlaythrus())
   }
 }
-
-// TODO: convert this to Selector
-export const getAnswerChoices = (quizStack) => {
-    const currentMon = quizStack[quizStack.length-1]
-    let answerChoices = []
-    answerChoices.push(currentMon)
-
-    // add bogus answers
-    const remainingMon = quizStack.length > 3 ? shuffle(quizStack.slice(0,quizStack.length-1)).slice(0,3) : quizStack.slice(0,quizStack.length-1)
-
-    remainingMon.forEach( (obj) => {
-      answerChoices.push(obj);
-    });
-
-    const shuffledAnswerChoices = answerChoices.length > 2 ? shuffle(answerChoices) : answerChoices
-
-    // shuffle the order
-    return shuffledAnswerChoices
-}
-
-const stackCorrectAnswerHelper = (shuffledQuizStack, correctAnswerStack) => {
-  const lastDatum = shuffledQuizStack[shuffledQuizStack.length-1]
-
-  correctAnswerStack.push(lastDatum)
-
-  const newObj = {
-    shuffledQuizStack: shuffledQuizStack.slice(0,-1) || [],
-    correctAnswerStack: correctAnswerStack,
-  };
-  return newObj;
-}
-

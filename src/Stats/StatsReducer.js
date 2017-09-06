@@ -26,7 +26,7 @@ const INITIAL_STATE = {
     startTime: '',
     endTime: '',
     clueCount: 0,
-    correctAnswerStack: [],
+    answerStack: [],
     wrongAnswer: null,
   },
   totalPlaythrus: 0,  
@@ -50,7 +50,7 @@ export default function (state = INITIAL_STATE, action) {
           startTime: action.payload.start_time,
           endTime: action.payload.end_time,
           clueCount: action.payload.clue_count,
-          correctAnswerStack: action.payload.correct_answer_stack,
+          answerStack: action.payload.correct_answer_stack,
           wrongAnswer: action.payload.wrong_answer, 
         }
       };

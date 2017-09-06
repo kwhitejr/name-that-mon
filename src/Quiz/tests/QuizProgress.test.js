@@ -6,7 +6,7 @@ import QuizProgress from '../QuizProgress';
 
 function setup() {
   const props = {
-    correctAnswerStack: jest.array,
+    answerStack: jest.array,
   	quizLength: jest.number,
   }
 
@@ -31,7 +31,7 @@ describe('QuizProgress', () => {
     //   expect(todoInputProps.placeholder).toEqual('What needs to be done?')
     // })
 
-    // it('should have props `correctAnswerStack` and `quizLength`', () => {
+    // it('should have props `answerStack` and `quizLength`', () => {
     //   const { enzymeWrapper, props } = setup()
     //   const input = enzymeWrapper.find('TodoTextInput')
     //   input.props().onSave('')
