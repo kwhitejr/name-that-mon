@@ -12,4 +12,3 @@ CREATE TABLE answer(
   playthru_id int REFERENCES playthru (id),
   was_correct boolean
 );
-

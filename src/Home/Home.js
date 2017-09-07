@@ -7,9 +7,7 @@ import HomeTop from './HomeTop';
 import './Home.css';
 
 import { 
-  beginGenerationQuiz, 
-  beginPokemonTypeQuiz, 
-  beginLegendaryQuiz
+  fetchQuizData
 } from '../Quiz/QuizActions';
 
 export class Home extends Component {

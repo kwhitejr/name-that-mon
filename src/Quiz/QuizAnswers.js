@@ -150,7 +150,7 @@ class QuizAnswers extends Component {
               key={i}
               value={datum.id}
               label={datum.name}
-              disabled={isAnswerSubmitted}
+              disabled={this.state.isAnswerSubmitted}
               style={styles.radioButton.style}
               labelStyle={styles.radioButton.label}
               // checkedIcon={<Pokeball />}
@@ -159,15 +159,15 @@ class QuizAnswers extends Component {
         </RadioButtonGroup>
         <RaisedButton 
           label="Submit"
-          primary={isAnswerSelected}
-          disabled={!isAnswerSelected}
+          primary={this.state.isAnswerSelected}
+          disabled={!this.state.isAnswerSelected}
           style={styles.raisedButton}
           onTouchTap={this.handleSubmitAnswer}
         />
         <RaisedButton 
           label="Next"
-          secondary={isAnswerSubmitted}
-          disabled={!isAnswerSubmitted}
+          secondary={this.state.isAnswerSubmitted}
+          disabled={!this.state.isAnswerSubmitted}
           style={styles.raisedButton}
           onTouchTap={this.handleSetNextQuestion}
         />

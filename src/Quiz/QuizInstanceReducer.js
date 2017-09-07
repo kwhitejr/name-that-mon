@@ -48,14 +48,14 @@ export default function (state = INITIAL_STATE, action) {
       return { 
         ...state, 
         isFetchingQuiz: false,
-        questionStack: action.shuffledData
+        questionStack: action.shuffledData,
         message: 'Fetch quiz data successful.', 
       }
     case FETCH_QUIZ_FAIL:
       return { 
         ...state, 
         isFetchingQuiz: false,
-        message: 'Fetch quiz data failed.' 
+        message: 'Fetch quiz data failed.',
         error: action.err, 
       }
 

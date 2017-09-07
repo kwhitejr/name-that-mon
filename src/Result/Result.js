@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { 
   resetThenHome, 
-  resetThenRestart, 
+  // resetThenRestart, 
 } from './ResultActions';
 
 import { 
@@ -51,7 +51,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   resetThenHome: () => dispatch(resetThenHome()),
-  resetThenRestart: () => dispatch(resetThenRestart()),
+  // resetThenRestart: () => dispatch(resetThenRestart()),
 });
 
 export default connect(

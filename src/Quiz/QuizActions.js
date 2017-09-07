@@ -13,7 +13,8 @@ import {
   FETCH_QUIZ_REQUEST,
   FETCH_QUIZ_SUCCESS,
   FETCH_QUIZ_FAIL,
-
+  
+  SET_META_DATA,
   SET_SELECTED_ANSWER,
   SET_USER_INITIALS,
   SET_QUIZ_COMPLETE_FLAG,
@@ -47,8 +48,10 @@ export const fetchQuizData = (quizType, quizSet) => {
   return (dispatch) => {
     dispatch({ type: FETCH_QUIZ_REQUEST })
     return fetch(`${API_URL}/pokemon/${quizType}/${quizSet}`)
-      .then(data => {
-        let shuffledData = shuffle(data.json())
+      .then(data => data.json())
+      .then(json => {
+        console.log(json)
+        let shuffledData = shuffle(json)
         dispatch({ type: SET_META_DATA, quizType, quizSet }) // set meta data
         dispatch({ type: FETCH_QUIZ_SUCCESS, shuffledData }) // set questionStack
         dispatch(startQuiz())
@@ -127,7 +130,7 @@ export const endQuiz = (isQuizComplete) => {
 export const setNextQuestion = () => {
   return (dispatch) => {
     dispatch({ type: INCREMENT_CLUE_COUNT })
-    dispatch({ type: STACK_ANSWER) })
+    dispatch({ type: STACK_ANSWER })
   }
 }
 

@@ -183,62 +183,64 @@ class HomeQuizList extends Component {
   }
 
   render() {
-    <div>
-      <SelectableList defaultValue={null} >
-        <Subheader
-          style={styles.subheader}
-        >Pick a Quiz!</Subheader>
-        <Divider />
-        <ListItem
-          value="generation"
-          primaryText="Pokemon Generations"
-          primaryTogglesNestedList={true}
-          style={styles.listitem}
-          // hoverColor="#3B4CCA"
-          leftAvatar={<Avatar src="" />}
-          nestedItems={pokemonGenerations.map( (generation, i) => (
-            <ListItem
-              key={i}
-              value={{ 
-                type: 'generation', 
-                value: generation.quizSet 
-              }}
-              style={styles.listitem}
-              primaryText={`Generation ${generation.quizSet}`}
-              leftAvatar={<Avatar src={generation.sprite} />}
-              onTouchTap={this.handleFetchQuiz('generation', generation.quizSet)}
-            />
-          ))}
-        />
-        <ListItem
-          value="type"
-          primaryText="Pokemon Types"
-          primaryTogglesNestedList={true}
-          style={styles.listitem}
-          // hoverColor="#cc0000"
-          leftAvatar={<Avatar src="" />}
-          nestedItems={pokemonTypes.map( (type, i) => (
-            <ListItem
-              key={i}
-              value={type.name}
-              style={styles.listitem}
-              primaryText={type.name}
-              hoverColor={type.color}
-              leftAvatar={<Avatar src={type.sprite} />}
-              onTouchTap={this.handleFetchQuiz('type', type.quizSet)}
-            />
-          ))}
-        />
-        <ListItem
-          value="legendary"
-          primaryText="Legendary Pokemon"
-          style={styles.listitem}
-          // hoverColor="#b3a125"
-          leftAvatar={<Avatar src="" />}
-          onTouchTap={this.handleFetchQuiz('legendary', null)}
-        />
-      </SelectableList>
-    </div>
+    return (
+      <div>
+        <SelectableList defaultValue={null} >
+          <Subheader
+            style={styles.subheader}
+          >Pick a Quiz!</Subheader>
+          <Divider />
+          <ListItem
+            value="generation"
+            primaryText="Pokemon Generations"
+            primaryTogglesNestedList={true}
+            style={styles.listitem}
+            // hoverColor="#3B4CCA"
+            leftAvatar={<Avatar src="" />}
+            nestedItems={pokemonGenerations.map( (generation, i) => (
+              <ListItem
+                key={i}
+                value={{ 
+                  type: 'generation', 
+                  value: generation.quizSet 
+                }}
+                style={styles.listitem}
+                primaryText={`Generation ${generation.quizSet}`}
+                leftAvatar={<Avatar src={generation.sprite} />}
+                onTouchTap={() => { this.handleFetchQuiz('generation', generation.quizSet) }}
+              />
+            ))}
+          />
+          <ListItem
+            value="type"
+            primaryText="Pokemon Types"
+            primaryTogglesNestedList={true}
+            style={styles.listitem}
+            // hoverColor="#cc0000"
+            leftAvatar={<Avatar src="" />}
+            nestedItems={pokemonTypes.map( (type, i) => (
+              <ListItem
+                key={i}
+                value={type.name}
+                style={styles.listitem}
+                primaryText={type.name}
+                hoverColor={type.color}
+                leftAvatar={<Avatar src={type.sprite} />}
+                onTouchTap={() => { this.handleFetchQuiz('type', type.quizSet) }}
+              />
+            ))}
+          />
+          <ListItem
+            value="legendary"
+            primaryText="Legendary Pokemon"
+            style={styles.listitem}
+            // hoverColor="#b3a125"
+            leftAvatar={<Avatar src="" />}
+            onTouchTap={() => { this.handleFetchQuiz('legendary', null) }}
+          />
+        </SelectableList>
+      </div>
+    );
   }
 }
 

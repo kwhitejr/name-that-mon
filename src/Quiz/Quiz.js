@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 
 import { 
   reset,
-  resetThenHome,
   setSelectedAnswer,
   setNextQuestion,
-  setQuizCompleteFlag,
+  // setQuizCompleteFlag,
   useClue,
+  incrementClueCount,
   endQuiz,
   moveToResults,
 } from './QuizActions'
@@ -91,7 +91,7 @@ const mapDispatchToProps = (dispatch) => ({
   resetThenHome:        () => dispatch(resetThenHome()),
   setSelectedAnswer:    (value) => dispatch(setSelectedAnswer(value)),
   setNextQuestion:      () => dispatch(setNextQuestion()),
-  setQuizCompleteFlag:  () => dispatch(setQuizCompleteFlag()),
+  // setQuizCompleteFlag:  () => dispatch(setQuizCompleteFlag()),
   incrementClueCount:   () => dispatch(incrementClueCount()),
   endQuiz:              () => dispatch(endQuiz()),
   moveToResults:        () => dispatch(moveToResults()),
