@@ -2,7 +2,7 @@
 
 -- \c name_that_mon;
 
-DROP TABLE IF EXISTS answer_count;
+-- DROP TABLE IF EXISTS answer_count;
 
 DROP TABLE IF EXISTS answer;
 
