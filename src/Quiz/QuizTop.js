@@ -29,6 +29,9 @@ class QuizTop extends Component {
       dialogOpen: false,
     // isClueUsed: false,
     };
+
+    this.handleOpen = this.handleOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   handleOpen() {

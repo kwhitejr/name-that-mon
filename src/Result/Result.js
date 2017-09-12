@@ -13,6 +13,7 @@ import {
 
 import { 
   getCurrentMon,
+  getQuizLength,
 } from '../Quiz/QuizSelectors'
 
 import ResultTable from './ResultTable'
@@ -47,6 +48,7 @@ const mapStateToProps = (state) => ({
   lastCorrectAnswer: getLastCorrectAnswer(state),
   wrongAnswer: getCurrentMon(state),
   quizTotalTime: getQuizTotalTime(state),
+  quizLength: getQuizLength(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -92,6 +92,7 @@ const mapDispatchToProps = (dispatch) => ({
   setSelectedAnswer:    (value) => dispatch(setSelectedAnswer(value)),
   setNextQuestion:      () => dispatch(setNextQuestion()),
   setUserInitials:      (userInitials) => dispatch(setUserInitials(userInitials)),
+  useClue:              () => dispatch(useClue()),
   incrementClueCount:   () => dispatch(incrementClueCount()),
   endQuiz:              () => dispatch(endQuiz()),
   moveToResults:        () => dispatch(moveToResults()),
