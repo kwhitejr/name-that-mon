@@ -22,17 +22,21 @@ const styles = {
 }
 
 class QuizTop extends Component {
-  state = {
-    dialogOpen: false,
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      dialogOpen: false,
     // isClueUsed: false,
-  };
+    };
+  }
 
-  handleOpen = () => {
+  handleOpen() {
     this.setState({dialogOpen: true});
     this.props.useClue()
   };
 
-  handleClose = () => {
+  handleClose() {
     this.setState({dialogOpen: false});
   };
 

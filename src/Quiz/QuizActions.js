@@ -50,7 +50,6 @@ export const fetchQuizData = (quizType, quizSet) => {
     return fetch(`${API_URL}/pokemon/${quizType}/${quizSet}`)
       .then(data => data.json())
       .then(json => {
-        console.log(json)
         let shuffledData = shuffle(json)
         dispatch({ type: SET_META_DATA, quizType, quizSet }) // set meta data
         dispatch({ type: FETCH_QUIZ_SUCCESS, shuffledData }) // set questionStack
@@ -167,7 +166,6 @@ export const postPlaythruData = () => {
     .then(response => {
       if (response.status >= 200 && response.status < 300) {
         dispatch({ type: POST_PLAYTHRU_SUCCESS })
-        console.log(response);
       } else {
         const error = new Error(response.statusText);
         error.response = response;

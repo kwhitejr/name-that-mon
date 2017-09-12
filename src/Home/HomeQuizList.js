@@ -150,10 +150,6 @@ let SelectableList = makeSelectable(List);
 
 function wrapState(ComposedComponent) {
   return class SelectableList extends Component {
-    static propTypes = {
-      children: PropTypes.node.isRequired,
-      // defaultValue: PropTypes.number.isRequired,
-    };
 
     componentWillMount() {
       this.setState({
@@ -177,7 +173,8 @@ function wrapState(ComposedComponent) {
 SelectableList = wrapState(SelectableList);
 
 class HomeQuizList extends Component {
-  handleFetchQuiz = (quizType, quizSet) => {
+
+  handleFetchQuiz(quizType, quizSet) {
     const { fetchQuizData } = this.props
     fetchQuizData(quizType, quizSet)
   }

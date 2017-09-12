@@ -34,34 +34,43 @@ const styles = {
 };
 
 class QuizAnswers extends Component {
-  state = {
-    dialogOpen: false,
-    isAnswerSelected: false,
-    isAnswerSubmitted: false,
-    isAnswerCorrect: false,
-    initialsValue: "",
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      dialogOpen: false,
+      isAnswerSelected: false,
+      isAnswerSubmitted: false,
+      isAnswerCorrect: false,
+      initialsValue: "",
+    };
+    this.handleInitialsChange = this.handleInitialsChange.bind(this);
+    this.handleSelectedAnswer = this.handleSelectedAnswer.bind(this);
+    this.handleSubmitAnswer = this.handleSubmitAnswer.bind(this);
+    this.handleSetNextQuestion = this.handleSetNextQuestion.bind(this);
+    this.handleMoveToResults = this.handleMoveToResults.bind(this);
   }
 
-  handleOpen = () => {
+  handleOpen() {
     this.setState({dialogOpen: true});
   }
 
-  handleClose = () => {
+  handleClose() {
     this.setState({dialogOpen: false});
   }
 
-  handleInitialsChange = (event) => {
+  handleInitialsChange(event) {
     this.setState({
       initialsValue: event.target.value.toUpperCase(),
     });
   }
 
-  handleSelectedAnswer = (event, value) => {
+  handleSelectedAnswer(event, value) {
     this.setState({isAnswerSelected: true});
     this.props.setSelectedAnswer(value)
   }
 
-  handleSubmitAnswer = () => {
+  handleSubmitAnswer() {
     const {
       isAnswerSelected
     } = this.state
@@ -97,7 +106,7 @@ class QuizAnswers extends Component {
     }
   }
 
-  handleSetNextQuestion = () => {
+  handleSetNextQuestion() {
     this.setState({
       dialogOpen: false,
       isAnswerSelected: false,
@@ -107,16 +116,17 @@ class QuizAnswers extends Component {
     this.props.setNextQuestion()
   }
 
-  handleMoveToResults = () => {
+  handleMoveToResults() {
     this.props.setUserInitials(this.state.initialsValue)
     this.props.moveToResults()
   }
 
-  render = () => {
+  render() {
     const {
       isAnswerSelected, 
       isAnswerSubmitted,
       isAnswerCorrect,
+      initialsValue,
     } = this.state
 
     const { 
@@ -142,7 +152,7 @@ class QuizAnswers extends Component {
       <div className="answers">
         <RadioButtonGroup 
           name="answers"  
-          onChange={this.handleSetUserAnswer}
+          onChange={this.handleSelectedAnswer}
           style={styles.radioButtonGroup} 
         >
           {answerChoices.map( (datum, i) => (
@@ -150,7 +160,7 @@ class QuizAnswers extends Component {
               key={i}
               value={datum.id}
               label={datum.name}
-              disabled={this.state.isAnswerSubmitted}
+              disabled={isAnswerSubmitted}
               style={styles.radioButton.style}
               labelStyle={styles.radioButton.label}
               // checkedIcon={<Pokeball />}
@@ -159,15 +169,15 @@ class QuizAnswers extends Component {
         </RadioButtonGroup>
         <RaisedButton 
           label="Submit"
-          primary={this.state.isAnswerSelected}
-          disabled={!this.state.isAnswerSelected}
+          primary={isAnswerSelected}
+          disabled={!isAnswerSelected}
           style={styles.raisedButton}
           onTouchTap={this.handleSubmitAnswer}
         />
         <RaisedButton 
           label="Next"
-          secondary={this.state.isAnswerSubmitted}
-          disabled={!this.state.isAnswerSubmitted}
+          secondary={isAnswerSubmitted}
+          disabled={!isAnswerSubmitted}
           style={styles.raisedButton}
           onTouchTap={this.handleSetNextQuestion}
         />
@@ -185,7 +195,7 @@ class QuizAnswers extends Component {
               id="text-field-controlled"
               hintText="Inititals"
               maxLength="3"
-              value={this.state.initialsValue}
+              value={initialsValue}
               onChange={this.handleInitialsChange}
             />
           </div>

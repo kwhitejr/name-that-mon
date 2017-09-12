@@ -2,7 +2,8 @@ import {
   SET_RIGHTIEST, 
   SET_WRONGIEST, 
   SET_HIGH_SCORE, 
-  SET_TOTAL_PLAYTHRUS, 
+  SET_TOTAL_PLAYTHRUS,
+  FETCH_STAT_FAIL, 
 } from './StatsActionTypes'
 
 const API_URL = 'http://localhost:3000/api';
@@ -14,6 +15,9 @@ export function getRightiest() {
       .then(rightiest => {
         dispatch({ type: SET_RIGHTIEST, payload: rightiest })
       })
+      .catch(err => {
+        dispatch({ type: FETCH_STAT_FAIL, payload: err })
+      })
   }
 }
 
@@ -23,6 +27,9 @@ export function getWrongiest() {
       .then(res => res.json())
       .then(wrongiest => {
         dispatch({ type: SET_WRONGIEST, payload: wrongiest })
+      })
+      .catch(err => {
+        dispatch({ type: FETCH_STAT_FAIL, payload: err })
       })
   }
 }
@@ -34,6 +41,9 @@ export function getHighScore() {
       .then(highScore => {
         dispatch({ type: SET_HIGH_SCORE, payload: highScore })
       })
+      .catch(err => {
+        dispatch({ type: FETCH_STAT_FAIL, payload: err })
+      })
   }
 }
 
@@ -43,6 +53,9 @@ export function getTotalPlaythrus() {
       .then(res => res.json())
       .then(totalPlaythrus => {
         dispatch({ type: SET_TOTAL_PLAYTHRUS, payload: totalPlaythrus.count })
+      })
+      .catch(err => {
+        dispatch({ type: FETCH_STAT_FAIL, payload: err })
       })
   }
 }

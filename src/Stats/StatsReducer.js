@@ -3,6 +3,7 @@ import {
   SET_WRONGIEST,
   SET_HIGH_SCORE,
   SET_TOTAL_PLAYTHRUS,
+  FETCH_STAT_FAIL,
 } from './StatsActionTypes'
 
 const INITIAL_STATE = { 
@@ -33,6 +34,7 @@ const INITIAL_STATE = {
 };
 
 export default function (state = INITIAL_STATE, action) {
+  // eslint-disable-next-line
   switch (action.type) {
     // case RESET:
     //   return { INITIAL_STATE };
@@ -55,7 +57,9 @@ export default function (state = INITIAL_STATE, action) {
         }
       };
     case SET_TOTAL_PLAYTHRUS:
-      return { ...state, totalPlaythrus: action.payload }; 
+      return { ...state, totalPlaythrus: action.payload };
+    case FETCH_STAT_FAIL:
+      return { ...state, error: action.payload }; 
   }
 
   return state;
