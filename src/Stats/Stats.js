@@ -16,7 +16,7 @@ import './Stats.css';
 
 export class Stats extends Component {
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.getRightiest()
     this.props.getWrongiest()
     this.props.getHighScore()
