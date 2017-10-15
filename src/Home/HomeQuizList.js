@@ -218,9 +218,9 @@ class HomeQuizList extends Component {
             nestedItems={pokemonTypes.map( (type, i) => (
               <ListItem
                 key={i}
-                value={type.name}
+                value={type.quizSet}
                 style={styles.listitem}
-                primaryText={type.name}
+                primaryText={type.quizSet}
                 hoverColor={type.color}
                 leftAvatar={<Avatar src={type.sprite} />}
                 onTouchTap={() => { this.handleFetchQuiz('type', type.quizSet) }}
