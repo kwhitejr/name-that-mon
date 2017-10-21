@@ -22,6 +22,7 @@ CREATE TABLE pokemon(
 
 -- copy pokemon from '/Users/kevin/git/name-that-mon/server/pokemon-data.csv' DELIMITERS ',' CSV HEADER;
 -- copy pokemon from '/Users/kwhi32/Projects/name-that-mon/server/pokemon-data.csv' DELIMITERS ',' CSV HEADER;
+-- /home/admin/apps/name-that-mon/server
 copy pokemon from './server/pokemon-data.csv' DELIMITERS ',' CSV HEADER;
 
 DROP TABLE IF EXISTS playthru;
