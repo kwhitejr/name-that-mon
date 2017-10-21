@@ -9,7 +9,7 @@ import {
   // SET_ANSWER_CHOICES,
 } from '../Quiz/QuizActionTypes'
 
-const API_URL = 'http://localhost:3000/api';
+const API_URL = 'http://localhost:4001/api';
 
 export function resetThenHome() {
   return (dispatch) => {

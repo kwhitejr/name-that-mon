@@ -6,7 +6,7 @@ import {
   FETCH_STAT_FAIL, 
 } from './StatsActionTypes'
 
-const API_URL = 'http://localhost:3000/api';
+const API_URL = 'http://localhost:4001/api';
 
 export function getRightiest() {
   return (dispatch) => {

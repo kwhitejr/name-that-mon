@@ -35,7 +35,7 @@ import {
   getTotalPlaythrus,
 } from '../Stats/StatsActions'
 
-const API_URL = 'http://localhost:3000/api';
+const API_URL = 'http://localhost:4001/api';
 
 export const reset = () => {
   return (dispatch) => {
