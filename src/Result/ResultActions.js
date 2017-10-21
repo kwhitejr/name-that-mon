@@ -1,6 +1,6 @@
 import { push } from 'react-router-redux'
 
-// import { shuffle } from '../common'
+import config from '../config.json'
 // import { getAnswerChoices } from '../Quiz/QuizActions'
 import { 
   RESET_INSTANCE_DATA, 
@@ -9,7 +9,7 @@ import {
   // SET_ANSWER_CHOICES,
 } from '../Quiz/QuizActionTypes'
 
-const API_URL = 'http://localhost:4001/api';
+const API_URL = `http://${config.API_URL}:${config.API_PORT}/api`;
 
 export function resetThenHome() {
   return (dispatch) => {

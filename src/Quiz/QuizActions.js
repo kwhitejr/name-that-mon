@@ -5,7 +5,8 @@ import fetch from 'isomorphic-fetch'
 import { getPlaythruData } from './QuizSelectors'
 import { shuffle } from '../common'
 
-import mockData from '../mockData'
+// import mockData from '../mockData'
+import config from '../config.json'
 
 import {
   RESET_INSTANCE_DATA,
@@ -35,7 +36,7 @@ import {
   getTotalPlaythrus,
 } from '../Stats/StatsActions'
 
-const API_URL = 'http://localhost:4001/api';
+const API_URL = `http://${config.API_URL}:${config.API_PORT}/api`;
 
 export const reset = () => {
   return (dispatch) => {

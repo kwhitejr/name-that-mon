@@ -1,3 +1,5 @@
+import config from '../config.json'
+
 import { 
   SET_RIGHTIEST, 
   SET_WRONGIEST, 
@@ -6,7 +8,7 @@ import {
   FETCH_STAT_FAIL, 
 } from './StatsActionTypes'
 
-const API_URL = 'http://localhost:4001/api';
+const API_URL = `http://${config.API_URL}:${config.API_PORT}/api`;
 
 export function getRightiest() {
   return (dispatch) => {
