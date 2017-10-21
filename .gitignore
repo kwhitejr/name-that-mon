@@ -7,7 +7,7 @@
 # testing
 /coverage
 
-# production
+# productiongit 
 /server/config
 
 # misc
