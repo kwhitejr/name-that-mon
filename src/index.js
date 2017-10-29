@@ -15,6 +15,8 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 // Import the redux store
 import { history, configureStore } from './store';
 
+// import { PersistGate } from 'redux-persist/es/integration/react';
+
 // Import Header
 import Header from './Header/Header'
 
