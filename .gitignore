@@ -8,7 +8,7 @@
 /coverage
 
 # productiongit 
-/server/config
+./server/config
 
 # misc
 .DS_Store

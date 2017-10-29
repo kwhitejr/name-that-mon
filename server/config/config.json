@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "kevin",
+    "username": "admin",
     "password": null,
     "database": "name_that_mon",
     "host": "127.0.0.1",
