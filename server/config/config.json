@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "admin",
+    "username": "kevin",
     "password": null,
     "database": "name_that_mon",
     "host": "127.0.0.1",
@@ -16,7 +16,7 @@
   "production": {
     "username": "admin",
     "password": null,
-    "database": "database_production",
+    "database": "name_that_mon",
     "host": "127.0.0.1",
     "dialect": "postgres"
   }

@@ -131,10 +131,7 @@ class QuizAnswers extends Component {
 
     const { 
       isQuizComplete,
-      questionStack, 
       answerChoices,
-      setUserAnswer, 
-      setNextQuestion, 
     } = this.props
 
     const dialogTitle = isQuizComplete && isAnswerCorrect ? "Congrats!" : "Oh Noes!"
@@ -205,19 +202,18 @@ class QuizAnswers extends Component {
   }
 }
 
-// QuizAnswers.propTypes = {
-//   reset: PropTypes.func,
-//   setUserAnswer: PropTypes.func,
-//   setNextQuestion: PropTypes.func,
-//   useClue: PropTypes.func,
-//   endCurrentQuiz: PropTypes.func,
-//   toggleMask: PropTypes.func,
-//   isAnswerSelected: PropTypes.bool,
-//   isAnswerSubmitted: PropTypes.bool,
-//   isClueUsed: PropTypes.bool,
-//   userAnswer: PropTypes.number,
-//   currentMon: PropTypes.object,
-//   answerChoices: PropTypes.array,
-// };
+QuizAnswers.propTypes = {
+  setNextQuestion: PropTypes.func,
+  setUserInitials: PropTypes.func,
+  moveToResults: PropTypes.func,
+  endQuiz: PropTypes.func,
+  toggleMask: PropTypes.func,
+  isClueUsed: PropTypes.bool,
+  isQuizComplete: PropTypes.bool,
+  userAnswer: PropTypes.number,
+  currentMon: PropTypes.object,
+  answerChoices: PropTypes.array,
+  questionStack: PropTypes.array,
+};
 
 export default QuizAnswers;

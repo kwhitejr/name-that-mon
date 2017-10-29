@@ -47,7 +47,7 @@ class QuizTop extends Component {
     const { currentMon } = this.props
 
     // image src requires dynamic import
-    let imgUrl = require(`../assets/pokemon/${currentMon.id}.png`)
+    let imgUrl = currentMon ? require(`../assets/pokemon/${currentMon.id}.png`) : require(`../assets/pokemon/0.png`)
 
     const actions = [
       <FlatButton

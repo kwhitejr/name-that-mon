@@ -24,7 +24,6 @@ import {
   STACK_ANSWER,
   START_TIMER,
   END_TIMER,
-  USE_CLUE,
   INCREMENT_CLUE_COUNT,
   POST_PLAYTHRU_SUCCESS,
 } from './QuizActionTypes'

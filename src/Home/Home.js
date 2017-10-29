@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types'; 
 
 import HomeQuizList from './HomeQuizList';
 import HomeTop from './HomeTop';
@@ -29,6 +30,10 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchQuizData:  (quizType, quizSet) => dispatch(fetchQuizData(quizType, quizSet)),
 });
+
+Home.propTypes = {
+  fetchQuizData: PropTypes.func,
+};
 
 export default connect(
   mapStateToProps,

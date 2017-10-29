@@ -12,6 +12,11 @@ const getQuizMetaData = (state) => state.quizMetaData
 export const getCurrentMon = createSelector(
   [ getQuestionStack, getAnswerStack ],
   (questionStack, answerStack) => {
+
+    if (questionStack == null) {
+      return null
+    }
+
     if (questionStack.length > 0) {
       return questionStack[questionStack.length-1]
     } else {

@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { routerMiddleware } from 'react-router-redux';
-import createHistory from 'history/createBrowserHistory'
+import createHistory from 'history/createHashHistory'
 
 /* "Reducer" is redux-speak for the set of functions that alter the application state. 
 *  State-altering functions should be grouped by purpose, thus the application may have multiple reducers.

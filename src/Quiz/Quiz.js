@@ -34,18 +34,9 @@ const toggleMask = () => {
   pokemon.classList.toggle('mask');
 }
 
-// const stackCorrectAnswerHelper = (questionStack, answerStack) => {
-//   const lastDatum = questionStack[questionStack.length-1]
-//   answerStack.push(lastDatum)
-
-//   const newObj = {
-//     questionStack: questionStack.slice(0,-1) || [],
-//     answerStack: answerStack,
-//   };
-//   return newObj;
-// }
-
 export class Quiz extends Component {
+
+  
 
   componentWillMount() {
     // TODO: refactor this away
@@ -98,19 +89,25 @@ const mapDispatchToProps = (dispatch) => ({
   moveToResults:        () => dispatch(moveToResults()),
 });
 
-// Quiz.propTypes = {
-//   reset: PropTypes.func,
-//   setSelectedAnswer: PropTypes.func,
-//   submitAnswer: PropTypes.func,
-//   setNextQuestion: PropTypes.func,
-//   useClue: PropTypes.func,
-//   endTimer: PropTypes.func,
-//   endCurrentQuiz: PropTypes.func,
-//   isAnswerSelected: PropTypes.bool,
-//   isAnswerSubmitted: PropTypes.bool,
-//   isClueUsed: PropTypes.bool,
-//   currentMon: PropTypes.object,
-// };
+Quiz.propTypes = {
+  reset: PropTypes.func,
+  resetThenHome: PropTypes.func,
+  setSelectedAnswer: PropTypes.func,
+  setNextQuestion: PropTypes.func,
+  setUserInitials: PropTypes.func,
+  useClue: PropTypes.func,
+  incrementClueCount: PropTypes.func,
+  endQuiz: PropTypes.func,
+  moveToResults: PropTypes.func,
+  isClueUsed: PropTypes.bool,
+  isQuizComplete: PropTypes.bool,
+  userAnswer: PropTypes.number,
+  questionStack: PropTypes.array,
+  answerStack: PropTypes.array,
+  answerChoices: PropTypes.array,
+  currentMon: PropTypes.object,
+  quizLength: PropTypes.number,
+};
 
 export default connect(
   mapStateToProps,

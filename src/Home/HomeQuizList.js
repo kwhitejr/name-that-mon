@@ -241,4 +241,8 @@ class HomeQuizList extends Component {
   }
 }
 
+HomeQuizList.propTypes = {
+  fetchQuizData: PropTypes.func,
+};
+
 export default HomeQuizList;
